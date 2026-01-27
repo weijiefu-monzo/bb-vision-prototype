@@ -11,20 +11,69 @@ import {
   TableCell,
   TableTitleCell,
   Avatar,
+  Pill,
+  PageSection,
+  Button,
 } from "@/components";
+import type { PaymentRow } from "../page";
 import styles from "../page.module.css";
 
-export default function ScheduledPaymentTable() {
+export interface ScheduledPaymentTableProps {
+  onRowClick?: (payment: PaymentRow) => void;
+}
+
+const PAYMENT_DATA: PaymentRow[] = [
+  {
+    recipient: "Acme Corporation",
+    amount: "£12,500.00",
+    project: "Q4 Marketing Campaign",
+    paymentType: "Invoice",
+    dueDate: "15 Feb 2025",
+    approvalStatus: "Approved",
+  },
+  {
+    recipient: "Tech Solutions Ltd",
+    amount: "£8,750.00",
+    project: "Website Redesign",
+    paymentType: "Recurring",
+    dueDate: "20 Feb 2025",
+    approvalStatus: "Pending",
+  },
+  {
+    recipient: "Global Services Inc",
+    amount: "£45,200.00",
+    project: "Infrastructure Upgrade",
+    paymentType: "Invoice",
+    dueDate: "25 Feb 2025",
+    approvalStatus: "Approved",
+  },
+  {
+    recipient: "Design Studio",
+    amount: "£3,200.00",
+    project: "Brand Identity",
+    paymentType: "One-time",
+    dueDate: "28 Feb 2025",
+    approvalStatus: "Pending",
+  },
+  {
+    recipient: "Consulting Group",
+    amount: "£21,090.00",
+    project: "Strategic Planning",
+    paymentType: "Recurring",
+    dueDate: "1 Mar 2025",
+    approvalStatus: "Approved",
+  },
+];
+
+export default function ScheduledPaymentTable({
+  onRowClick,
+}: ScheduledPaymentTableProps) {
   return (
     <>
       <div className={styles.summaryRow}>
         <DataCard label="Total payment due" value="£91,740" />
         <DataCard label="Post-approval balance" value="£1.16m" />
-        <DataCard
-          label="Budget remaining"
-          value="18%"
-          severity="positive"
-        />
+        <DataCard label="Budget remaining" value="18%" severity="positive" />
         <DataCard
           label="Risk"
           value="2 payments"
@@ -32,75 +81,51 @@ export default function ScheduledPaymentTable() {
           severity="warning"
         />
       </div>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderCell>Recipient</TableHeaderCell>
-            <TableHeaderCell align="right">Amount</TableHeaderCell>
-            <TableHeaderCell>Project</TableHeaderCell>
-            <TableHeaderCell>Payment type</TableHeaderCell>
-            <TableHeaderCell>Due date</TableHeaderCell>
-            <TableHeaderCell>Approval status</TableHeaderCell>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableTitleCell
-              title="Acme Corporation"
-              avatar={<Avatar name="Acme Corporation" />}
-            />
-            <TableCell align="right">£12,500.00</TableCell>
-            <TableCell>Q4 Marketing Campaign</TableCell>
-            <TableCell>Invoice</TableCell>
-            <TableCell>15 Feb 2025</TableCell>
-            <TableCell>Approved</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableTitleCell
-              title="Tech Solutions Ltd"
-              avatar={<Avatar name="Tech Solutions Ltd" />}
-            />
-            <TableCell align="right">£8,750.00</TableCell>
-            <TableCell>Website Redesign</TableCell>
-            <TableCell>Recurring</TableCell>
-            <TableCell>20 Feb 2025</TableCell>
-            <TableCell>Pending</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableTitleCell
-              title="Global Services Inc"
-              avatar={<Avatar name="Global Services Inc" />}
-            />
-            <TableCell align="right">£45,200.00</TableCell>
-            <TableCell>Infrastructure Upgrade</TableCell>
-            <TableCell>Invoice</TableCell>
-            <TableCell>25 Feb 2025</TableCell>
-            <TableCell>Approved</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableTitleCell
-              title="Design Studio"
-              avatar={<Avatar name="Design Studio" />}
-            />
-            <TableCell align="right">£3,200.00</TableCell>
-            <TableCell>Brand Identity</TableCell>
-            <TableCell>One-time</TableCell>
-            <TableCell>28 Feb 2025</TableCell>
-            <TableCell>Pending</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableTitleCell
-              title="Consulting Group"
-              avatar={<Avatar name="Consulting Group" />}
-            />
-            <TableCell align="right">£21,090.00</TableCell>
-            <TableCell>Strategic Planning</TableCell>
-            <TableCell>Recurring</TableCell>
-            <TableCell>1 Mar 2025</TableCell>
-            <TableCell>Approved</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
+      <PageSection
+        title="Scheduled payments by March 2025"
+        trailing={<Button size="medium">Approve all</Button>}
+      >
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHeaderCell>Recipient</TableHeaderCell>
+              <TableHeaderCell align="right">Amount</TableHeaderCell>
+              <TableHeaderCell>Project</TableHeaderCell>
+              <TableHeaderCell>Payment type</TableHeaderCell>
+              <TableHeaderCell>Due date</TableHeaderCell>
+              <TableHeaderCell>Approval status</TableHeaderCell>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {PAYMENT_DATA.map((payment, index) => (
+              <TableRow key={index} onClick={() => onRowClick?.(payment)}>
+                <TableTitleCell
+                  title={payment.recipient}
+                  avatar={<Avatar name={payment.recipient} />}
+                />
+                <TableCell align="right">{payment.amount}</TableCell>
+                <TableCell>{payment.project}</TableCell>
+                <TableCell>
+                  <Pill label={payment.paymentType} severity="default" />
+                </TableCell>
+                <TableCell>{payment.dueDate}</TableCell>
+                <TableCell>
+                  <Pill
+                    label={payment.approvalStatus}
+                    severity={
+                      payment.approvalStatus === "Approved"
+                        ? "positive"
+                        : payment.approvalStatus === "Pending"
+                          ? "warning"
+                          : "default"
+                    }
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </PageSection>
     </>
   );
 }

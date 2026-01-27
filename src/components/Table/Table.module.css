@@ -17,7 +17,10 @@
   height: var(--spacing-2x-large, 48px);
   border-bottom: none;
 }
-
+.tableHeader .tableRow:hover {
+  background-color: transparent;
+  cursor: default;
+}
 .tableHeaderCell {
   padding: var(--spacing-small, 12px) var(--spacing-medium, 16px);
   text-align: left;
@@ -54,7 +57,11 @@
 
 .tableRow {
   height: var(--spacing-3x-large, 64px);
-  border-bottom: 1px solid var(--semantic-separator);
+}
+
+.tableRow:hover {
+  background-color: var(--semantic-background-secondary, #f2f8f3);
+  cursor: pointer;
 }
 
 .tableBody .tableRow:first-child {
@@ -66,6 +73,10 @@
   border-bottom: none;
   border-bottom-left-radius: var(--corner-radius-medium, 16px);
   border-bottom-right-radius: var(--corner-radius-medium, 16px);
+}
+
+.tableBody .tableRow:last-child .tableCell {
+  border-bottom: none;
 }
 
 .tableBody .tableRow:first-child .tableCell:first-child {
@@ -92,6 +103,7 @@
   color: var(--semantic-content-primary, #091723);
   text-align: left;
   border: none;
+  border-bottom: 1px solid var(--semantic-separator, rgba(9, 23, 35, 0.1));
   height: 100%;
   vertical-align: middle;
 }
@@ -106,6 +118,11 @@
 
 .tableTitleCell {
   padding: var(--spacing-medium, 16px);
+  border-bottom: 1px solid var(--semantic-separator, rgba(9, 23, 35, 0.1));
+}
+
+.tableBody .tableRow:last-child .tableTitleCell {
+  border-bottom: none;
 }
 
 .tableTitleCellContent {
@@ -150,7 +167,10 @@
 }
 
 .tableTitleLink:hover {
-  color: var(--semantic-content-link-hover, var(--semantic-action-fill-primary-default));
+  color: var(
+    --semantic-content-link-hover,
+    var(--semantic-action-fill-primary-default)
+  );
 }
 
 .tableTitleCaption {

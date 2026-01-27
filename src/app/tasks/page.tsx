@@ -8,6 +8,7 @@ import {
   type PageLayoutRef,
   PageHeader,
   Chip,
+  DetailHeader,
 } from "@/components";
 import { useNavState } from "@/contexts/NavContext";
 import ScheduledPaymentTable from "./components/ScheduledPaymentTable";
@@ -22,11 +23,23 @@ const VALID_TASK_TYPES = [
 
 type TaskType = (typeof VALID_TASK_TYPES)[number] | null;
 
+export interface PaymentRow {
+  recipient: string;
+  amount: string;
+  project: string;
+  paymentType: string;
+  dueDate: string;
+  approvalStatus: string;
+}
+
 export default function TasksPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { navState, setNavState } = useNavState();
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [selectedPayment, setSelectedPayment] = useState<PaymentRow | null>(
+    null,
+  );
   const layoutRef = useRef<PageLayoutRef>(null);
 
   // Derive selected task type from URL query parameter
@@ -66,7 +79,20 @@ export default function TasksPage() {
             }}
           />
         }
-        detailContent={<></>}
+        detailContent={
+          selectedPayment ? (
+            <DetailHeader
+              title={selectedPayment.recipient}
+              description={selectedPayment.amount}
+              onBack={() => {
+                setIsDetailOpen(false);
+                setSelectedPayment(null);
+              }}
+            />
+          ) : (
+            <></>
+          )
+        }
       >
         <PageHeader
           title="Tasks"
@@ -121,7 +147,14 @@ export default function TasksPage() {
             />
           </div>
         </div>
-        {selectedTaskType === "scheduled-payment" && <ScheduledPaymentTable />}
+        {selectedTaskType === "scheduled-payment" && (
+          <ScheduledPaymentTable
+            onRowClick={(payment) => {
+              setSelectedPayment(payment);
+              setIsDetailOpen(true);
+            }}
+          />
+        )}
       </PageLayout>
     </div>
   );

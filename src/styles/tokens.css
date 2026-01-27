@@ -48,31 +48,13 @@
   --color-red-accent: #ff3b30;
   --color-teal-550: #016b83;
   --color-white: #ffffff;
-  --elevation-level1-blur: 8px;
-  --elevation-level1-box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.16);
-  --elevation-level1-color: rgba(0, 0, 0, 0.16);
-  --elevation-level1-h-offset: 0px;
-  --elevation-level1-v-offset: 2px;
-  --elevation-level2-blur: 16px;
+
+  --elevation-level1-box-shadow: 0px 4px 48px rgba(0, 0, 0, 0.08);
   --elevation-level2-box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.16);
-  --elevation-level2-color: rgba(0, 0, 0, 0.16);
-  --elevation-level2-h-offset: 0px;
-  --elevation-level2-v-offset: 4px;
-  --elevation-level3-blur: 32px;
   --elevation-level3-box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.16);
-  --elevation-level3-color: rgba(0, 0, 0, 0.16);
-  --elevation-level3-h-offset: 0px;
-  --elevation-level3-v-offset: 8px;
-  --elevation-level4-blur: 48px;
   --elevation-level4-box-shadow: 0px 16px 48px rgba(0, 0, 0, 0.24);
-  --elevation-level4-color: rgba(0, 0, 0, 0.24);
-  --elevation-level4-h-offset: 0px;
-  --elevation-level4-v-offset: 16px;
-  --elevation-level5-blur: 64px;
   --elevation-level5-box-shadow: 0px 32px 64px rgba(0, 0, 0, 0.24);
-  --elevation-level5-color: rgba(0, 0, 0, 0.24);
-  --elevation-level5-h-offset: 0px;
-  --elevation-level5-v-offset: 32px;
+
   --motion-delay-base: 150ms;
   --motion-duration-extra-long: 400ms;
   --motion-duration-instant: 0ms;

@@ -38,13 +38,11 @@ export default function Home() {
           />
         }
         detailContent={
-          <div className={styles.detailPlaceholder}>
-            <DetailHeader
-              title="Details"
-              description="This shows a detail of something on the side"
-              onBack={() => setIsDetailOpen(false)}
-            />
-          </div>
+          <DetailHeader
+            title="Details"
+            description="This shows a detail of something on the side"
+            onBack={() => setIsDetailOpen(false)}
+          />
         }
       >
         <PageHeader

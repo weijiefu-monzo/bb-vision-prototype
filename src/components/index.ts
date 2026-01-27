@@ -34,6 +34,9 @@ export type { DetailHeaderProps } from "./DetailHeader";
 export { PageSection } from "./PageSection";
 export type { PageSectionProps } from "./PageSection";
 
+export { Pill } from "./Pill";
+export type { PillProps, PillSeverity } from "./Pill";
+
 export {
   Table,
   TableHeader,
