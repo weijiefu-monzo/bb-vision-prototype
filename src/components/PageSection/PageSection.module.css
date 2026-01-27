@@ -51,7 +51,7 @@
 
 .description {
   font-family: var(--font-family-text);
-  font-size: var(--type-font-size-medium, 16px);
+  font-size: var(--type-font-size-medium, 14px);
   font-weight: 400;
   line-height: 1.5;
   color: var(--semantic-content-secondary, #666666);

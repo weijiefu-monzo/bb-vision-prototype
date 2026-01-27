@@ -25,7 +25,7 @@
 .buttonLarge {
   padding: var(--spacing-small, 12px) var(--spacing-medium, 16px);
   border-radius: var(--corner-radius-large, 24px);
-  font-size: var(--type-font-size-medium, 16px);
+  font-size: var(--type-font-size-medium, 14px);
 }
 
 .leadingIcon,

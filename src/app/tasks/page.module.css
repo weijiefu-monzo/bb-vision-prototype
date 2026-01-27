@@ -1,0 +1,24 @@
+.pageContainer {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.chipsContainer {
+  width: 100%;
+  max-width: var(--semantic-max-content-width, 960px);
+}
+
+.chipsRow {
+  display: flex;
+  gap: var(--spacing-small, 12px);
+  flex-wrap: wrap;
+}
+
+.summaryRow {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-medium, 16px);
+  width: 100%;
+  max-width: var(--semantic-max-content-width, 960px);
+}

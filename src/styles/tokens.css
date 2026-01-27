@@ -209,7 +209,7 @@
   --type-line-height-large-heading: 1.2;
   --type-font-size-x-large: 32px;
   --type-font-size-large: 24px;
-  --type-font-size-medium: 16px;
+  --type-font-size-medium: 14px;
   --type-font-size-small: 12px;
   --type-font-size-x-small: 10px;
 
@@ -241,6 +241,7 @@
   --semantic-content-link-hover: #3b4c54;
   --semantic-content-negative: #d70015;
   --semantic-content-positive: #248a3d;
+  --semantic-content-warning: var(--color-red-450);
   --semantic-content-primary: #091723;
   --semantic-content-secondary: rgba(9, 23, 35, 0.6);
   --semantic-field-border-active: #091723;

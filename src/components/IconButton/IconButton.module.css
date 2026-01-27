@@ -31,11 +31,11 @@
   /* Match Button large height exactly: padding-top + font-size + padding-bottom */
   /* Button large: 12px (top) + 16px (font-size) + 12px (bottom) = 40px */
   width: calc(
-    var(--spacing-small, 12px) + var(--type-font-size-medium, 16px) +
+    var(--spacing-small, 12px) + var(--type-font-size-medium, 14px) +
       var(--spacing-small, 12px)
   );
   height: calc(
-    var(--spacing-small, 12px) + var(--type-font-size-medium, 16px) +
+    var(--spacing-small, 12px) + var(--type-font-size-medium, 14px) +
       var(--spacing-small, 12px)
   );
   padding: 0;

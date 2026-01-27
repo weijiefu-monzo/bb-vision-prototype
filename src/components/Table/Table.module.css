@@ -1,0 +1,162 @@
+.table {
+  width: 100%;
+  max-width: var(--semantic-max-content-width, 960px);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.tableFullWidth {
+  max-width: none;
+}
+
+.tableHeader {
+  background: transparent;
+}
+
+.tableHeader .tableRow {
+  height: var(--spacing-2x-large, 48px);
+  border-bottom: none;
+}
+
+.tableHeaderCell {
+  padding: var(--spacing-small, 12px) var(--spacing-medium, 16px);
+  text-align: left;
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-small, 12px);
+  font-weight: 600;
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border: none;
+  vertical-align: middle;
+  height: 100%;
+}
+
+.tableHeaderCellRight {
+  text-align: right;
+}
+
+.tableHeaderCellCenter {
+  text-align: center;
+}
+
+.tableBody {
+  display: table-row-group;
+  background-color: var(--semantic-background-primary, #ffffff);
+  box-shadow: var(
+    --elevation-level1-box-shadow,
+    0px 4px 16px rgba(0, 0, 0, 0.16)
+  );
+  border-radius: var(--corner-radius-medium, 16px);
+  overflow: hidden;
+  position: relative;
+}
+
+.tableRow {
+  height: var(--spacing-3x-large, 64px);
+  border-bottom: 1px solid var(--semantic-separator);
+}
+
+.tableBody .tableRow:first-child {
+  border-top-left-radius: var(--corner-radius-medium, 16px);
+  border-top-right-radius: var(--corner-radius-medium, 16px);
+}
+
+.tableBody .tableRow:last-child {
+  border-bottom: none;
+  border-bottom-left-radius: var(--corner-radius-medium, 16px);
+  border-bottom-right-radius: var(--corner-radius-medium, 16px);
+}
+
+.tableBody .tableRow:first-child .tableCell:first-child {
+  border-top-left-radius: var(--corner-radius-medium, 16px);
+}
+
+.tableBody .tableRow:first-child .tableCell:last-child {
+  border-top-right-radius: var(--corner-radius-medium, 16px);
+}
+
+.tableBody .tableRow:last-child .tableCell:first-child {
+  border-bottom-left-radius: var(--corner-radius-medium, 16px);
+}
+
+.tableBody .tableRow:last-child .tableCell:last-child {
+  border-bottom-right-radius: var(--corner-radius-medium, 16px);
+}
+
+.tableCell {
+  padding: var(--spacing-medium, 16px);
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 400;
+  color: var(--semantic-content-primary, #091723);
+  text-align: left;
+  border: none;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.tableCellRight {
+  text-align: right;
+}
+
+.tableCellCenter {
+  text-align: center;
+}
+
+.tableTitleCell {
+  padding: var(--spacing-medium, 16px);
+}
+
+.tableTitleCellContent {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small, 12px);
+  height: 100%;
+}
+
+.tableTitleAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tableTitleTextContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2x-small, 4px);
+  flex: 1;
+  min-width: 0;
+}
+
+.tableTitleText {
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 600;
+  color: var(--semantic-content-primary, #091723);
+  line-height: 1.4;
+}
+
+.tableTitleLink {
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 600;
+  color: var(--semantic-content-primary, #091723);
+  line-height: 1.4;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.tableTitleLink:hover {
+  color: var(--semantic-content-link-hover, var(--semantic-action-fill-primary-default));
+}
+
+.tableTitleCaption {
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-small, 12px);
+  font-weight: 400;
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+  line-height: 1.4;
+}

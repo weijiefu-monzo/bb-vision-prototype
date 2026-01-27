@@ -1,0 +1,53 @@
+.dataCard {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.dataCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-small, 8px);
+  width: 100%;
+}
+
+.label {
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-small, 12px);
+  font-weight: 500;
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+  line-height: 1.4;
+}
+
+.value {
+  font-family: var(--font-family-display);
+  font-size: var(--type-font-size-large, 24px);
+  font-weight: 600;
+  color: var(--semantic-content-primary, #091723);
+  line-height: 1.2;
+}
+
+.valuePositive {
+  color: var(--semantic-content-positive, #248a3d);
+}
+
+.valueWarning {
+  color: var(--semantic-content-warning, var(--color-red-450));
+}
+
+.valueNegative {
+  color: var(--semantic-content-negative, #d70015);
+}
+
+.caption {
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-small, 12px);
+  font-weight: 400;
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+  line-height: 1.4;
+}
+
+.graph {
+  margin-top: var(--spacing-small, 12px);
+  width: 100%;
+}

@@ -4,7 +4,6 @@
   gap: var(--spacing-medium, 16px);
   width: 100%;
   max-width: var(--semantic-max-content-width, 960px);
-  margin-bottom: var(--spacing-large, 24px);
 }
 
 .backButtonContainer {

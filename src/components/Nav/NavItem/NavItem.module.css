@@ -62,7 +62,7 @@
     opacity 0.2s ease-in-out 0.1s,
     width 0.3s ease-in-out;
   position: relative;
-  font-size: var(--type-font-size-medium, 16px);
+  font-size: var(--type-font-size-medium, 14px);
   font-weight: 600;
   line-height: 1;
   overflow: hidden;
