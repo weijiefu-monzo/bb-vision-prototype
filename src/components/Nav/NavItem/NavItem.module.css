@@ -64,7 +64,7 @@
   position: relative;
   font-size: var(--type-font-size-medium, 14px);
   font-weight: 600;
-  line-height: 1;
+  line-height: 16px;
   overflow: hidden;
 }
 

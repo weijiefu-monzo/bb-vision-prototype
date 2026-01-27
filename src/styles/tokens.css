@@ -277,12 +277,13 @@
   --semantic-action-border-secondary-default: #ffffff;
   --semantic-action-border-secondary-disabled: rgba(255, 255, 255, 0.1);
   --semantic-action-border-secondary-loading: #ffffff;
+  --semantic-action-fill-secondary-default: var(--alpha-white-10-pct);
   --semantic-action-fill-primary-active: #f2f8f3;
   --semantic-action-fill-primary-default: #ffffff;
   --semantic-action-fill-primary-disabled: rgba(255, 255, 255, 0.1);
   --semantic-action-fill-primary-hover: #e3ebe4;
   --semantic-action-fill-primary-loading: #ffffff;
-  --semantic-action-fill-secondary-active: rgba(255, 255, 255, 0.2);
+  --semantic-action-fill-secondary-active: rgba(255, 255, 255, 0);
   --semantic-action-fill-secondary-hover: rgba(255, 255, 255, 0.1);
   --semantic-action-outline-focus: #009ace;
   --semantic-backdrop: rgba(0, 0, 0, 0.3);
@@ -291,8 +292,14 @@
   --semantic-background-overlay-darker: rgba(255, 255, 255, 0.7);
   --semantic-background-overlay-light: rgba(9, 23, 35, 0.3);
   --semantic-background-overlay-lighter: rgba(255, 255, 255, 0.1);
-  --semantic-background-primary: #112231;
-  --semantic-background-secondary: #091723;
+  --semantic-background-primary: #091723;
+  --semantic-background-secondary: #112231;
+  --semantic-background-gradient: linear-gradient(
+    161deg,
+    #301904 3.55%,
+    #040e16 59.38%,
+    #000203 109.84%
+  );
   --semantic-content-accent: #ff4f40;
   --semantic-content-disabled: rgba(255, 255, 255, 0.3);
   --semantic-content-link-default: #ffffff;

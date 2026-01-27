@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import Image from "next/image";
 import NavItem from "./NavItem/NavItem";
-import { Icon, IconButton } from "@/components";
+import { Icon, IconButton, Avatar, Pill } from "@/components";
 import styles from "./Nav.module.css";
 
 export interface NavProps {
@@ -25,8 +26,40 @@ export default function Nav({
   const [internalActiveItemId, setInternalActiveItemId] =
     useState<string>("home");
 
+  // Theme state - initialize from localStorage or system preference
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window !== "undefined") {
+      const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+      if (savedTheme) {
+        return savedTheme;
+      }
+      const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      return systemPrefersDark ? "dark" : "light";
+    }
+    return "light";
+  });
+
   const router = useRouter();
   const pathname = usePathname();
+
+  // Sync theme to DOM attribute
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+  }, [theme]);
+
+  // Handle theme toggle
+  const handleThemeToggle = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    if (typeof window !== "undefined") {
+      document.documentElement.setAttribute("data-theme", newTheme);
+      localStorage.setItem("theme", newTheme);
+    }
+  };
 
   // Map item IDs to routes
   const itemRoutes: Record<string, string> = {
@@ -66,6 +99,30 @@ export default function Nav({
 
   return (
     <nav className={styles.nav}>
+      <div className={styles.logoContainer}>
+        <Image
+          src="/assets/Monzo.svg"
+          alt="Monzo"
+          width={120}
+          height={36}
+          className={`${styles.logo} ${shouldExpand ? styles.logoVisible : ""}`}
+          priority
+        />
+      </div>
+      <div className={styles.companyContainer}>
+        <Avatar
+          image="/assets/ElementalCore.png"
+          name="Elemental Core"
+          size="medium"
+        />
+        <div
+          className={`${styles.companyInfo} ${shouldExpand ? styles.companyInfoVisible : ""}`}
+        >
+          <span className={styles.companyName}>Elemental Core ltd</span>
+          <Pill label="Pro" severity="default" icon="navigation_star" />
+        </div>
+      </div>
+
       <div className={styles.navItems}>
         <NavItem
           label="Home"
@@ -146,6 +203,19 @@ export default function Nav({
             aria-label={expanded ? "Collapse navigation" : "Expand navigation"}
             onClick={onNavStateToggle}
           />
+          <div
+            className={`${styles.themeToggleContainer} ${shouldExpand ? styles.themeToggleVisible : ""}`}
+          >
+            <IconButton
+              variant="secondary"
+              size="medium"
+              icon="general_theme"
+              aria-label={
+                theme === "light" ? "Switch to dark mode" : "Switch to light mode"
+              }
+              onClick={handleThemeToggle}
+            />
+          </div>
         </div>
       )}
     </nav>

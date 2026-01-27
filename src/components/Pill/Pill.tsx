@@ -28,7 +28,6 @@ export default function Pill({
         <Icon
           name={icon}
           size="small"
-          color="inherit"
         />
       )}
       {label && <span className={styles.label}>{label}</span>}

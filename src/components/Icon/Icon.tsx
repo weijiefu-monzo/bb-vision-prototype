@@ -173,16 +173,27 @@ export default function Icon({
     );
   }
 
-  // Modify SVG to use the color if specified
+  // Modify SVG to use the color if specified, or currentColor for inheritance
   let modifiedSvg = svgContent;
   if (colorValue) {
-    // Replace fill attributes and styles
+    // Replace fill attributes and styles with specified color
     modifiedSvg = modifiedSvg
       .replace(/fill="[^"]*"/g, `fill="${colorValue}"`)
       .replace(/fill:#[0-9a-fA-F]{6}/g, `fill:${colorValue}`)
       .replace(/style="([^"]*)"/g, (match, styleContent) => {
         const updatedStyle = styleContent
           .replace(/fill:[^;]*/g, `fill:${colorValue}`)
+          .replace(/fill-opacity:[^;]*/g, ''); // Remove fill-opacity if present
+        return `style="${updatedStyle}"`;
+      });
+  } else {
+    // No color specified - use currentColor for inheritance
+    modifiedSvg = modifiedSvg
+      .replace(/fill="[^"]*"/g, 'fill="currentColor"')
+      .replace(/fill:#[0-9a-fA-F]{6}/g, 'fill:currentColor')
+      .replace(/style="([^"]*)"/g, (match, styleContent) => {
+        const updatedStyle = styleContent
+          .replace(/fill:[^;]*/g, 'fill:currentColor')
           .replace(/fill-opacity:[^;]*/g, ''); // Remove fill-opacity if present
         return `style="${updatedStyle}"`;
       });

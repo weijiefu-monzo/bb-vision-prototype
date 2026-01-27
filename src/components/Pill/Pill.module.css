@@ -13,25 +13,50 @@
 
 .pillDefault {
   color: var(--semantic-content-primary, #091723);
-  background-color: rgba(9, 23, 35, 0.1);
+  background-color: color-mix(
+    in srgb,
+    var(--semantic-content-primary, #091723) 10%,
+    transparent
+  );
 }
 
 .pillPositive {
   color: var(--semantic-content-positive, #248a3d);
-  background-color: rgba(36, 138, 61, 0.1);
+  background-color: color-mix(
+    in srgb,
+    var(--semantic-content-positive, #248a3d) 10%,
+    transparent
+  );
 }
 
 .pillNegative {
   color: var(--semantic-content-negative, #d70015);
-  background-color: rgba(215, 0, 21, 0.1);
+  background-color: color-mix(
+    in srgb,
+    var(--semantic-content-negative, #d70015) 10%,
+    transparent
+  );
 }
 
 .pillWarning {
   color: var(--semantic-content-warning, var(--color-red-450));
-  background-color: rgba(255, 105, 97, 0.1);
+  background-color: color-mix(
+    in srgb,
+    var(--semantic-content-warning, var(--color-red-450)) 10%,
+    transparent
+  );
 }
 
 .label {
   display: inline-flex;
   align-items: center;
+}
+
+.pill :global(svg),
+.pill :global([class*="icon"]) {
+  color: inherit;
+}
+
+.pill :global(svg *) {
+  fill: currentColor;
 }

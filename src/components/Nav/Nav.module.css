@@ -7,6 +7,53 @@
   justify-content: space-between;
 }
 
+.logoContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: var(--spacing-medium, 16px) var(--spacing-small, 12px);
+}
+
+.logo {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  width: auto;
+  height: 36px;
+}
+
+.logoVisible {
+  opacity: 1;
+}
+
+.companyContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small, 12px);
+  padding: var(--spacing-small, 12px) var(--spacing-x-small, 8px);
+}
+
+.companyInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-2x-small, 4px);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.companyInfoVisible {
+  opacity: 1;
+}
+
+.companyName {
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 600;
+  color: var(--semantic-content-primary, #091723);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 .navItems {
   display: flex;
   flex-direction: column;
@@ -54,8 +101,18 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  gap: var(--spacing-x-small, 8px);
   padding: var(--spacing-small, 12px);
   margin-top: auto;
+}
+
+.themeToggleContainer {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.themeToggleVisible {
+  opacity: 1;
 }
 
 .badge {

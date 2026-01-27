@@ -8,6 +8,17 @@ import {
   Box,
   DetailHeader,
   Chip,
+  Avatar,
+  DataCard,
+  Pill,
+  Table,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableHeaderCell,
+  TableCell,
+  TableTitleCell,
+  Icon,
 } from "@/components";
 import styles from "./page.module.css";
 
@@ -921,6 +932,448 @@ export default function DesignSystemPage() {
                 label="Savings"
                 selected={false}
                 onClick={() => {}}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Avatar Section */}
+      <div className={styles.section}>
+        <h2>Avatar</h2>
+        <p className={styles.sectionDescription}>
+          Avatars display user or entity images or initials. They come in small,
+          medium, and large sizes.
+        </p>
+
+        <div className={styles.subsection}>
+          <h3>Avatar with Image</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Small</p>
+              <Avatar
+                image="/assets/ElementalCore.png"
+                name="Elemental Core"
+                size="small"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Medium</p>
+              <Avatar
+                image="/assets/ElementalCore.png"
+                name="Elemental Core"
+                size="medium"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Large</p>
+              <Avatar
+                image="/assets/ElementalCore.png"
+                name="Elemental Core"
+                size="large"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Avatar with Initials</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Small</p>
+              <Avatar name="John Doe" size="small" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Medium</p>
+              <Avatar name="Jane Smith" size="medium" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Large</p>
+              <Avatar name="Acme Corporation" size="large" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Custom Initials</p>
+              <Avatar initials="AB" size="medium" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Single Word</p>
+              <Avatar name="Monzo" size="medium" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* DataCard Section */}
+      <div className={styles.section}>
+        <h2>DataCard</h2>
+        <p className={styles.sectionDescription}>
+          Data cards display key metrics and information with optional severity
+          indicators for positive, warning, and negative states.
+        </p>
+
+        <div className={styles.subsection}>
+          <h3>Basic DataCard</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Label and Value</p>
+              <DataCard label="Total Revenue" value="£125,000" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Caption</p>
+              <DataCard
+                label="Active Users"
+                value="1,234"
+                caption="Last 30 days"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Large Value</p>
+              <DataCard label="Total Balance" value="£2.5m" />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>DataCard with Severity</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Positive</p>
+              <DataCard
+                label="Growth Rate"
+                value="+18%"
+                severity="positive"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Warning</p>
+              <DataCard
+                label="Risk Level"
+                value="2 payments"
+                caption="require attention"
+                severity="warning"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Negative</p>
+              <DataCard
+                label="Overdue"
+                value="£5,200"
+                severity="negative"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>DataCard with Graph</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Graph Placeholder</p>
+              <DataCard
+                label="Monthly Trends"
+                value="£45,000"
+                graph={
+                  <div
+                    style={{
+                      height: "60px",
+                      background: "linear-gradient(90deg, #248a3d 0%, #30db5b 100%)",
+                      borderRadius: "4px",
+                    }}
+                  />
+                }
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Pill Section */}
+      <div className={styles.section}>
+        <h2>Pill</h2>
+        <p className={styles.sectionDescription}>
+          Pills are compact badges that display status, categories, or tags with
+          optional icons and severity-based styling.
+        </p>
+
+        <div className={styles.subsection}>
+          <h3>Basic Pills</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Label Only</p>
+              <Pill label="Default" severity="default" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Icon</p>
+              <Pill label="Pro" severity="default" icon="navigation_star" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Icon Only</p>
+              <Pill icon="navigation_star" severity="default" />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Pill Severities</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Default</p>
+              <Pill label="Invoice" severity="default" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Positive</p>
+              <Pill label="Approved" severity="positive" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Warning</p>
+              <Pill label="Pending" severity="warning" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Negative</p>
+              <Pill label="Rejected" severity="negative" />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Pill Examples</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Status - Approved</p>
+              <Pill label="Approved" severity="positive" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Status - Pending</p>
+              <Pill label="Pending" severity="warning" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Payment Type</p>
+              <Pill label="Recurring" severity="default" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Icon</p>
+              <Pill
+                label="Premium"
+                severity="default"
+                icon="navigation_star"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Table Section */}
+      <div className={styles.section}>
+        <h2>Table</h2>
+        <p className={styles.sectionDescription}>
+          Tables organize data into rows and columns. They support title cells
+          with avatars, right-aligned quantitative data, and row interactions.
+        </p>
+
+        <div className={styles.subsection}>
+          <h3>Basic Table</h3>
+          <div className={styles.componentExample} style={{ width: "100%" }}>
+            <p className={styles.label}>Default Table</p>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderCell>Name</TableHeaderCell>
+                  <TableHeaderCell align="right">Amount</TableHeaderCell>
+                  <TableHeaderCell>Status</TableHeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Acme Corporation</TableCell>
+                  <TableCell align="right">£12,500.00</TableCell>
+                  <TableCell>
+                    <Pill label="Approved" severity="positive" />
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Tech Solutions Ltd</TableCell>
+                  <TableCell align="right">£8,750.00</TableCell>
+                  <TableCell>
+                    <Pill label="Pending" severity="warning" />
+                  </TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Global Services Inc</TableCell>
+                  <TableCell align="right">£45,200.00</TableCell>
+                  <TableCell>
+                    <Pill label="Approved" severity="positive" />
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Table with Title Cells</h3>
+          <div className={styles.componentExample} style={{ width: "100%" }}>
+            <p className={styles.label}>Table with Avatars</p>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderCell>Recipient</TableHeaderCell>
+                  <TableHeaderCell align="right">Amount</TableHeaderCell>
+                  <TableHeaderCell>Project</TableHeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableTitleCell
+                    title="Acme Corporation"
+                    avatar={<Avatar name="Acme Corporation" />}
+                  />
+                  <TableCell align="right">£12,500.00</TableCell>
+                  <TableCell>Q4 Marketing Campaign</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableTitleCell
+                    title="Tech Solutions Ltd"
+                    avatar={<Avatar name="Tech Solutions Ltd" />}
+                    caption="Website Redesign"
+                  />
+                  <TableCell align="right">£8,750.00</TableCell>
+                  <TableCell>Website Redesign</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableTitleCell
+                    title="Global Services Inc"
+                    avatar={<Avatar name="Global Services Inc" />}
+                  />
+                  <TableCell align="right">£45,200.00</TableCell>
+                  <TableCell>Infrastructure Upgrade</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Table Variants</h3>
+          <div className={styles.componentExample} style={{ width: "100%" }}>
+            <p className={styles.label}>Full Width Table</p>
+            <Table fullWidth>
+              <TableHeader>
+                <TableRow>
+                  <TableHeaderCell>Item</TableHeaderCell>
+                  <TableHeaderCell align="right">Price</TableHeaderCell>
+                  <TableHeaderCell align="right">Quantity</TableHeaderCell>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Product A</TableCell>
+                  <TableCell align="right">£99.99</TableCell>
+                  <TableCell align="right">5</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Product B</TableCell>
+                  <TableCell align="right">£149.99</TableCell>
+                  <TableCell align="right">3</TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </div>
+        </div>
+      </div>
+
+      {/* Icon Section */}
+      <div className={styles.section}>
+        <h2>Icon</h2>
+        <p className={styles.sectionDescription}>
+          Icons are visual symbols used throughout the interface. They come in
+          various sizes and can be colored using semantic tokens.
+        </p>
+
+        <div className={styles.subsection}>
+          <h3>Icon Sizes</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>X-Small</p>
+              <Icon name="general_home" size="x-small" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Small</p>
+              <Icon name="general_home" size="small" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Medium</p>
+              <Icon name="general_home" size="medium" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Large</p>
+              <Icon name="general_home" size="large" />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Icon Examples</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Home</p>
+              <Icon name="general_home" size="medium" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Chart</p>
+              <Icon name="general_chart_bar_line" size="medium" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Task</p>
+              <Icon name="general_task" size="medium" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Settings</p>
+              <Icon name="action_plus" size="medium" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Payment</p>
+              <Icon name="money_cheque" size="medium" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Invoice</p>
+              <Icon name="money_invoice_envelope" size="medium" />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Icon Colors</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Primary</p>
+              <Icon
+                name="general_home"
+                size="medium"
+                color="content-primary"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Secondary</p>
+              <Icon
+                name="general_home"
+                size="medium"
+                color="content-secondary"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Positive</p>
+              <Icon
+                name="general_home"
+                size="medium"
+                color="content-positive"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Negative</p>
+              <Icon
+                name="general_home"
+                size="medium"
+                color="content-negative"
               />
             </div>
           </div>
