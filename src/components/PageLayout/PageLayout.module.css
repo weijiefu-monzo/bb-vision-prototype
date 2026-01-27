@@ -35,11 +35,13 @@
   flex-shrink: 0;
   transition: width 0.3s ease-in-out;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   flex-direction: column;
   gap: var(--spacing-x-large, 32px);
-  padding: var(--spacing-3x-large, 64x);
+  padding: var(--spacing-3x-large, 64px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .mainContentResizing {
@@ -72,6 +74,10 @@
   background: var(--semantic-background-gradient);
   background-attachment: fixed;
   z-index: 10;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .detailPanelResizing {

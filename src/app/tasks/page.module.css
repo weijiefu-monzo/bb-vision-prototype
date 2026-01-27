@@ -17,7 +17,7 @@
 
 .summaryRow {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: var(--spacing-medium, 16px);
   width: 100%;
   max-width: var(--semantic-max-content-width, 960px);

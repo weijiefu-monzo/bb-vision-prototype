@@ -82,7 +82,7 @@ export default function ScheduledPaymentTable({
         />
       </div>
       <PageSection
-        title="Scheduled payments by March 2025"
+        title="Payments due by March 2025"
         trailing={<Button size="medium">Approve all</Button>}
       >
         <Table>

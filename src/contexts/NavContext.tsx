@@ -11,26 +11,30 @@ interface NavContextType {
 const NavContext = createContext<NavContextType | undefined>(undefined);
 
 export function NavProvider({ children }: { children: ReactNode }) {
-  // Initialize from localStorage if available, otherwise default to "expanded"
-  // Only persist expanded/collapsed, not floating (which is transient)
-  const [navState, setNavStateState] = useState<NavState>(() => {
+  // Always start with "expanded" to match server render and avoid hydration mismatch
+  // We'll sync with localStorage after mount
+  const [navState, setNavStateState] = useState<NavState>("expanded");
+  const [isMounted, setIsMounted] = useState(false);
+
+  // After mount, read from localStorage to restore user preference
+  useEffect(() => {
+    setIsMounted(true);
     if (typeof window !== "undefined") {
       const saved = localStorage.getItem("navState");
       if (saved === "expanded" || saved === "collapsed") {
-        return saved as NavState;
+        setNavStateState(saved as NavState);
       }
     }
-    return "expanded";
-  });
+  }, []);
 
-  // Save to localStorage whenever navState changes
+  // Save to localStorage whenever navState changes (but only after mount)
   // Normalize floating to collapsed since floating is a transient hover state
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (isMounted && typeof window !== "undefined") {
       const stateToSave = navState === "floating" ? "collapsed" : navState;
       localStorage.setItem("navState", stateToSave);
     }
-  }, [navState]);
+  }, [navState, isMounted]);
 
   const setNavState = (state: NavState) => {
     setNavStateState(state);
