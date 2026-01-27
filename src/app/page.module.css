@@ -5,21 +5,8 @@
 }
 
 .detailPlaceholder {
-  padding: 20px;
+  padding: var(--spacing-large, 24px);
 
   height: 100%;
-  border-left: 1px solid #e0e0e0;
   overflow-y: auto;
-}
-
-.detailPlaceholder h2 {
-  margin: 0 0 16px 0;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.detailPlaceholder p {
-  margin: 0;
-  font-size: 14px;
-  color: #666;
 }

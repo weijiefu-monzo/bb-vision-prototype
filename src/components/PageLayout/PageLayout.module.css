@@ -38,7 +38,7 @@
   align-items: center;
   width: 100%;
   flex-direction: column;
-  gap: var(--spacing-medium, 16px);
+  gap: var(--spacing-x-large, 32px);
   padding: var(--spacing-3x-large, 64x);
 }
 
@@ -47,10 +47,10 @@
 }
 
 .divider {
-  width: 4px;
+  width: 2px;
   height: 100%;
   cursor: col-resize;
-  background-color: transparent;
+  background-color: var(--semantic-separator);
   position: relative;
   flex-shrink: 0;
   user-select: none;
@@ -62,7 +62,6 @@
   top: 0;
   bottom: 0;
   width: 1px;
-  background-color: #e0e0e0;
   transform: translateX(-50%);
 }
 

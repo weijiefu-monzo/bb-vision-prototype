@@ -1,6 +1,6 @@
 'use client';
 
-import { Button, IconButton } from '@/components';
+import { Button, IconButton, PageHeader, PageSection } from '@/components';
 import styles from './page.module.css';
 
 export default function DesignSystemPage() {
@@ -389,6 +389,197 @@ export default function DesignSystemPage() {
                 iconSize="medium"
                 aria-label="Layout"
               />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Page Header Section */}
+      <div className={styles.section}>
+        <h2>Page Header</h2>
+        <p className={styles.sectionDescription}>
+          Page headers provide context and navigation for page content. They include an optional back button, title, and description.
+        </p>
+
+        <div className={styles.subsection}>
+          <h3>Basic Page Header</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Title Only</p>
+              <PageHeader title="Dashboard" />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Text Description</p>
+              <PageHeader 
+                title="Settings"
+                description="Manage your account preferences and settings"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With ReactNode Description</p>
+              <PageHeader 
+                title="Profile"
+                description={
+                  <div>
+                    <p>Welcome back, John!</p>
+                    <p style={{ marginTop: '8px', fontSize: '14px' }}>Last updated: 2 hours ago</p>
+                  </div>
+                }
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Page Header with Back Button</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Back Button</p>
+              <PageHeader 
+                title="Edit Profile"
+                description="Update your personal information"
+                onBack={() => {}}
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Custom Back Label</p>
+              <PageHeader 
+                title="Settings"
+                description="Configure your preferences"
+                onBack={() => {}}
+                backButtonAriaLabel="Return to previous page"
+              />
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Back Button Only</p>
+              <PageHeader 
+                title="Details"
+                onBack={() => {}}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Page Section Section */}
+      <div className={styles.section}>
+        <h2>Page Section</h2>
+        <p className={styles.sectionDescription}>
+          Page sections organize content into distinct areas with optional headers, icons, and trailing elements.
+        </p>
+
+        <div className={styles.subsection}>
+          <h3>Basic Page Section</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Title Only</p>
+              <PageSection title="Account Overview">
+                <p>This is the content area of the section.</p>
+              </PageSection>
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Description</p>
+              <PageSection 
+                title="Transactions"
+                description="View and manage your recent transactions"
+              >
+                <p>Transaction content goes here.</p>
+              </PageSection>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Page Section with Icon</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Icon</p>
+              <PageSection 
+                title="Savings"
+                description="Track your savings goals"
+                icon="general_chart_bar_line"
+              >
+                <p>Savings content goes here.</p>
+              </PageSection>
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Icon Only (No Description)</p>
+              <PageSection 
+                title="Payments"
+                icon="action_plus"
+              >
+                <p>Payment content goes here.</p>
+              </PageSection>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Page Section with Trailing Element</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Button</p>
+              <PageSection 
+                title="Projects"
+                description="Manage your active projects"
+                trailing={<Button variant="secondary" size="medium">View All</Button>}
+              >
+                <p>Projects content goes here.</p>
+              </PageSection>
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Icon Button</p>
+              <PageSection 
+                title="Settings"
+                description="Configure your preferences"
+                trailing={
+                  <IconButton
+                    variant="secondary"
+                    size="medium"
+                    icon="action_plus"
+                    iconSize="small"
+                    aria-label="Add"
+                  />
+                }
+              >
+                <p>Settings content goes here.</p>
+              </PageSection>
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Full Featured</p>
+              <PageSection 
+                title="Insights"
+                description="View your financial insights"
+                icon="general_chart_bar_line"
+                trailing={<Button variant="primary" size="medium">Explore</Button>}
+              >
+                <p>Insights content goes here.</p>
+              </PageSection>
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Page Section Variants</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>With Max Width (Default)</p>
+              <PageSection 
+                title="Limited Width"
+                description="This section has a maximum width constraint"
+              >
+                <p>Content is constrained to max-width.</p>
+              </PageSection>
+            </div>
+            <div className={styles.componentExample}>
+              <p className={styles.label}>Full Width</p>
+              <PageSection 
+                title="Full Width"
+                description="This section spans the full width"
+                hasMaxWidth={false}
+              >
+                <p>Content spans the full available width.</p>
+              </PageSection>
             </div>
           </div>
         </div>

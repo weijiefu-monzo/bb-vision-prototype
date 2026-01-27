@@ -214,6 +214,7 @@
   --type-font-size-x-small: 10px;
 
   /* Light Theme Semantic Tokens */
+  --semantic-max-content-width: 960px;
   --semantic-action-fill-primary-default: var(--color-blue-500);
   --semantic-action-fill-primary-hover: var(--color-blue-500);
 

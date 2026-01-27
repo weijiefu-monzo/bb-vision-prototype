@@ -1,18 +1,23 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import {
   PageLayout,
   Nav,
   Button,
   type PageLayoutRef,
-  type NavState,
   PageHeader,
+  PageSection,
+  DetailHeader,
+  Box,
 } from "@/components";
+import { useNavState } from "@/contexts/NavContext";
 import styles from "./page.module.css";
 
 export default function Home() {
-  const [navState, setNavState] = useState<NavState>("expanded");
+  const router = useRouter();
+  const { navState, setNavState } = useNavState();
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const layoutRef = useRef<PageLayoutRef>(null);
 
@@ -34,31 +39,55 @@ export default function Home() {
         }
         detailContent={
           <div className={styles.detailPlaceholder}>
-            <h2>Detail Panel</h2>
-            <p>Detail content goes here</p>
+            <DetailHeader
+              title="Details"
+              description="This shows a detail of something on the side"
+              onBack={() => setIsDetailOpen(false)}
+            />
           </div>
         }
       >
-        <PageHeader title="Hello David!" />
-        <div className={styles.mainPlaceholder}>
-          <h1>Main Page</h1>
-          <p>This is the main content area</p>
-          <div
-            style={{
-              display: "flex",
-              gap: "12px",
-              alignItems: "center",
-              flexWrap: "wrap",
-            }}
-          >
+        <PageHeader
+          title="Hello David!"
+          description="Welcome to your dashboard"
+        />
+
+        <PageSection
+          title="Something"
+          description="Hey yo this is the first section, very important"
+          icon="general_chart_bar_line"
+          trailing={
             <Button
-              variant="primary"
-              onClick={() => setIsDetailOpen(!isDetailOpen)}
+              variant="secondary"
+              size="medium"
+              onClick={() => setIsDetailOpen(true)}
             >
-              {isDetailOpen ? "Close" : "Open"} Detail Panel
+              View all
             </Button>
-          </div>
-        </div>
+          }
+        >
+          <Box>
+            <p>Section content goes here</p>
+          </Box>
+        </PageSection>
+        <PageSection
+          title="Your Todo List"
+          description="View your current tasks and priorities"
+          icon="general_task"
+          trailing={
+            <Button
+              variant="secondary"
+              size="medium"
+              onClick={() => router.push("/tasks")}
+            >
+              View all tasks
+            </Button>
+          }
+        >
+          <Box>
+            <p>Section content goes here</p>
+          </Box>
+        </PageSection>
       </PageLayout>
     </div>
   );

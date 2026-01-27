@@ -1,0 +1,13 @@
+.box {
+  background-color: var(--semantic-background-primary, #ffffff);
+  box-shadow: var(
+    --elevation-level1-box-shadow,
+    0px 4px 16px rgba(0, 0, 0, 0.16)
+  );
+  padding: var(--spacing-medium, 16px);
+  border-radius: var(--corner-radius-medium, 16px);
+}
+
+.box.noPadding {
+  padding: 0;
+}

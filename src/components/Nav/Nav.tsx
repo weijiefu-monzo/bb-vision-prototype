@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import NavItem from "./NavItem/NavItem";
 import { Icon, IconButton } from "@/components";
 import styles from "./Nav.module.css";
@@ -24,14 +25,36 @@ export default function Nav({
   const [internalActiveItemId, setInternalActiveItemId] =
     useState<string>("home");
 
-  // Use controlled activeItemId if provided, otherwise use internal state
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // Map item IDs to routes
+  const itemRoutes: Record<string, string> = {
+    home: "/",
+    "get-paid": "/get-paid",
+    payments: "/payments",
+    pots: "/pots",
+    insights: "/insights",
+    projects: "/projects",
+  };
+
+  // Determine active item from current pathname if not controlled
+  const pathnameBasedActiveId = pathname
+    ? Object.entries(itemRoutes).find(([_, route]) => pathname === route)?.[0]
+    : undefined;
+
+  // Use controlled activeItemId if provided, otherwise use pathname-based, otherwise use internal state
   const activeItemId =
     controlledActiveItemId !== undefined
       ? controlledActiveItemId
-      : internalActiveItemId;
+      : pathnameBasedActiveId || internalActiveItemId;
 
   // Handle nav item click
   const handleItemClick = (itemId: string) => {
+    const route = itemRoutes[itemId];
+    if (route) {
+      router.push(route);
+    }
     if (controlledActiveItemId === undefined) {
       setInternalActiveItemId(itemId);
     }

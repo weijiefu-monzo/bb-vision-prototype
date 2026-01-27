@@ -12,21 +12,6 @@
   margin-top: 0;
 }
 
-.section h1 {
-  margin-bottom: var(--spacing-small, 12px);
-}
-
-.section h2 {
-  margin-bottom: var(--spacing-small, 12px);
-  margin-top: 0;
-}
-
-.section h3 {
-  margin-bottom: var(--spacing-medium, 16px);
-  margin-top: var(--spacing-large, 24px);
-  font-size: var(--type-font-size-large, 24px);
-}
-
 .description {
   font-size: var(--type-font-size-medium, 16px);
   color: var(--semantic-content-secondary, #666);

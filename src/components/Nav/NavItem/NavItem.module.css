@@ -56,29 +56,35 @@
   display: flex;
   align-items: center;
   min-width: 0;
-  /* overflow: hidden; */
   white-space: nowrap;
   transition:
     max-width 0.3s ease-in-out,
-    opacity 0.2s ease-in-out 0.1s;
+    opacity 0.2s ease-in-out 0.1s,
+    width 0.3s ease-in-out;
   position: relative;
   font-size: var(--type-font-size-medium, 16px);
   font-weight: 600;
   line-height: 1;
+  overflow: hidden;
 }
 
 .navItemHeaderCollapsed .navItemLabel {
   max-width: 0;
+  width: 0;
   opacity: 0;
   transition:
     max-width 0.3s ease-in-out,
-    opacity 0.1s ease-in-out;
+    opacity 0.1s ease-in-out,
+    width 0.3s ease-in-out;
   margin-left: 0;
+  padding: 0;
 }
 
 .navItemHeaderExpanded .navItemLabel {
-  max-width: 500px;
+  max-width: none;
+  width: auto;
   opacity: 1;
+  padding: 0;
 }
 
 .trailingSlot {

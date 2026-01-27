@@ -30,8 +30,8 @@ export default function IconButton({
     : 'semantic-action-fill-primary-default'; // Matches Button secondary/tertiary text color
 
   // Auto-adjust icon size based on button size if not explicitly provided
-  // Medium buttons use smaller icons to match medium Button icon sizes
-  const effectiveIconSize = iconSize || (size === 'medium' ? 'small' : 'medium');
+  // Both medium and large buttons use medium icon size
+  const effectiveIconSize = iconSize || 'medium';
   
   return (
     <button

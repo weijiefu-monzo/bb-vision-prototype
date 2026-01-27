@@ -1,0 +1,70 @@
+.pageSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium, 16px);
+  width: 100%;
+}
+
+.pageSection.hasMaxWidth {
+  max-width: var(--semantic-max-content-width, 960px);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-medium, 16px);
+  flex-wrap: wrap;
+}
+
+.headerContent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-small, 12px);
+  flex: 1;
+  min-width: 0;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-top: 2px; /* Align icon with title baseline */
+}
+
+.titleDescription {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-small, 8px);
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--font-family-display);
+  font-size: var(--type-font-size-large, 24px);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--semantic-content-primary, #000000);
+  margin: 0;
+}
+
+.description {
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-medium, 16px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--semantic-content-secondary, #666666);
+  margin: 0;
+}
+
+.trailingSlot {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small, 12px);
+  flex-shrink: 0;
+}
+
+.sectionContent {
+  width: 100%;
+}

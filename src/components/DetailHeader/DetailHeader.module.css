@@ -1,10 +1,8 @@
-.pageHeader {
+.detailHeader {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium, 16px);
   width: 100%;
-  max-width: var(--semantic-max-content-width, 960px);
-  margin-bottom: var(--spacing-large, 24px);
 }
 
 .backButtonContainer {
@@ -21,8 +19,8 @@
 .title {
   margin: 0;
   font-family: var(--font-family-display);
-  font-size: var(--type-font-size-x-large, 32px);
-  font-weight: 700;
+  font-size: var(--type-font-size-large, 24px);
+  font-weight: 500;
   line-height: 1.2;
   color: var(--semantic-content-primary, #091723);
 }
