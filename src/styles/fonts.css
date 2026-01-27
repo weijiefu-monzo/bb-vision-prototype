@@ -1,0 +1,129 @@
+/* Monzo Sans Display Font Family */
+@font-face {
+  font-family: "Monzo Sans Display";
+  src: url("../assets/fonts/MonzoSansDisplay-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Display";
+  src: url("../assets/fonts/MonzoSansDisplay-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Display";
+  src: url("../assets/fonts/MonzoSansDisplay-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Display";
+  src: url("../assets/fonts/MonzoSansDisplay-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Display";
+  src: url("../assets/fonts/MonzoSansDisplay-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Display";
+  src: url("../assets/fonts/MonzoSansDisplay-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Display";
+  src: url("../assets/fonts/MonzoSansDisplay-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Display";
+  src: url("../assets/fonts/MonzoSansDisplay-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Monzo Sans Text Font Family */
+@font-face {
+  font-family: "Monzo Sans Text";
+  src: url("../assets/fonts/MonzoSansText-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Text";
+  src: url("../assets/fonts/MonzoSansText-Italic.woff2") format("woff2");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Text";
+  src: url("../assets/fonts/MonzoSansText-Medium.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Text";
+  src: url("../assets/fonts/MonzoSansText-MediumItalic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Text";
+  src: url("../assets/fonts/MonzoSansText-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Text";
+  src: url("../assets/fonts/MonzoSansText-SemiBoldItalic.woff2") format("woff2");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Text";
+  src: url("../assets/fonts/MonzoSansText-Bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Monzo Sans Text";
+  src: url("../assets/fonts/MonzoSansText-BoldItalic.woff2") format("woff2");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}

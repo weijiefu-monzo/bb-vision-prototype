@@ -1,0 +1,78 @@
+.iconButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+  flex-shrink: 0;
+}
+
+/* Size Variants */
+.iconButtonMedium {
+  /* Match Button medium height exactly: padding-top + font-size + padding-bottom */
+  /* Button medium: 8px (top) + 12px (font-size) + 8px (bottom) = 28px */
+  width: calc(
+    var(--spacing-x-small, 8px) + var(--type-font-size-small, 12px) +
+      var(--spacing-x-small, 8px)
+  );
+  height: calc(
+    var(--spacing-x-small, 8px) + var(--type-font-size-small, 12px) +
+      var(--spacing-x-small, 8px)
+  );
+  padding: 0;
+  border-radius: var(--corner-radius-medium, 16px);
+}
+
+.iconButtonLarge {
+  /* Match Button large height exactly: padding-top + font-size + padding-bottom */
+  /* Button large: 12px (top) + 16px (font-size) + 12px (bottom) = 40px */
+  width: calc(
+    var(--spacing-small, 12px) + var(--type-font-size-medium, 16px) +
+      var(--spacing-small, 12px)
+  );
+  height: calc(
+    var(--spacing-small, 12px) + var(--type-font-size-medium, 16px) +
+      var(--spacing-small, 12px)
+  );
+  padding: 0;
+  border-radius: var(--corner-radius-large, 24px);
+}
+
+.iconButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary Variant */
+.iconButtonPrimary {
+  background-color: var(
+    --semantic-action-fill-primary-default,
+    var(--color-blue-500)
+  );
+}
+
+.iconButtonPrimary:not(:disabled):hover {
+  background-color: var(--semantic-action-fill-primary-hover);
+}
+
+/* Secondary Variant */
+.iconButtonSecondary {
+  background-color: var(--semantic-action-fill-secondary-default);
+}
+
+.iconButtonSecondary:not(:disabled):hover {
+  background-color: var(--semantic-action-fill-secondary-hover);
+}
+
+/* Tertiary Variant */
+.iconButtonTertiary {
+  background-color: transparent;
+}
+
+.iconButtonTertiary:not(:disabled):hover {
+  background-color: var(--semantic-action-fill-secondary-hover);
+}

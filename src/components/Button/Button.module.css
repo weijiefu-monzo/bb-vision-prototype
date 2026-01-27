@@ -1,0 +1,75 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-x-small, 8px);
+  border: none;
+  font-family: var(--font-family-text);
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.1s ease;
+  white-space: nowrap;
+}
+
+/* Size Variants */
+.buttonMedium {
+  padding: var(--spacing-x-small, 8px) var(--spacing-small, 12px);
+  border-radius: var(--corner-radius-medium, 16px);
+  font-size: var(--type-font-size-small, 12px);
+}
+
+.buttonLarge {
+  padding: var(--spacing-small, 12px) var(--spacing-medium, 16px);
+  border-radius: var(--corner-radius-large, 24px);
+  font-size: var(--type-font-size-medium, 16px);
+}
+
+.leadingIcon,
+.trailingIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Primary Variant */
+.buttonPrimary {
+  background-color: var(
+    --semantic-action-fill-primary-default,
+    var(--color-blue-500)
+  );
+  color: var(--semantic-inverse-content-primary, #ffffff);
+}
+
+.buttonPrimary:not(:disabled):hover {
+  background-color: var(--semantic-action-fill-primary-hover);
+}
+
+/* Secondary Variant */
+.buttonSecondary {
+  background-color: var(--semantic-action-fill-secondary-default);
+  color: var(--semantic-action-fill-primary-default, var(--color-blue-500));
+}
+
+.buttonSecondary:not(:disabled):hover {
+  background-color: var(--semantic-action-fill-secondary-hover);
+}
+
+/* Tertiary Variant */
+.buttonTertiary {
+  background-color: transparent;
+  color: var(--semantic-action-fill-primary-default, var(--color-blue-500));
+}
+
+.buttonTertiary:not(:disabled):hover {
+  background-color: var(--semantic-action-fill-secondary-hover);
+}

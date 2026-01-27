@@ -1,0 +1,94 @@
+@import "../styles/fonts.css";
+@import "../styles/tokens.css";
+
+:root {
+  --background: var(--semantic-background-primary, #ffffff);
+  --foreground: var(--semantic-content-primary, #171717);
+
+  /* Font Family Variables with Fallbacks */
+  --font-family-display:
+    var(--type-font-family-display, "Monzo Sans Display"), -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-family-text:
+    var(--type-font-family-content, "Monzo Sans Text"), -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--semantic-background-primary, #0a0a0a);
+    --foreground: var(--semantic-content-primary, #ededed);
+  }
+}
+
+[data-theme="dark"] {
+  --background: var(--semantic-background-primary);
+  --foreground: var(--semantic-content-primary);
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-family-text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+h1,
+h2 {
+  font-family: var(--font-family-display);
+  font-weight: bold;
+  font-style: normal;
+  margin: 0;
+}
+
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: var(--font-family-text);
+  font-weight: normal;
+  font-style: normal;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--type-font-size-x-large, 32px);
+}
+
+h2 {
+  font-size: var(--type-font-size-large, 24px);
+}
+
+h3 {
+  font-size: var(--type-font-size-medium, 16px);
+}
+
+h4,
+p {
+  font-size: var(--type-font-size-small, 12px);
+}

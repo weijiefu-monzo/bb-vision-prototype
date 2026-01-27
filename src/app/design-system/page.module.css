@@ -1,0 +1,70 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-large, 24px);
+}
+
+.section {
+  margin-bottom: var(--spacing-4x-large, 64px);
+}
+
+.section:first-child {
+  margin-top: 0;
+}
+
+.section h1 {
+  margin-bottom: var(--spacing-small, 12px);
+}
+
+.section h2 {
+  margin-bottom: var(--spacing-small, 12px);
+  margin-top: 0;
+}
+
+.section h3 {
+  margin-bottom: var(--spacing-medium, 16px);
+  margin-top: var(--spacing-large, 24px);
+  font-size: var(--type-font-size-large, 24px);
+}
+
+.description {
+  font-size: var(--type-font-size-medium, 16px);
+  color: var(--semantic-content-secondary, #666);
+  margin-bottom: var(--spacing-large, 24px);
+}
+
+.sectionDescription {
+  font-size: var(--type-font-size-medium, 16px);
+  color: var(--semantic-content-secondary, #666);
+  margin-bottom: var(--spacing-large, 24px);
+}
+
+.subsection {
+  margin-bottom: var(--spacing-3x-large, 48px);
+}
+
+.componentGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: var(--spacing-large, 24px);
+  margin-bottom: var(--spacing-large, 24px);
+}
+
+.componentExample {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small, 12px);
+  padding: var(--spacing-large, 24px);
+  background-color: var(--semantic-background-secondary, #f5f5f5);
+  border-radius: var(--corner-radius-medium, 16px);
+  align-items: flex-start;
+}
+
+.label {
+  font-size: var(--type-font-size-small, 12px);
+  font-weight: 600;
+  color: var(--semantic-content-secondary, #666);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}

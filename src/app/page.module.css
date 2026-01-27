@@ -1,0 +1,25 @@
+.pageContainer {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.detailPlaceholder {
+  padding: 20px;
+
+  height: 100%;
+  border-left: 1px solid #e0e0e0;
+  overflow-y: auto;
+}
+
+.detailPlaceholder h2 {
+  margin: 0 0 16px 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.detailPlaceholder p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}

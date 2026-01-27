@@ -1,0 +1,37 @@
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium, 16px);
+  width: 100%;
+}
+
+.backButtonContainer {
+  display: flex;
+  align-items: center;
+}
+
+.headerContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small, 12px);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: var(--type-font-size-x-large, 32px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--semantic-content-primary, #091723);
+}
+
+.description {
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-medium, 16px);
+  line-height: 1.5;
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+}
+
+.description p {
+  margin: 0;
+}

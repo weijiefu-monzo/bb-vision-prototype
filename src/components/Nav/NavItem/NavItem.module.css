@@ -1,0 +1,108 @@
+.navItem {
+  width: 100%;
+}
+
+.navItemHeader {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+  gap: var(--spacing-small, 12px);
+  padding: var(--spacing-medium, 16px);
+  border-radius: var(--corner-radius-medium, 16px);
+  transition: background-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* .navItemHeader:hover {
+  background-color: var(
+    --semantic-background-overlay-dark,
+    rgba(9, 23, 35, 0.3)
+  );
+} */
+
+.navItemHeaderCollapsed {
+  justify-content: flex-start;
+}
+
+.navItemHeaderExpanded {
+  justify-content: flex-start;
+}
+
+.navItemHeaderActive {
+  background-color: var(--semantic-inverse-background-primary, #ff4f40);
+  color: var(--semantic-inverse-content-primary, #091723);
+}
+
+/* .navItemHeaderActive:hover {
+  background-color: var(
+    --semantic-background-overlay-darker,
+    rgba(9, 23, 35, 0.7)
+  );
+} */
+
+.leadingIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: var(--size-medium, 16px);
+  height: var(--size-medium, 16px);
+}
+
+.navItemLabel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  /* overflow: hidden; */
+  white-space: nowrap;
+  transition:
+    max-width 0.3s ease-in-out,
+    opacity 0.2s ease-in-out 0.1s;
+  position: relative;
+  font-size: var(--type-font-size-medium, 16px);
+  font-weight: 600;
+  line-height: 1;
+}
+
+.navItemHeaderCollapsed .navItemLabel {
+  max-width: 0;
+  opacity: 0;
+  transition:
+    max-width 0.3s ease-in-out,
+    opacity 0.1s ease-in-out;
+  margin-left: 0;
+}
+
+.navItemHeaderExpanded .navItemLabel {
+  max-width: 500px;
+  opacity: 1;
+}
+
+.trailingSlot {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: auto;
+  overflow: hidden;
+  transition:
+    max-width 0.3s ease-in-out,
+    opacity 0.2s ease-in-out 0.1s;
+  position: relative;
+}
+
+.navItemHeaderCollapsed .trailingSlot {
+  max-width: 0;
+  opacity: 0;
+  transition:
+    max-width 0.3s ease-in-out,
+    opacity 0.1s ease-in-out;
+  margin-left: 0;
+}
+
+.navItemHeaderExpanded .trailingSlot {
+  max-width: 200px;
+  opacity: 1;
+}
