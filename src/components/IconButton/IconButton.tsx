@@ -1,6 +1,6 @@
 'use client';
 
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { ButtonHTMLAttributes, forwardRef } from 'react';
 import { Icon } from '@/components';
 import styles from './IconButton.module.css';
 
@@ -15,30 +15,36 @@ export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEle
   'aria-label': string;
 }
 
-export default function IconButton({
-  variant = 'primary',
-  size = 'large',
-  icon,
-  iconSize,
-  className,
-  ...props
-}: IconButtonProps) {
+const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconButton(
+  {
+    variant = 'primary',
+    size = 'large',
+    icon,
+    iconSize,
+    className,
+    ...props
+  },
+  ref
+) {
   // Match Button variant colors: primary uses inverse-content-primary, secondary/tertiary use semantic-action-fill-primary-default
   // Icon component supports semantic- prefix, so we can use the token directly
-  const iconColor = variant === 'primary' 
-    ? 'inverse-content-primary' 
+  const iconColor = variant === 'primary'
+    ? 'inverse-content-primary'
     : 'semantic-action-fill-primary-default'; // Matches Button secondary/tertiary text color
 
   // Auto-adjust icon size based on button size if not explicitly provided
   // Both medium and large buttons use medium icon size
   const effectiveIconSize = iconSize || 'medium';
-  
+
   return (
     <button
+      ref={ref}
       className={`${styles.iconButton} ${styles[`iconButton${variant.charAt(0).toUpperCase() + variant.slice(1)}`]} ${styles[`iconButton${size.charAt(0).toUpperCase() + size.slice(1)}`]} ${className || ''}`}
       {...props}
     >
       <Icon name={icon} size={effectiveIconSize} color={iconColor} />
     </button>
   );
-}
+});
+
+export default IconButton;

@@ -1,0 +1,22 @@
+.chartsRow {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-medium, 16px);
+  width: 100%;
+  max-width: var(--semantic-max-content-width, 960px);
+  min-width: 0;
+}
+
+.chartBox {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.fullWidthBox {
+  width: 100%;
+  min-width: 0;
+  max-width: var(--semantic-max-content-width, 960px);
+  box-sizing: border-box;
+}

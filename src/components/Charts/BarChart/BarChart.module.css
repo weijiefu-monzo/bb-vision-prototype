@@ -1,0 +1,80 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.title {
+  margin: 0 0 var(--spacing-small, 12px);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 500;
+  color: var(--semantic-content-primary, #091723);
+}
+
+.chartContainer {
+  width: 100%;
+  min-width: 0;
+}
+
+.chartWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 0;
+  min-height: 200px;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.grid {
+  pointer-events: none;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small, 12px);
+  margin-top: var(--spacing-small, 12px);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-x-small, 8px);
+  font-size: var(--type-font-size-small, 12px);
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+}
+
+.legendSwatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.yAxisLabels {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-right: var(--spacing-x-small, 8px);
+  font-size: var(--type-font-size-x-small, 10px);
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+  min-height: 0;
+}
+
+.chartArea {
+  flex: 1;
+  min-width: 0;
+}
+
+.xAxisLabels {
+  display: flex;
+  justify-content: space-around;
+  margin-top: var(--spacing-x-small, 8px);
+  font-size: var(--type-font-size-x-small, 10px);
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+}

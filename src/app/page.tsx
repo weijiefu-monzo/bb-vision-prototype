@@ -11,7 +11,9 @@ import {
   PageSection,
   DetailHeader,
   Box,
+  WorkflowBuilder,
 } from "@/components";
+import { workflowDummyData } from "@/data";
 import { useNavState } from "@/contexts/NavContext";
 import styles from "./page.module.css";
 
@@ -19,6 +21,7 @@ export default function Home() {
   const router = useRouter();
   const { navState, setNavState } = useNavState();
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [isWorkflowBuilderOpen, setIsWorkflowBuilderOpen] = useState(false);
   const layoutRef = useRef<PageLayoutRef>(null);
 
   return (
@@ -55,13 +58,22 @@ export default function Home() {
           description="Hey yo this is the first section, very important"
           icon="general_chart_bar_line"
           trailing={
-            <Button
-              variant="secondary"
-              size="medium"
-              onClick={() => setIsDetailOpen(true)}
-            >
-              View all
-            </Button>
+            <>
+              <Button
+                variant="secondary"
+                size="medium"
+                onClick={() => setIsWorkflowBuilderOpen(true)}
+              >
+                Open workflow builder
+              </Button>
+              <Button
+                variant="secondary"
+                size="medium"
+                onClick={() => setIsDetailOpen(true)}
+              >
+                View all
+              </Button>
+            </>
           }
         >
           <Box>
@@ -87,6 +99,12 @@ export default function Home() {
           </Box>
         </PageSection>
       </PageLayout>
+
+      <WorkflowBuilder
+        open={isWorkflowBuilderOpen}
+        onClose={() => setIsWorkflowBuilderOpen(false)}
+        workflow={workflowDummyData}
+      />
     </div>
   );
 }

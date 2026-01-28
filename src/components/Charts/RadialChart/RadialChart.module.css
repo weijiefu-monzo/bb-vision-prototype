@@ -1,0 +1,102 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 0;
+}
+
+.title {
+  margin: 0 0 var(--spacing-small, 12px);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 500;
+  color: var(--semantic-content-primary, #091723);
+}
+
+.chartContainer {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg {
+  display: block;
+  overflow: visible;
+}
+
+.track {
+  fill: none;
+  stroke: var(--semantic-field-border-default, rgba(9, 23, 35, 0.12));
+}
+
+.segment {
+  fill: none;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.2s ease;
+}
+
+.centerGroup {
+  pointer-events: none;
+}
+
+.centerValue {
+  font-size: var(--type-font-size-4x-large, 28px);
+  font-weight: 600;
+  fill: var(--semantic-content-primary, #091723);
+  text-anchor: middle;
+}
+
+.centerUnit {
+  font-size: var(--type-font-size-small, 12px);
+  fill: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+  text-anchor: middle;
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small, 12px);
+  justify-content: center;
+  margin-top: var(--spacing-medium, 16px);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-x-small, 8px);
+  font-size: var(--type-font-size-small, 12px);
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+}
+
+.legendSwatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.footer {
+  margin-top: var(--spacing-medium, 16px);
+  padding-top: var(--spacing-small, 12px);
+  border-top: 1px solid
+    var(--semantic-field-border-default, rgba(9, 23, 35, 0.1));
+}
+
+.trendRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-x-small, 8px);
+  font-size: var(--type-font-size-small, 12px);
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+  margin-bottom: var(--spacing-x-small, 8px);
+}
+
+.trendRow:last-child {
+  margin-bottom: 0;
+}
+
+.periodText {
+  font-size: var(--type-font-size-small, 12px);
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+}

@@ -1,0 +1,68 @@
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium, 16px);
+  padding: var(--spacing-small, 12px) var(--spacing-medium, 16px);
+  flex-shrink: 0;
+  min-height: 0;
+  border-bottom: 1px solid var(--semantic-separator);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: var(--type-font-size-large, 24px);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--semantic-content-primary, #091723);
+  flex-shrink: 0;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--semantic-field-border-default, rgba(9, 23, 35, 0.1));
+  flex-shrink: 0;
+}
+
+.itemBlock {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  min-width: 0;
+}
+
+.itemLabel {
+  margin: 0;
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--semantic-content-primary, #091723);
+}
+
+.itemCaption {
+  margin: 0;
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-small, 12px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--semantic-content-secondary, rgba(9, 23, 35, 0.6));
+}
+
+.spacer {
+  flex: 1;
+  min-width: 0;
+}
+
+.trailingSlot {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-x-small, 8px);
+  flex-shrink: 0;
+}
+
+.closeButtonWrapper {
+  flex-shrink: 0;
+  margin-left: var(--spacing-x-small, 8px);
+}

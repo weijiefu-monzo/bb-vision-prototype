@@ -16,6 +16,27 @@ export type { ButtonProps, ButtonVariant } from "./Button";
 export { Box } from "./Box";
 export type { BoxProps } from "./Box";
 
+export { BarChart, HorizontalBarChart, LineChart, RadialChart } from "./Charts";
+export type {
+  BarChartProps,
+  BarChartDataItem,
+  BarChartGridProps,
+  BarChartYAxisProps,
+  BarChartXAxisProps,
+  BarChartBarsProps,
+  BarChartLegendProps,
+  HorizontalBarChartProps,
+  LineChartProps,
+  LineChartSeries,
+  RadialChartProps,
+  RadialChartSingleProps,
+  RadialChartMultipleProps,
+  RadialChartBaseProps,
+  RadialChartSingleEntry,
+  RadialChartMultipleEntry,
+  RadialChartVariant,
+} from "./Charts";
+
 export { DataCard } from "./DataCard";
 export type { DataCardProps, DataCardSeverity } from "./DataCard";
 
@@ -30,6 +51,12 @@ export type { PageHeaderProps } from "./PageHeader";
 
 export { DetailHeader } from "./DetailHeader";
 export type { DetailHeaderProps } from "./DetailHeader";
+
+export { FocusView, FocusViewHeader } from "./FocusView";
+export type { FocusViewProps, FocusViewHeaderProps } from "./FocusView";
+
+export { WorkflowBuilder } from "./WorkflowBuilder";
+export type { WorkflowBuilderProps, Workflow } from "./WorkflowBuilder";
 
 export { PageSection } from "./PageSection";
 export type { PageSectionProps } from "./PageSection";

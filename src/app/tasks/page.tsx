@@ -10,6 +10,7 @@ import {
   Chip,
   DetailHeader,
 } from "@/components";
+import type { PaymentRow } from "@/data";
 import { useNavState } from "@/contexts/NavContext";
 import ScheduledPaymentTable from "./components/ScheduledPaymentTable";
 import styles from "./page.module.css";
@@ -23,14 +24,7 @@ const VALID_TASK_TYPES = [
 
 type TaskType = (typeof VALID_TASK_TYPES)[number] | null;
 
-export interface PaymentRow {
-  recipient: string;
-  amount: string;
-  project: string;
-  paymentType: string;
-  dueDate: string;
-  approvalStatus: string;
-}
+export type { PaymentRow } from "@/data";
 
 export default function TasksPage() {
   const router = useRouter();

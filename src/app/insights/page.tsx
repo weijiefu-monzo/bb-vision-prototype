@@ -4,12 +4,29 @@ import { useState, useRef } from "react";
 import {
   PageLayout,
   Nav,
-  Button,
   type PageLayoutRef,
   PageHeader,
+  Box,
+  BarChart,
+  HorizontalBarChart,
+  LineChart,
+  RadialChart,
 } from "@/components";
+import {
+  barChartDummyData,
+  stackedBarChartDummyData,
+  stackedBarChartSeriesLabels,
+  horizontalBarChartDummyData,
+  horizontalBarChartSeriesLabels,
+  lineChartDummyDataSingle,
+  lineChartDummyDataMultiple,
+  lineChartXLabels,
+  radialChartDummyDataSingle,
+  radialChartDummyDataMultiple,
+} from "@/data";
 import { useNavState } from "@/contexts/NavContext";
-import styles from "../page.module.css";
+import layoutStyles from "../page.module.css";
+import styles from "./page.module.css";
 
 export default function InsightsPage() {
   const { navState, setNavState } = useNavState();
@@ -17,7 +34,7 @@ export default function InsightsPage() {
   const layoutRef = useRef<PageLayoutRef>(null);
 
   return (
-    <div className={styles.pageContainer}>
+    <div className={layoutStyles.pageContainer}>
       <PageLayout
         ref={layoutRef}
         navState={navState}
@@ -33,7 +50,7 @@ export default function InsightsPage() {
           />
         }
         detailContent={
-          <div className={styles.detailPlaceholder}>
+          <div className={layoutStyles.detailPlaceholder}>
             <h2>Insights Details</h2>
             <p>Insights detail content goes here</p>
           </div>
@@ -43,8 +60,71 @@ export default function InsightsPage() {
           title="Insights"
           description="Analyze your spending and income patterns"
         />
-        <div className={styles.mainPlaceholder}>
-          <p>This is the insights page</p>
+        <div className={styles.chartsRow}>
+          <Box className={styles.chartBox}>
+            <BarChart
+              data={barChartDummyData}
+              title="Monthly overview"
+              showLegend={false}
+            />
+          </Box>
+          <Box className={styles.chartBox}>
+            <BarChart
+              data={stackedBarChartDummyData}
+              seriesLabels={stackedBarChartSeriesLabels}
+              title="Stacked by category"
+              showLegend={true}
+            />
+          </Box>
+        </div>
+        <Box className={styles.fullWidthBox}>
+          <HorizontalBarChart
+            data={horizontalBarChartDummyData}
+            seriesLabels={horizontalBarChartSeriesLabels}
+            title="Horizontal by category"
+            showLegend={true}
+          />
+        </Box>
+        <div className={styles.chartsRow}>
+          <Box className={styles.chartBox}>
+            <LineChart
+              data={lineChartDummyDataSingle}
+              xLabels={lineChartXLabels}
+              title="Single line (area gradient)"
+              showLegend={true}
+            />
+          </Box>
+          <Box className={styles.chartBox}>
+            <LineChart
+              data={lineChartDummyDataMultiple}
+              xLabels={lineChartXLabels}
+              title="Multiple lines"
+              showLegend={true}
+            />
+          </Box>
+        </div>
+        <div className={styles.chartsRow}>
+          <Box className={styles.chartBox}>
+            <RadialChart
+              variant="single"
+              data={radialChartDummyDataSingle}
+              title="Radial – single (progress ring)"
+              trendText="Trending up by 5.2% this month"
+              periodText="Showing total visitors for the last 6 months"
+              size={200}
+            />
+          </Box>
+          <Box className={styles.chartBox}>
+            <RadialChart
+              variant="multiple"
+              data={radialChartDummyDataMultiple}
+              title="Radial – multiple (concentric rings)"
+              showLegend={true}
+              trendText="Trending up by 5.2% this month"
+              periodText="Showing total visitors for the last 6 months"
+              size={200}
+            />
+          </Box>
         </div>
       </PageLayout>
     </div>
