@@ -26,25 +26,28 @@ export default function Nav({
   const [internalActiveItemId, setInternalActiveItemId] =
     useState<string>("home");
 
-  // Theme state - initialize from localStorage or system preference
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
-    if (typeof window !== "undefined") {
-      const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
-      if (savedTheme) {
-        return savedTheme;
-      }
-      const systemPrefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      return systemPrefersDark ? "dark" : "light";
-    }
-    return "light";
-  });
+  // Theme state - always start with "light" to match server and avoid hydration mismatch
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   const router = useRouter();
   const pathname = usePathname();
 
-  // Sync theme to DOM attribute
+  // After mount: restore theme from localStorage and sync to DOM (deferred to avoid setState-in-effect lint)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const savedTheme = localStorage.getItem("theme") as "light" | "dark" | null;
+    if (savedTheme === "light" || savedTheme === "dark") {
+      const apply = () => {
+        setTheme(savedTheme);
+        document.documentElement.setAttribute("data-theme", savedTheme);
+      };
+      queueMicrotask(apply);
+    } else {
+      document.documentElement.setAttribute("data-theme", "light");
+    }
+  }, []);
+
+  // Sync theme to DOM when it changes (e.g. after toggle)
   useEffect(() => {
     if (typeof window !== "undefined") {
       document.documentElement.setAttribute("data-theme", theme);
@@ -73,7 +76,7 @@ export default function Nav({
 
   // Determine active item from current pathname if not controlled
   const pathnameBasedActiveId = pathname
-    ? Object.entries(itemRoutes).find(([_, route]) => pathname === route)?.[0]
+    ? Object.entries(itemRoutes).find(([, route]) => pathname === route)?.[0]
     : undefined;
 
   // Use controlled activeItemId if provided, otherwise use pathname-based, otherwise use internal state
