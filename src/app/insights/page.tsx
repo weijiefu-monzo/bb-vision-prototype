@@ -6,6 +6,7 @@ import {
   Nav,
   type PageLayoutRef,
   PageHeader,
+  Button,
   Box,
   BarChart,
   HorizontalBarChart,
@@ -61,6 +62,11 @@ export default function InsightsPage() {
         <PageHeader
           title="Insights"
           description="Analyze your spending and income patterns"
+          trailing={
+            <Button variant="secondary" size="medium" leadingIcon="action_plus">
+              Add new chart
+            </Button>
+          }
         />
         <div className={styles.chartsRow}>
           <Box className={styles.chartBox}>

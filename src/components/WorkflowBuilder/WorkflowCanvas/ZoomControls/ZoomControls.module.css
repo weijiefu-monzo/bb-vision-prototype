@@ -1,0 +1,32 @@
+.panel {
+  margin: var(--spacing-small, 12px);
+  pointer-events: auto;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2x-small, 4px);
+  padding: var(--spacing-2x-small, 4px) var(--spacing-2x-small, 2px);
+  border-radius: var(--corner-radius-large, 24px);
+  background-color: var(--semantic-background-primary, #ffffff);
+  border: 1px solid var(--semantic-separator, #e5e7eb);
+  box-shadow: var(
+    --elevation-level1-box-shadow,
+    0px 4px 16px rgba(0, 0, 0, 0.16)
+  );
+}
+
+.zoomLevel {
+  min-width: 3em;
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-small, 12px);
+  font-weight: 600;
+  color: var(--semantic-content-primary, #111827);
+  text-align: center;
+  margin-left: var(--spacing-x-small, 8px);
+}
+
+.button {
+  flex-shrink: 0;
+}

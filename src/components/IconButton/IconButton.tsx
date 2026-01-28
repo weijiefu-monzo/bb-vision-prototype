@@ -5,7 +5,7 @@ import { Icon } from '@/components';
 import styles from './IconButton.module.css';
 
 export type IconButtonVariant = 'primary' | 'secondary' | 'tertiary';
-export type IconButtonSize = 'medium' | 'large';
+export type IconButtonSize = 'small' | 'medium' | 'large';
 
 export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
   variant?: IconButtonVariant;
@@ -33,8 +33,9 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(function IconB
     : 'semantic-action-fill-primary-default'; // Matches Button secondary/tertiary text color
 
   // Auto-adjust icon size based on button size if not explicitly provided
-  // Both medium and large buttons use medium icon size
-  const effectiveIconSize = iconSize || 'medium';
+  const effectiveIconSize =
+    iconSize ||
+    (size === 'small' ? 'small' : size === 'medium' ? 'medium' : 'medium');
 
   return (
     <button

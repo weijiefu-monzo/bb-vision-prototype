@@ -67,6 +67,9 @@ export type { PageSectionProps } from "./PageSection";
 export { Pill } from "./Pill";
 export type { PillProps, PillSeverity } from "./Pill";
 
+export { Tabs } from "./Tabs";
+export type { TabsProps, TabItem } from "./Tabs";
+
 export {
   Table,
   TableHeader,

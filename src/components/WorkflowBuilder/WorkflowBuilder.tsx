@@ -1,8 +1,9 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import React, { useState } from "react";
+import type { Edge } from "@xyflow/react";
 import { IconButton, FocusView, FocusViewHeader } from "@/components";
-import { WorkflowCanvas } from "./WorkflowCanvas";
+import { WorkflowCanvas, type WorkflowNode } from "./WorkflowCanvas";
 import { WorkflowSidePanel } from "./WorkflowSidePanel";
 import styles from "./WorkflowBuilder.module.css";
 
@@ -15,6 +16,10 @@ export interface Workflow {
   itemCaption?: string;
   /** Optional id for identifying the workflow */
   id?: string;
+  /** Nodes to show when editing an existing workflow (empty = new workflow) */
+  nodes?: WorkflowNode[];
+  /** Edges to show when editing an existing workflow */
+  edges?: Edge[];
   /** Extensible for future workflow-specific data */
   [key: string]: unknown;
 }
@@ -34,6 +39,88 @@ export default function WorkflowBuilder({
 
   className,
 }: WorkflowBuilderProps) {
+  const [sidePanelOpen, setSidePanelOpen] = useState(true);
+
+  const headerTrailing = (
+    <div className={styles.headerTrailing}>
+      <div className={styles.actionGroup}>
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon={
+            sidePanelOpen
+              ? "navigation_chevron_right_2"
+              : "navigation_chevron_left_2"
+          }
+          aria-label={
+            sidePanelOpen ? "Collapse side panel" : "Expand side panel"
+          }
+          onClick={() => setSidePanelOpen((prev) => !prev)}
+        />
+      </div>
+      <div className={styles.actionGroup}>
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon="action_play"
+          aria-label="Play workflow"
+        />
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon="action_pause"
+          aria-label="Pause workflow"
+        />
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon="navigation_arrow_circlepath_horizontal"
+          aria-label="Restart workflow"
+        />
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon="navigation_arrow_rotating_anticlockwise"
+          aria-label="Undo last step"
+        />
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon="navigation_arrow_rotating_clockwise"
+          aria-label="Redo last step"
+        />
+      </div>
+      <div className={styles.actionGroup}>
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon="general_tune"
+          aria-label="Play workflow"
+        />
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon="general_history"
+          aria-label="Play workflow"
+        />
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon="action_share"
+          aria-label="Play workflow"
+        />
+      </div>
+      <div className={styles.actionGroup}>
+        <IconButton
+          variant="tertiary"
+          size="medium"
+          icon="general_questionmark_circle"
+          aria-label="Play workflow"
+        />
+      </div>
+    </div>
+  );
+
   return (
     <FocusView
       open={open}
@@ -51,74 +138,12 @@ export default function WorkflowBuilder({
       }
     >
       <div className={styles.content}>
-        <WorkflowCanvas />
-        <WorkflowSidePanel />
+        <WorkflowCanvas
+          initialNodes={workflow.nodes}
+          initialEdges={workflow.edges}
+        />
+        <WorkflowSidePanel open={sidePanelOpen} />
       </div>
     </FocusView>
   );
 }
-
-const headerTrailing: ReactNode = (
-  <div className={styles.headerTrailing}>
-    <div className={styles.actionGroup}>
-      <IconButton
-        variant="tertiary"
-        size="medium"
-        icon="action_play"
-        aria-label="Play workflow"
-      />
-      <IconButton
-        variant="tertiary"
-        size="medium"
-        icon="action_pause"
-        aria-label="Pause workflow"
-      />
-      <IconButton
-        variant="tertiary"
-        size="medium"
-        icon="navigation_arrow_circlepath_horizontal"
-        aria-label="Restart workflow"
-      />
-      <IconButton
-        variant="tertiary"
-        size="medium"
-        icon="navigation_arrow_rotating_anticlockwise"
-        aria-label="Undo last step"
-      />
-      <IconButton
-        variant="tertiary"
-        size="medium"
-        icon="navigation_arrow_rotating_clockwise"
-        aria-label="Redo last step"
-      />
-    </div>
-    <div className={styles.actionGroup}>
-      <IconButton
-        variant="tertiary"
-        size="medium"
-        icon="general_tune"
-        aria-label="Play workflow"
-      />
-      <IconButton
-        variant="tertiary"
-        size="medium"
-        icon="general_history"
-        aria-label="Play workflow"
-      />
-      <IconButton
-        variant="tertiary"
-        size="medium"
-        icon="action_share"
-        aria-label="Play workflow"
-      />
-    </div>
-    <div className={styles.actionGroup}>
-      <IconButton
-        variant="tertiary"
-        size="medium"
-        icon="general_questionmark_circle"
-        aria-label="Play workflow"
-      />
-    </div>
-  </div>
-);

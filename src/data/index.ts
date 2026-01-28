@@ -6,7 +6,10 @@ export {
   horizontalBarChartSeriesLabels,
   type BarChartDataItem,
 } from "./barChart";
-export { workflowDummyData } from "./workflow";
+export {
+  workflowDummyData,
+  type WorkflowDummyNodeData,
+} from "./workflow";
 export {
   scheduledPaymentsDummyData,
   type PaymentRow,

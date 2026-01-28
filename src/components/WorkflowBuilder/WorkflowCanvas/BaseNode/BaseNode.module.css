@@ -1,0 +1,42 @@
+.baseNode {
+  background-color: var(--semantic-background-primary, #ffffff);
+  border: 2px solid var(--semantic-separator);
+  padding: var(--spacing-small, 12px);
+  border-radius: var(--corner-radius-medium, 16px);
+  min-width: 120px;
+  max-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-small, 12px);
+}
+
+.baseNode:hover {
+  border-color: var(--semantic-content-secondary);
+  cursor: grab;
+}
+
+.iconSlot {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.label {
+  font-family: var(--font-family-text);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 600;
+  color: var(--semantic-content-primary);
+  flex: 1;
+  min-width: 0;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2x-small, 4px);
+  flex-shrink: 0;
+  background: var(--semantic-background-secondary);
+  padding: var(--spacing-3x-small, 2px);
+  border-radius: var(--corner-radius-medium, 16px);
+}

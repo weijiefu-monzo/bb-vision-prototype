@@ -97,3 +97,43 @@ h3 {
 p {
   font-size: var(--type-font-size-medium, 14px);
 }
+
+/* Workflow canvas: connection handle styles (global so they override React Flow) */
+[data-workflow-canvas] .react-flow__handle {
+  width: 12px !important;
+  height: 12px !important;
+  min-width: 12px !important;
+  min-height: 12px !important;
+  background-color: var(--semantic-background-primary, #ffffff) !important;
+  border: 2px solid var(--semantic-separator, rgba(9, 23, 35, 0.1)) !important;
+  pointer-events: all !important;
+}
+
+[data-workflow-canvas] .react-flow__handle:hover {
+  background-color: var(--semantic-background-primary, #ffffff) !important;
+}
+
+/* Center handles on node edge: top up 6px, bottom down 6px */
+[data-workflow-canvas] .react-flow__handle-top {
+  top: -6px !important;
+}
+
+[data-workflow-canvas] .react-flow__handle-bottom {
+  bottom: -6px !important;
+}
+
+/* Workflow canvas: dashed edges with flow-direction animation */
+@keyframes workflowEdgeFlow {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -16;
+  }
+}
+
+[data-workflow-canvas] .react-flow__edge path.react-flow__edge-path {
+  stroke-dasharray: 8 8 !important;
+  animation: workflowEdgeFlow 0.6s linear infinite !important;
+  will-change: stroke-dashoffset;
+}

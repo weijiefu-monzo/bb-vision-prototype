@@ -1,15 +1,24 @@
 "use client";
 
-import React, { ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { Tabs } from "@/components";
+import type { TabItem } from "@/components";
 import styles from "./WorkflowSidePanel.module.css";
+
+const SIDE_PANEL_TABS: TabItem[] = [
+  { id: "nodes", label: "Nodes" },
+  { id: "detail", label: "Detail" },
+  { id: "monzo-ai", label: "Monzo AI" },
+];
 
 const DEFAULT_WIDTH = 320;
 const DEFAULT_MAX_WIDTH = 480;
 const DEFAULT_MIN_WIDTH = 240;
 
 export interface WorkflowSidePanelProps {
-  /** Panel content */
-  children?: ReactNode;
+  /** Whether the panel is expanded (visible). When false, panel animates to 0 width. */
+  open?: boolean;
+
   /** Default width in pixels when no previous size is stored */
   defaultWidth?: number;
   /** Maximum width in pixels */
@@ -20,13 +29,15 @@ export interface WorkflowSidePanelProps {
 }
 
 export default function WorkflowSidePanel({
-  children,
+  open = true,
+
   defaultWidth = DEFAULT_WIDTH,
   maxWidth = DEFAULT_MAX_WIDTH,
   minWidth = DEFAULT_MIN_WIDTH,
   className,
 }: WorkflowSidePanelProps) {
   const [width, setWidth] = useState(defaultWidth);
+  const [activeTab, setActiveTab] = useState(SIDE_PANEL_TABS[0].id);
   const [isResizing, setIsResizing] = useState(false);
   const [startX, setStartX] = useState(0);
   const [startWidth, setStartWidth] = useState(0);
@@ -35,7 +46,7 @@ export default function WorkflowSidePanel({
 
   const clamp = useCallback(
     (value: number) => Math.min(maxWidth, Math.max(minWidth, value)),
-    [minWidth, maxWidth]
+    [minWidth, maxWidth],
   );
 
   const handleMouseDown = useCallback(
@@ -45,7 +56,7 @@ export default function WorkflowSidePanel({
       setStartX(e.clientX);
       setStartWidth(width);
     },
-    [width]
+    [width],
   );
 
   const handleDividerMouseMove = useCallback((e: React.MouseEvent) => {
@@ -67,7 +78,7 @@ export default function WorkflowSidePanel({
 
     const handleMouseMove = (e: MouseEvent) => {
       const delta = startX - e.clientX;
-      setWidth((w) => clamp(startWidth + delta));
+      setWidth(() => clamp(startWidth + delta));
       if (dividerRef.current) {
         const rect = dividerRef.current.getBoundingClientRect();
         const y = e.clientY - rect.top;
@@ -96,8 +107,8 @@ export default function WorkflowSidePanel({
 
   return (
     <div
-      className={`${styles.wrapper} ${isResizing ? styles.resizing : ""} ${className ?? ""}`}
-      style={{ width: effectiveWidth }}
+      className={`${styles.wrapper} ${!open ? styles.closed : ""} ${isResizing ? styles.resizing : ""} ${className ?? ""}`}
+      style={{ width: open ? effectiveWidth : 0 }}
       data-workflow-side-panel
     >
       <div
@@ -116,10 +127,37 @@ export default function WorkflowSidePanel({
         <div className={styles.dividerLine} />
         <div
           className={`${styles.dividerGradient} ${dividerMouseY !== null || isResizing ? styles.dividerGradientVisible : ""}`}
-          style={{ top: dividerMouseY !== null ? `${dividerMouseY}px` : undefined }}
+          style={{
+            top: dividerMouseY !== null ? `${dividerMouseY}px` : undefined,
+          }}
         />
       </div>
-      <div className={styles.panel}>{children}</div>
+      <div className={styles.panel}>
+        <div className={styles.tabsWrapper}>
+          <Tabs
+            tabs={SIDE_PANEL_TABS}
+            value={activeTab}
+            onChange={setActiveTab}
+            fullWidth
+          />
+        </div>
+        <div
+          className={styles.tabContent}
+          role="tabpanel"
+          id={`tabpanel-${activeTab}`}
+          aria-labelledby={`tab-${activeTab}`}
+        >
+          {activeTab === "nodes" && (
+            <div className={styles.placeholder}>Nodes content</div>
+          )}
+          {activeTab === "detail" && (
+            <div className={styles.placeholder}>Detail content</div>
+          )}
+          {activeTab === "monzo-ai" && (
+            <div className={styles.placeholder}>Monzo AI content</div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }

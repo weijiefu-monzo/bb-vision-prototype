@@ -12,6 +12,13 @@
 }
 
 /* Size Variants */
+.iconButtonSmall {
+  width: var(--size-small);
+  height: var(--size-small);
+  padding: 0;
+  border-radius: var(--corner-radius-small, 8px);
+}
+
 .iconButtonMedium {
   /* Match Button medium height exactly: padding-top + font-size + padding-bottom */
   /* Button medium: 8px (top) + 12px (font-size) + 8px (bottom) = 28px */
