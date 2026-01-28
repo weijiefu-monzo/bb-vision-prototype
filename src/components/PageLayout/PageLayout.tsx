@@ -70,6 +70,7 @@ const PageLayout = forwardRef<PageLayoutRef, PageLayoutProps>(
     const [previousNavState, setPreviousNavState] =
       useState<NavState>("expanded");
     const [isHovering, setIsHovering] = useState(false);
+    const [dividerMouseY, setDividerMouseY] = useState<number | null>(null);
 
     const navRef = useRef<HTMLDivElement>(null);
     const dividerRef = useRef<HTMLDivElement>(null);
@@ -228,6 +229,22 @@ const PageLayout = forwardRef<PageLayoutRef, PageLayoutProps>(
       };
     }, [navFloatingTimeout]);
 
+    // Handle divider mouse move for gradient effect
+    const handleDividerMouseMove = useCallback((e: React.MouseEvent) => {
+      if (dividerRef.current) {
+        const rect = dividerRef.current.getBoundingClientRect();
+        const y = e.clientY - rect.top;
+        setDividerMouseY(y);
+      }
+    }, []);
+
+    const handleDividerMouseLeave = useCallback(() => {
+      // Don't hide gradient if we're resizing
+      if (!isResizing) {
+        setDividerMouseY(null);
+      }
+    }, [isResizing]);
+
     // Resize handler for divider
     const handleMouseDown = useCallback((e: React.MouseEvent) => {
       e.preventDefault();
@@ -251,12 +268,20 @@ const PageLayout = forwardRef<PageLayoutRef, PageLayoutProps>(
           detailWidthRef.current = finalWidth; // Persist width in ref
         }
         onDetailWidthChange?.(finalWidth);
+
+        // Update gradient position during resize
+        if (dividerRef.current) {
+          const rect = dividerRef.current.getBoundingClientRect();
+          const y = e.clientY - rect.top;
+          setDividerMouseY(y);
+        }
       },
       [isResizing, detailMaxWidth, controlledDetailWidth, onDetailWidthChange],
     );
 
     const handleMouseUp = useCallback(() => {
       setIsResizing(false);
+      setDividerMouseY(null);
     }, []);
 
     useEffect(() => {
@@ -374,9 +399,15 @@ const PageLayout = forwardRef<PageLayoutRef, PageLayoutProps>(
             <div
               ref={dividerRef}
               onMouseDown={handleMouseDown}
+              onMouseMove={handleDividerMouseMove}
+              onMouseLeave={handleDividerMouseLeave}
               className={styles.divider}
             >
               <div className={styles.dividerLine} />
+              <div
+                className={`${styles.dividerGradient} ${dividerMouseY !== null || isResizing ? styles.dividerGradientVisible : ""}`}
+                style={{ top: dividerMouseY !== null ? `${dividerMouseY}px` : undefined }}
+              />
             </div>
 
             {/* Detail Panel */}

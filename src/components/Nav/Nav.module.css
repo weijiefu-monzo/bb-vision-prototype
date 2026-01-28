@@ -11,7 +11,8 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: var(--spacing-medium, 16px) var(--spacing-small, 12px);
+  padding: var(--spacing-medium, 16px) var(--spacing-small, 12px) 0
+    var(--spacing-small, 12px);
 }
 
 .logo {

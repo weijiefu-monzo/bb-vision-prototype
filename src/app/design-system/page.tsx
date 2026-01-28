@@ -25,21 +25,16 @@ import styles from "./page.module.css";
 export default function DesignSystemPage() {
   return (
     <div className={styles.container}>
-      <div className={styles.section}>
-        <h1>Design System</h1>
-        <p className={styles.description}>
-          A comprehensive guide to all components and their variants.
-        </p>
-      </div>
+      <PageHeader
+        title="Design System"
+        description="A comprehensive guide to all components and their variants."
+      />
 
       {/* Buttons Section */}
-      <div className={styles.section}>
-        <h2>Buttons</h2>
-        <p className={styles.sectionDescription}>
-          Buttons are used to trigger actions. They come in primary and
-          secondary variants.
-        </p>
-
+      <PageSection
+        title="Buttons"
+        description="Buttons are used to trigger actions. They come in primary and secondary variants."
+      >
         <div className={styles.subsection}>
           <h3>Primary Buttons - Large</h3>
           <div className={styles.componentGrid}>
@@ -244,16 +239,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Icon Buttons Section */}
-      <div className={styles.section}>
-        <h2>Icon Buttons</h2>
-        <p className={styles.sectionDescription}>
-          Icon buttons are compact buttons that contain only an icon. They come
-          in primary, secondary, and tertiary variants.
-        </p>
-
+      <PageSection
+        title="Icon Buttons"
+        description="Icon buttons are compact buttons that contain only an icon. They come in primary, secondary, and tertiary variants."
+      >
         <div className={styles.subsection}>
           <h3>Primary Icon Buttons - Large</h3>
           <div className={styles.componentGrid}>
@@ -457,16 +449,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Page Header Section */}
-      <div className={styles.section}>
-        <h2>Page Header</h2>
-        <p className={styles.sectionDescription}>
-          Page headers provide context and navigation for page content. They
-          include an optional back button, title, and description.
-        </p>
-
+      <PageSection
+        title="Page Header"
+        description="Page headers provide context and navigation for page content. They include an optional back button, title, and description."
+      >
         <div className={styles.subsection}>
           <h3>Basic Page Header</h3>
           <div className={styles.componentGrid}>
@@ -524,16 +513,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Page Section Section */}
-      <div className={styles.section}>
-        <h2>Page Section</h2>
-        <p className={styles.sectionDescription}>
-          Page sections organize content into distinct areas with optional
-          headers, icons, and trailing elements.
-        </p>
-
+      <PageSection
+        title="Page Section"
+        description="Page sections organize content into distinct areas with optional headers, icons, and trailing elements."
+      >
         <div className={styles.subsection}>
           <h3>Basic Page Section</h3>
           <div className={styles.componentGrid}>
@@ -654,16 +640,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Box Section */}
-      <div className={styles.section}>
-        <h2>Box</h2>
-        <p className={styles.sectionDescription}>
-          Box containers provide a consistent way to display content with
-          primary background and elevation shadow.
-        </p>
-
+      <PageSection
+        title="Box"
+        description="Box containers provide a consistent way to display content with primary background and elevation shadow."
+      >
         <div className={styles.subsection}>
           <h3>Basic Box</h3>
           <div className={styles.componentGrid}>
@@ -726,16 +709,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Detail Header Section */}
-      <div className={styles.section}>
-        <h2>Detail Header</h2>
-        <p className={styles.sectionDescription}>
-          Detail headers provide context for detail panels. They render an h2
-          title and include an optional back button and description.
-        </p>
-
+      <PageSection
+        title="Detail Header"
+        description="Detail headers provide context for detail panels. They render an h2 title and include an optional back button and description."
+      >
         <div className={styles.subsection}>
           <h3>Basic Detail Header</h3>
           <div className={styles.componentGrid}>
@@ -793,16 +773,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Chip Section */}
-      <div className={styles.section}>
-        <h2>Chip</h2>
-        <p className={styles.sectionDescription}>
-          Chips are compact elements that display an icon and label. They can be
-          selected and are used for filtering, tagging, or selection.
-        </p>
-
+      <PageSection
+        title="Chip"
+        description="Chips are compact elements that display an icon and label. They can be selected and are used for filtering, tagging, or selection."
+      >
         <div className={styles.subsection}>
           <h3>Basic Chips</h3>
           <div className={styles.componentGrid}>
@@ -936,16 +913,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Avatar Section */}
-      <div className={styles.section}>
-        <h2>Avatar</h2>
-        <p className={styles.sectionDescription}>
-          Avatars display user or entity images or initials. They come in small,
-          medium, and large sizes.
-        </p>
-
+      <PageSection
+        title="Avatar"
+        description="Avatars display user or entity images or initials. They come in small, medium, and large sizes."
+      >
         <div className={styles.subsection}>
           <h3>Avatar with Image</h3>
           <div className={styles.componentGrid}>
@@ -1001,16 +975,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* DataCard Section */}
-      <div className={styles.section}>
-        <h2>DataCard</h2>
-        <p className={styles.sectionDescription}>
-          Data cards display key metrics and information with optional severity
-          indicators for positive, warning, and negative states.
-        </p>
-
+      <PageSection
+        title="DataCard"
+        description="Data cards display key metrics and information with optional severity indicators for positive, warning, and negative states."
+      >
         <div className={styles.subsection}>
           <h3>Basic DataCard</h3>
           <div className={styles.componentGrid}>
@@ -1085,16 +1056,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Pill Section */}
-      <div className={styles.section}>
-        <h2>Pill</h2>
-        <p className={styles.sectionDescription}>
-          Pills are compact badges that display status, categories, or tags with
-          optional icons and severity-based styling.
-        </p>
-
+      <PageSection
+        title="Pill"
+        description="Pills are compact badges that display status, categories, or tags with optional icons and severity-based styling."
+      >
         <div className={styles.subsection}>
           <h3>Basic Pills</h3>
           <div className={styles.componentGrid}>
@@ -1160,16 +1128,13 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Table Section */}
-      <div className={styles.section}>
-        <h2>Table</h2>
-        <p className={styles.sectionDescription}>
-          Tables organize data into rows and columns. They support title cells
-          with avatars, right-aligned quantitative data, and row interactions.
-        </p>
-
+      <PageSection
+        title="Table"
+        description="Tables organize data into rows and columns. They support title cells with avatars, right-aligned quantitative data, and row interactions."
+      >
         <div className={styles.subsection}>
           <h3>Basic Table</h3>
           <div className={styles.componentExample} style={{ width: "100%" }}>
@@ -1279,16 +1244,13 @@ export default function DesignSystemPage() {
             </Table>
           </div>
         </div>
-      </div>
+      </PageSection>
 
       {/* Icon Section */}
-      <div className={styles.section}>
-        <h2>Icon</h2>
-        <p className={styles.sectionDescription}>
-          Icons are visual symbols used throughout the interface. They come in
-          various sizes and can be colored using semantic tokens.
-        </p>
-
+      <PageSection
+        title="Icon"
+        description="Icons are visual symbols used throughout the interface. They come in various sizes and can be colored using semantic tokens."
+      >
         <div className={styles.subsection}>
           <h3>Icon Sizes</h3>
           <div className={styles.componentGrid}>
@@ -1378,7 +1340,7 @@ export default function DesignSystemPage() {
             </div>
           </div>
         </div>
-      </div>
+      </PageSection>
     </div>
   );
 }
