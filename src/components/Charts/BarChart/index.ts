@@ -6,5 +6,4 @@ export type {
   BarChartYAxisProps,
   BarChartXAxisProps,
   BarChartBarsProps,
-  BarChartLegendProps,
 } from "./BarChart";

@@ -11,6 +11,7 @@ import {
   HorizontalBarChart,
   LineChart,
   RadialChart,
+  DonutChart,
 } from "@/components";
 import {
   barChartDummyData,
@@ -23,6 +24,7 @@ import {
   lineChartXLabels,
   radialChartDummyDataSingle,
   radialChartDummyDataMultiple,
+  donutChartDummyData,
 } from "@/data";
 import { useNavState } from "@/contexts/NavContext";
 import layoutStyles from "../page.module.css";
@@ -92,6 +94,7 @@ export default function InsightsPage() {
               xLabels={lineChartXLabels}
               title="Single line (area gradient)"
               showLegend={true}
+              smooth
             />
           </Box>
           <Box className={styles.chartBox}>
@@ -109,8 +112,6 @@ export default function InsightsPage() {
               variant="single"
               data={radialChartDummyDataSingle}
               title="Radial – single (progress ring)"
-              trendText="Trending up by 5.2% this month"
-              periodText="Showing total visitors for the last 6 months"
               size={200}
             />
           </Box>
@@ -120,8 +121,26 @@ export default function InsightsPage() {
               data={radialChartDummyDataMultiple}
               title="Radial – multiple (concentric rings)"
               showLegend={true}
-              trendText="Trending up by 5.2% this month"
-              periodText="Showing total visitors for the last 6 months"
+              size={200}
+            />
+          </Box>
+        </div>
+        <div className={styles.chartsRow}>
+          <Box className={styles.chartBox}>
+            <DonutChart
+              data={donutChartDummyData}
+              title="Donut – with center text"
+              centerValue="100"
+              centerLabel="Total"
+              showLegend={true}
+              size={200}
+            />
+          </Box>
+          <Box className={styles.chartBox}>
+            <DonutChart
+              data={donutChartDummyData}
+              title="Donut – no center text"
+              showLegend={true}
               size={200}
             />
           </Box>

@@ -22,3 +22,5 @@ export {
   radialChartDummyDataSingle,
   radialChartDummyDataMultiple,
 } from "./radialChart";
+
+export { donutChartDummyData } from "./donutChart";

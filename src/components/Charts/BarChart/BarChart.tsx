@@ -2,6 +2,7 @@
 
 import React, { ReactNode, useRef, useState, useEffect } from "react";
 import { barChartDummyData, type BarChartDataItem } from "@/data";
+import { ChartLegend } from "../Legend";
 import styles from "./BarChart.module.css";
 
 const SEQUENTIAL_COLORS = ["var(--chart-sequential-on-light-order1)"];
@@ -93,6 +94,16 @@ function BarChartRoot({
     isStacked && seriesLabels && seriesLabels.length > 0
       ? seriesLabels
       : undefined;
+  const legendItems =
+    isStacked && legendLabels
+      ? legendLabels.map((label, i) => ({
+          label,
+          color: colors[i % colors.length],
+        }))
+      : data.map((d, i) => ({
+          label: d.label,
+          color: (d as { color?: string }).color ?? colors[i % colors.length],
+        }));
 
   return (
     <div className={`${styles.root} ${className ?? ""}`}>
@@ -145,14 +156,7 @@ function BarChartRoot({
           />
         </svg>
       </div>
-      {showLegend && (
-        <BarChart.Legend
-          data={data}
-          colors={colors}
-          seriesLabels={legendLabels}
-          isStacked={isStacked}
-        />
-      )}
+      {showLegend && <ChartLegend items={legendItems} />}
     </div>
   );
 }
@@ -410,59 +414,11 @@ function BarChartBars({
   );
 }
 
-export interface BarChartLegendProps {
-  data: BarChartDataItem[];
-  colors: string[];
-  /** When stacked, show these series labels instead of entry labels */
-  seriesLabels?: string[];
-  isStacked?: boolean;
-}
-
-function BarChartLegend({
-  data,
-  colors,
-  seriesLabels,
-  isStacked,
-}: BarChartLegendProps) {
-  if (isStacked && seriesLabels && seriesLabels.length > 0) {
-    return (
-      <div className={styles.legend} role="list">
-        {seriesLabels.map((label, i) => (
-          <div key={i} className={styles.legendItem} role="listitem">
-            <span
-              className={styles.legendSwatch}
-              style={{ backgroundColor: colors[i % colors.length] }}
-            />
-            <span>{label}</span>
-          </div>
-        ))}
-      </div>
-    );
-  }
-  return (
-    <div className={styles.legend} role="list">
-      {data.map((d, i) => (
-        <div key={i} className={styles.legendItem} role="listitem">
-          <span
-            className={styles.legendSwatch}
-            style={{
-              backgroundColor: d.color ?? colors[i % colors.length],
-            }}
-          />
-          <span>{d.label}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-// Compound component exports
 const BarChart = Object.assign(BarChartRoot, {
   Grid: BarChartGrid,
   YAxis: BarChartYAxis,
   XAxis: BarChartXAxis,
   Bars: BarChartBars,
-  Legend: BarChartLegend,
 });
 
 export { BarChart };

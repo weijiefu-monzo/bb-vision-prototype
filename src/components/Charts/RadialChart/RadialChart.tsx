@@ -1,6 +1,7 @@
 "use client";
 
 import React, { ReactNode, useRef, useState, useEffect } from "react";
+import { ChartLegend } from "../Legend";
 import styles from "./RadialChart.module.css";
 
 const SINGLE_COLOR = "var(--chart-sequential-on-light-order1)";
@@ -42,12 +43,6 @@ export interface RadialChartBaseProps {
   size?: number;
   /** Optional title */
   title?: ReactNode;
-  /** Trend line with optional icon (e.g. "Trending up by 5.2% this month") */
-  trendText?: string;
-  /** Optional icon before trend text (e.g. up arrow) */
-  trendIcon?: ReactNode;
-  /** Period/context line (e.g. "Showing total visitors for the last 6 months") */
-  periodText?: string;
   /** Show legend (multiple variant only) */
   showLegend?: boolean;
   className?: string;
@@ -74,9 +69,6 @@ export default function RadialChart(props: RadialChartProps) {
     variant,
     size: sizeProp,
     title,
-    trendText,
-    trendIcon,
-    periodText,
     showLegend = true,
     className,
   } = props;
@@ -102,8 +94,6 @@ export default function RadialChart(props: RadialChartProps) {
   const size = sizeProp ?? Math.min(containerWidth, DEFAULT_SIZE);
   const cx = size / 2;
   const cy = size / 2;
-
-  const hasFooter = !!(trendText ?? periodText);
 
   if (variant === "single") {
     const { data } = props;
@@ -167,19 +157,6 @@ export default function RadialChart(props: RadialChartProps) {
             </g>
           </svg>
         </div>
-        {hasFooter && (
-          <div className={styles.footer}>
-            {trendText != null && (
-              <div className={styles.trendRow}>
-                {trendIcon}
-                <span>{trendText}</span>
-              </div>
-            )}
-            {periodText != null && (
-              <div className={styles.periodText}>{periodText}</div>
-            )}
-          </div>
-        )}
       </div>
     );
   }
@@ -237,32 +214,12 @@ export default function RadialChart(props: RadialChartProps) {
         </svg>
       </div>
       {showLegend && entries.length > 0 && (
-        <div className={styles.legend} role="list">
-          {entries.map((entry, i) => (
-            <div key={i} className={styles.legendItem} role="listitem">
-              <span
-                className={styles.legendSwatch}
-                style={{
-                  backgroundColor: colors[i % colors.length],
-                }}
-              />
-              <span>{entry.label}</span>
-            </div>
-          ))}
-        </div>
-      )}
-      {hasFooter && (
-        <div className={styles.footer}>
-          {trendText != null && (
-            <div className={styles.trendRow}>
-              {trendIcon}
-              <span>{trendText}</span>
-            </div>
-          )}
-          {periodText != null && (
-            <div className={styles.periodText}>{periodText}</div>
-          )}
-        </div>
+        <ChartLegend
+          items={entries.map((entry, i) => ({
+            label: entry.label,
+            color: colors[i % colors.length],
+          }))}
+        />
       )}
     </div>
   );

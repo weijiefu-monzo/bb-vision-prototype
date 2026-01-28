@@ -2,6 +2,7 @@
 
 import React, { ReactNode, useRef, useState, useEffect } from "react";
 import type { BarChartDataItem } from "@/data";
+import { ChartLegend } from "../Legend";
 import styles from "./HorizontalBarChart.module.css";
 
 const CATEGORICAL_COLORS = [
@@ -179,20 +180,12 @@ export default function HorizontalBarChart({
         </svg>
       </div>
       {showLegend && seriesLabels.length > 0 && (
-        <div className={styles.legend} role="list">
-          {seriesLabels.map((label, i) => (
-            <div key={i} className={styles.legendItem} role="listitem">
-              <span
-                className={styles.legendSwatch}
-                style={{
-                  backgroundColor:
-                    CATEGORICAL_COLORS[i % CATEGORICAL_COLORS.length],
-                }}
-              />
-              <span>{label}</span>
-            </div>
-          ))}
-        </div>
+        <ChartLegend
+          items={seriesLabels.map((label, i) => ({
+            label,
+            color: CATEGORICAL_COLORS[i % CATEGORICAL_COLORS.length],
+          }))}
+        />
       )}
     </div>
   );

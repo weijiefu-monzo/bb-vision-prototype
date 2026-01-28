@@ -1,6 +1,7 @@
 "use client";
 
 import React, { ReactNode, useRef, useState, useEffect } from "react";
+import { ChartLegend } from "../Legend";
 import styles from "./LineChart.module.css";
 
 const DIVERGING_COLORS = [
@@ -34,11 +35,38 @@ export interface LineChartProps {
   title?: ReactNode;
   /** Y-axis max (default: derived from data) */
   yMax?: number;
+  /** Use smooth curves (Catmull–Rom) instead of straight segments */
+  smooth?: boolean;
   className?: string;
 }
 
 const DEFAULT_WIDTH = 400;
 const DEFAULT_HEIGHT = 240;
+
+/** Build a smooth path through points using Catmull–Rom spline (cubic Bezier). */
+function smoothLinePath(
+  points: Array<{ x: number; y: number }>
+): string {
+  if (points.length === 0) return "";
+  if (points.length === 1) return `M ${points[0].x} ${points[0].y}`;
+  if (points.length === 2) {
+    return `M ${points[0].x} ${points[0].y} L ${points[1].x} ${points[1].y}`;
+  }
+  const path: string[] = [];
+  path.push(`M ${points[0].x} ${points[0].y}`);
+  for (let i = 0; i < points.length - 1; i++) {
+    const p0 = points[Math.max(0, i - 1)];
+    const p1 = points[i];
+    const p2 = points[i + 1];
+    const p3 = points[Math.min(points.length - 1, i + 2)];
+    const cp1x = p1.x + (p2.x - p0.x) / 6;
+    const cp1y = p1.y + (p2.y - p0.y) / 6;
+    const cp2x = p2.x - (p3.x - p1.x) / 6;
+    const cp2y = p2.y - (p3.y - p1.y) / 6;
+    path.push(`C ${cp1x} ${cp1y} ${cp2x} ${cp2y} ${p2.x} ${p2.y}`);
+  }
+  return path.join(" ");
+}
 
 export default function LineChart({
   data,
@@ -48,6 +76,7 @@ export default function LineChart({
   showLegend = true,
   title,
   yMax: yMaxProp,
+  smooth = false,
   className,
 }: LineChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -225,13 +254,17 @@ export default function LineChart({
             }));
             const linePath =
               points.length > 0
-                ? points
-                    .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
-                    .join(" ")
+                ? smooth
+                  ? smoothLinePath(points)
+                  : points
+                      .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x} ${p.y}`)
+                      .join(" ")
                 : "";
             const areaPath =
               points.length > 0
-                ? `${linePath} L ${points[points.length - 1].x} ${padding.top + chartHeight} L ${points[0].x} ${padding.top + chartHeight} Z`
+                ? smooth
+                  ? `${smoothLinePath(points)} L ${points[points.length - 1].x} ${padding.top + chartHeight} L ${points[0].x} ${padding.top + chartHeight} Z`
+                  : `${linePath} L ${points[points.length - 1].x} ${padding.top + chartHeight} L ${points[0].x} ${padding.top + chartHeight} Z`
                 : "";
 
             return (
@@ -257,20 +290,12 @@ export default function LineChart({
         </svg>
       </div>
       {showLegend && data.length > 0 && (
-        <div className={styles.legend} role="list">
-          {data.map((series, i) => (
-            <div key={i} className={styles.legendItem} role="listitem">
-              <span
-                className={styles.legendSwatch}
-                style={{
-                  backgroundColor:
-                    DIVERGING_COLORS[i % DIVERGING_COLORS.length],
-                }}
-              />
-              <span>{series.label}</span>
-            </div>
-          ))}
-        </div>
+        <ChartLegend
+          items={data.map((series, i) => ({
+            label: series.label,
+            color: DIVERGING_COLORS[i % DIVERGING_COLORS.length],
+          }))}
+        />
       )}
     </div>
   );

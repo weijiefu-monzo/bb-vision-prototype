@@ -1,3 +1,6 @@
+export { ChartLegend } from "./Legend";
+export type { ChartLegendProps, ChartLegendItem } from "./Legend";
+
 export { BarChart } from "./BarChart";
 export type {
   BarChartProps,
@@ -6,7 +9,6 @@ export type {
   BarChartYAxisProps,
   BarChartXAxisProps,
   BarChartBarsProps,
-  BarChartLegendProps,
 } from "./BarChart";
 
 export { HorizontalBarChart } from "./HorizontalBarChart";
@@ -25,3 +27,6 @@ export type {
   RadialChartMultipleEntry,
   RadialChartVariant,
 } from "./RadialChart";
+
+export { DonutChart } from "./DonutChart";
+export type { DonutChartProps, DonutChartEntry } from "./DonutChart";

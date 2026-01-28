@@ -16,15 +16,16 @@ export type { ButtonProps, ButtonVariant } from "./Button";
 export { Box } from "./Box";
 export type { BoxProps } from "./Box";
 
-export { BarChart, HorizontalBarChart, LineChart, RadialChart } from "./Charts";
+export { ChartLegend, BarChart, HorizontalBarChart, LineChart, RadialChart, DonutChart } from "./Charts";
 export type {
+  ChartLegendProps,
+  ChartLegendItem,
   BarChartProps,
   BarChartDataItem,
   BarChartGridProps,
   BarChartYAxisProps,
   BarChartXAxisProps,
   BarChartBarsProps,
-  BarChartLegendProps,
   HorizontalBarChartProps,
   LineChartProps,
   LineChartSeries,
@@ -35,6 +36,8 @@ export type {
   RadialChartSingleEntry,
   RadialChartMultipleEntry,
   RadialChartVariant,
+  DonutChartProps,
+  DonutChartEntry,
 } from "./Charts";
 
 export { DataCard } from "./DataCard";
