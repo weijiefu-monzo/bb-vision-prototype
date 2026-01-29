@@ -1,12 +1,72 @@
 .root {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  width: 100px;
+  height: 100px;
   color: var(--semantic-content-secondary);
 }
 
-.icon {
+/* Rotating blurred gradient – glowing lights behind */
+.glowBack {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--semantic-content-accent, #ff4f40) 0deg,
+    var(--chart-diverging-on-dark-negative-light, #ff6961) 90deg,
+    var(--semantic-content-accent, #ff4f40) 180deg,
+    var(--chart-categorical-category3, #eb58ba) 270deg,
+    var(--chart-diverging-on-light-negative-mid, #ff4f40) 360deg
+  );
+  filter: blur(12px);
+  opacity: 0.4;
   animation: spin 6s linear infinite;
+  pointer-events: none;
+}
+
+.glowBack2 {
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--semantic-content-accent, #ff4f40) 0deg,
+    var(--chart-diverging-on-dark-negative-light, #ff6961) 90deg,
+    var(--semantic-content-accent, #ff4f40) 180deg,
+    var(--chart-categorical-category3, #eb58ba) 270deg,
+    var(--chart-diverging-on-dark-negative-light, #ff4f40) 360deg
+  );
+  filter: blur(24px);
+  opacity: 0.3;
+  animation: spin 12s linear reverse infinite;
+  pointer-events: none;
+}
+
+.circleWrap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background-color: var(--semantic-background-primary, #ffffff);
+  box-shadow: 0 0 12px 4px var(--semantic-content-accent);
+}
+
+.icon {
+  position: absolute;
+  /* animation: spin 6s linear infinite; */
+}
+
+.iconSmall {
+  position: relative;
+  z-index: 1;
+  animation: spin 4s linear infinite reverse;
 }
 
 @keyframes spin {

@@ -5,28 +5,27 @@ import { Icon } from "@/components";
 import styles from "./MonzoAIThinking.module.css";
 
 export interface MonzoAIThinkingProps {
-  /** Icon size */
-  size?: "x-small" | "small" | "medium" | "large";
   /** Optional class for the root element */
   className?: string;
 }
 
-export default function MonzoAIThinking({
-  size = "medium",
-  className,
-}: MonzoAIThinkingProps) {
+export default function MonzoAIThinking({ className }: MonzoAIThinkingProps) {
   return (
     <div
       className={`${styles.root} ${className ?? ""}`}
       role="status"
       aria-label="Monzo AI is thinking"
     >
-      <Icon
-        name="navigation_subscription"
-        size={size}
-        color="content-secondary"
-        className={styles.icon}
-      />
+      <div className={styles.glowBack} aria-hidden />
+      <div className={styles.glowBack2} aria-hidden />
+      <div className={styles.circleWrap}>
+        <Icon
+          name="navigation_subscription_more"
+          size={40}
+          color="content-accent"
+          className={styles.icon}
+        />
+      </div>
     </div>
   );
 }
