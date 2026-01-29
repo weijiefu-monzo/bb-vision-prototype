@@ -22,7 +22,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  width: 2px;
+  width: 3px;
   cursor: col-resize;
   background-color: var(--semantic-separator);
   flex-shrink: 0;

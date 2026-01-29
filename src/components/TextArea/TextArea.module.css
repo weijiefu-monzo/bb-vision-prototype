@@ -1,0 +1,93 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-small, 8px);
+  width: 100%;
+}
+
+.label {
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 600;
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-primary);
+}
+
+.textareaWrap {
+  position: relative;
+  display: flex;
+  width: 100%;
+  padding: var(--spacing-small, 12px);
+  background-color: var(--semantic-field-fill-default);
+  border: 2px solid var(--semantic-field-border-default);
+  border-radius: var(--corner-radius-small, 12px);
+  transition:
+    border-color var(--motion-duration-short) var(--motion-easing-flow),
+    background-color var(--motion-duration-short) var(--motion-easing-flow),
+    box-shadow var(--motion-duration-short) var(--motion-easing-flow);
+}
+
+.textareaWrap:hover {
+  background-color: var(--semantic-field-fill-hover);
+  border-color: var(--semantic-field-border-hover);
+}
+
+.textareaWrap:focus-within {
+  background-color: var(--semantic-field-fill-active);
+  border-color: var(--semantic-field-border-active);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--semantic-field-outline-focus);
+}
+
+.root[data-error="true"] .textareaWrap {
+  background-color: var(--semantic-field-fill-error);
+  border-color: var(--semantic-field-border-error);
+}
+
+.root[data-error="true"] .textareaWrap:focus-within {
+  box-shadow: 0 0 0 2px var(--semantic-field-outline-focus);
+}
+
+.root[data-disabled="true"] .textareaWrap {
+  background-color: var(--semantic-field-fill-disabled);
+  border-color: var(--semantic-field-border-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.textarea {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  min-height: 80px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-medium, 14px);
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-primary);
+  outline: none;
+  resize: vertical;
+  overflow-y: hidden;
+}
+
+.textarea::placeholder {
+  color: var(--semantic-content-secondary);
+}
+
+.textarea:disabled {
+  color: var(--semantic-content-disabled);
+  cursor: not-allowed;
+}
+
+.description {
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-small, 12px);
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-secondary);
+}
+
+.root[data-error="true"] .description {
+  color: var(--semantic-content-negative);
+}

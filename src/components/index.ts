@@ -89,6 +89,12 @@ export type { SearchFieldProps } from "./SearchField";
 export { Select } from "./Select";
 export type { SelectProps, SelectOption } from "./Select";
 
+export { TextArea } from "./TextArea";
+export type { TextAreaProps } from "./TextArea";
+
+export { MonzoAIChat } from "./MonzoAIChat";
+export type { MonzoAIChatProps, MonzoAIChatMessage } from "./MonzoAIChat";
+
 export {
   Table,
   TableHeader,

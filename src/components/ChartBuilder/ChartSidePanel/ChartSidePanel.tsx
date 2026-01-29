@@ -7,6 +7,7 @@ import {
   Button,
   SearchField,
   Chip,
+  MonzoAIChat,
 } from "@/components";
 import type { TabItem } from "@/components";
 import type { ChartBuilderStep } from "../ChartBuilder";
@@ -177,7 +178,9 @@ export default function ChartSidePanel({
               </div>
             )}
             {step1Tab === "monzo-ai" && (
-              <div className={styles.placeholder}>Monzo AI content</div>
+              <div className={styles.monzoAiTab}>
+                <MonzoAIChat placeholder="Message Monzo AI..." />
+              </div>
             )}
           </div>
         </>
@@ -213,7 +216,9 @@ export default function ChartSidePanel({
               <div className={styles.placeholder}>Chart Editor content</div>
             )}
             {step2Tab === "monzo-ai" && (
-              <div className={styles.placeholder}>Monzo AI content</div>
+              <div className={styles.monzoAiTab}>
+                <MonzoAIChat placeholder="Message Monzo AI..." />
+              </div>
             )}
           </div>
         </>
