@@ -96,11 +96,12 @@ export type { SelectProps, SelectOption } from "./Select";
 export { TextArea } from "./TextArea";
 export type { TextAreaProps } from "./TextArea";
 
-export { MonzoAIChat, MonzoAIThinking } from "./MonzoAIChat";
+export { MonzoAIChat, MonzoAIThinking, MonzoAILoading } from "./MonzoAIChat";
 export type {
   MonzoAIChatProps,
   MonzoAIChatMessage,
   MonzoAIThinkingProps,
+  MonzoAILoadingProps,
 } from "./MonzoAIChat";
 
 export {

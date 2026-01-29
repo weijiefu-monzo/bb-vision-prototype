@@ -1,7 +1,12 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
-import { TextArea, IconButton, MonzoAIThinking } from "@/components";
+import React, { useState, useCallback, useEffect, useRef } from "react";
+import {
+  TextArea,
+  IconButton,
+  MonzoAIThinking,
+  MonzoAILoading,
+} from "@/components";
 import styles from "./MonzoAIChat.module.css";
 
 export interface MonzoAIChatMessage {
@@ -23,15 +28,20 @@ export interface MonzoAIChatProps {
   messages?: MonzoAIChatMessage[];
   /** Called when the user sends a message */
   onSend?: (content: string) => void;
+  /** When true, shows loading dots (e.g. while waiting for AI). If omitted, loading is shown briefly after send. */
+  loading?: boolean;
   /** Optional placeholder for the input */
   placeholder?: string;
   /** Optional class for the root element */
   className?: string;
 }
 
+const LOADING_DEMO_DURATION_MS = 2500;
+
 export default function MonzoAIChat({
   messages: controlledMessages,
   onSend,
+  loading: loadingProp,
   placeholder = "Message Monzo AI...",
   className,
 }: MonzoAIChatProps) {
@@ -39,9 +49,24 @@ export default function MonzoAIChat({
   const [internalMessages, setInternalMessages] = useState<
     MonzoAIChatMessage[]
   >([]);
+  const [internalLoading, setInternalLoading] = useState(false);
+  const loadingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const messages = controlledMessages ?? internalMessages;
   const isControlled = controlledMessages !== undefined;
+  const loading = loadingProp !== undefined ? loadingProp : internalLoading;
+
+  useEffect(() => {
+    return () => {
+      if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
+    };
+  }, []);
+
+  // Scroll to bottom when messages or loading change so the loading dots stay visible
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages.length, loading]);
 
   const handleSubmit = useCallback(() => {
     const trimmed = inputValue.trim();
@@ -58,7 +83,15 @@ export default function MonzoAIChat({
     }
     onSend?.(trimmed);
     setInputValue("");
-  }, [inputValue, isControlled, onSend]);
+    if (loadingProp === undefined) {
+      setInternalLoading(true);
+      if (loadingTimeoutRef.current) clearTimeout(loadingTimeoutRef.current);
+      loadingTimeoutRef.current = setTimeout(() => {
+        setInternalLoading(false);
+        loadingTimeoutRef.current = null;
+      }, LOADING_DEMO_DURATION_MS);
+    }
+  }, [inputValue, isControlled, onSend, loadingProp]);
 
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
@@ -78,18 +111,30 @@ export default function MonzoAIChat({
             <MonzoAIThinking />
           </div>
         ) : (
-          messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`${styles.message} ${
-                msg.role === "user"
-                  ? styles.messageUser
-                  : styles.messageAssistant
-              }`}
-            >
-              {msg.content}
-            </div>
-          ))
+          <>
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`${styles.message} ${
+                  msg.role === "user"
+                    ? styles.messageUser
+                    : styles.messageAssistant
+                }`}
+              >
+                {msg.content}
+              </div>
+            ))}
+            {loading && (
+              <div
+                className={`${styles.message} ${styles.messageAssistant} ${styles.loadingRow}`}
+                role="status"
+                aria-live="polite"
+              >
+                <MonzoAILoading />
+              </div>
+            )}
+            <div ref={messagesEndRef} aria-hidden />
+          </>
         )}
       </div>
       <div className={styles.inputSection}>

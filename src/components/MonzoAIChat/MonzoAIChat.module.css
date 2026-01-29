@@ -34,8 +34,11 @@
 
 .messageAssistant {
   align-self: flex-start;
-  background-color: var(--semantic-background-secondary);
   color: var(--semantic-content-primary);
+}
+
+.loadingRow {
+  flex-shrink: 0;
 }
 
 .emptyState {
