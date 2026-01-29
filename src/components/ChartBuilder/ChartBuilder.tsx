@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { IconButton, FocusView, FocusViewHeader } from "@/components";
+import { IconButton, FullscreenDialog, FullscreenDialogHeader } from "@/components";
 import type { ChartDataItem } from "@/data";
 import { chartTemplateSections } from "@/data";
 import { ChartSidePanel } from "./ChartSidePanel";
@@ -122,12 +122,12 @@ export default function ChartBuilder({
   );
 
   return (
-    <FocusView
+    <FullscreenDialog
       open={open}
       onClose={onClose}
       className={className}
       header={
-        <FocusViewHeader
+        <FullscreenDialogHeader
           title={chart.title}
           itemLabel={chart.itemLabel}
           itemCaption={chart.itemCaption}
@@ -183,6 +183,6 @@ export default function ChartBuilder({
           onBackToTemplates={handleBackToTemplates}
         />
       </div>
-    </FocusView>
+    </FullscreenDialog>
   );
 }

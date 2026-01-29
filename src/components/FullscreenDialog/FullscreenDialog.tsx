@@ -2,26 +2,26 @@
 
 import React, { ReactNode, useEffect, useRef } from "react";
 import { IconButton } from "@/components";
-import styles from "./FocusView.module.css";
+import styles from "./FullscreenDialog.module.css";
 
-export interface FocusViewProps {
+export interface FullscreenDialogProps {
   open: boolean;
   onClose: () => void;
-  /** When provided, replaces the default close row; use FocusViewHeader for title, item label/caption, trailing slot, and close button. */
+  /** When provided, replaces the default close row; use FullscreenDialogHeader for title, item label/caption, trailing slot, and close button. */
   header?: ReactNode;
   children?: ReactNode;
   closeButtonAriaLabel?: string;
   className?: string;
 }
 
-export default function FocusView({
+export default function FullscreenDialog({
   open,
   onClose,
   header,
   children,
   closeButtonAriaLabel = "Close",
   className,
-}: FocusViewProps) {
+}: FullscreenDialogProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const showDefaultCloseRow = header == null;
 
@@ -50,7 +50,7 @@ export default function FocusView({
       className={`${styles.overlay} ${className || ""}`}
       role="dialog"
       aria-modal="true"
-      aria-label="Focus view"
+      aria-label="Fullscreen dialog"
     >
       <div className={styles.backdrop} onClick={onClose} aria-hidden />
       <div className={styles.container}>

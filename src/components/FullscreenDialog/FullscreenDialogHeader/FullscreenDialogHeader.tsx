@@ -2,9 +2,9 @@
 
 import React, { ReactNode } from "react";
 import { IconButton } from "@/components";
-import styles from "./FocusViewHeader.module.css";
+import styles from "./FullscreenDialogHeader.module.css";
 
-export interface FocusViewHeaderProps {
+export interface FullscreenDialogHeaderProps {
   title: string;
   itemLabel?: string;
   itemCaption?: string;
@@ -14,7 +14,7 @@ export interface FocusViewHeaderProps {
   className?: string;
 }
 
-export default function FocusViewHeader({
+export default function FullscreenDialogHeader({
   title,
   itemLabel,
   itemCaption,
@@ -22,7 +22,7 @@ export default function FocusViewHeader({
   onClose,
   closeButtonAriaLabel = "Close",
   className,
-}: FocusViewHeaderProps) {
+}: FullscreenDialogHeaderProps) {
   const hasItemBlock = itemLabel != null || itemCaption != null;
 
   return (

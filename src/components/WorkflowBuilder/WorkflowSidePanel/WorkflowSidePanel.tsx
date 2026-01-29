@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Tabs, FocusViewSidePanel } from "@/components";
+import { Tabs, FullscreenDialogSidePanel } from "@/components";
 import type { TabItem } from "@/components";
 import styles from "./WorkflowSidePanel.module.css";
 
@@ -33,7 +33,7 @@ export default function WorkflowSidePanel({
   const [activeTab, setActiveTab] = useState(SIDE_PANEL_TABS[0].id);
 
   return (
-    <FocusViewSidePanel
+    <FullscreenDialogSidePanel
       open={open}
       defaultWidth={defaultWidth}
       maxWidth={maxWidth}
@@ -65,6 +65,6 @@ export default function WorkflowSidePanel({
           <div className={styles.placeholder}>Monzo AI content</div>
         )}
       </div>
-    </FocusViewSidePanel>
+    </FullscreenDialogSidePanel>
   );
 }

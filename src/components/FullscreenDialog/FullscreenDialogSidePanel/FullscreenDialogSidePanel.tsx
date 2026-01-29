@@ -1,13 +1,13 @@
 "use client";
 
 import React, { ReactNode, useCallback, useEffect, useRef, useState } from "react";
-import styles from "./FocusViewSidePanel.module.css";
+import styles from "./FullscreenDialogSidePanel.module.css";
 
 const DEFAULT_WIDTH = 320;
 const DEFAULT_MAX_WIDTH = 480;
 const DEFAULT_MIN_WIDTH = 240;
 
-export interface FocusViewSidePanelProps {
+export interface FullscreenDialogSidePanelProps {
   /** Whether the panel is expanded (visible). When false, panel animates to 0 width. */
   open?: boolean;
   /** Panel content (e.g. tabs + tab content). */
@@ -23,7 +23,7 @@ export interface FocusViewSidePanelProps {
   className?: string;
 }
 
-export default function FocusViewSidePanel({
+export default function FullscreenDialogSidePanel({
   open = true,
   children,
   defaultWidth = DEFAULT_WIDTH,
@@ -31,7 +31,7 @@ export default function FocusViewSidePanel({
   minWidth = DEFAULT_MIN_WIDTH,
   dataAttribute,
   className,
-}: FocusViewSidePanelProps) {
+}: FullscreenDialogSidePanelProps) {
   const [width, setWidth] = useState(defaultWidth);
   const [isResizing, setIsResizing] = useState(false);
   const [startX, setStartX] = useState(0);

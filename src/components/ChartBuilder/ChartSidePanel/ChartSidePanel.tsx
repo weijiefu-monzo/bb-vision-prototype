@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import {
   Tabs,
-  FocusViewSidePanel,
+  FullscreenDialogSidePanel,
   Button,
   SearchField,
   Chip,
@@ -102,7 +102,7 @@ export default function ChartSidePanel({
   const isStep2 = step === STEP_EDIT;
 
   return (
-    <FocusViewSidePanel
+    <FullscreenDialogSidePanel
       open={open}
       defaultWidth={defaultWidth}
       maxWidth={maxWidth}
@@ -223,6 +223,6 @@ export default function ChartSidePanel({
           </div>
         </>
       )}
-    </FocusViewSidePanel>
+    </FullscreenDialogSidePanel>
   );
 }

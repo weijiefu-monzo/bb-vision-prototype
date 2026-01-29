@@ -58,12 +58,16 @@ export type { PageHeaderProps } from "./PageHeader";
 export { DetailHeader } from "./DetailHeader";
 export type { DetailHeaderProps } from "./DetailHeader";
 
-export { FocusView, FocusViewHeader, FocusViewSidePanel } from "./FocusView";
+export {
+  FullscreenDialog,
+  FullscreenDialogHeader,
+  FullscreenDialogSidePanel,
+} from "./FullscreenDialog";
 export type {
-  FocusViewProps,
-  FocusViewHeaderProps,
-  FocusViewSidePanelProps,
-} from "./FocusView";
+  FullscreenDialogProps,
+  FullscreenDialogHeaderProps,
+  FullscreenDialogSidePanelProps,
+} from "./FullscreenDialog";
 
 export { WorkflowBuilder } from "./WorkflowBuilder";
 export type { WorkflowBuilderProps, Workflow } from "./WorkflowBuilder";
@@ -92,8 +96,12 @@ export type { SelectProps, SelectOption } from "./Select";
 export { TextArea } from "./TextArea";
 export type { TextAreaProps } from "./TextArea";
 
-export { MonzoAIChat } from "./MonzoAIChat";
-export type { MonzoAIChatProps, MonzoAIChatMessage } from "./MonzoAIChat";
+export { MonzoAIChat, MonzoAIThinking } from "./MonzoAIChat";
+export type {
+  MonzoAIChatProps,
+  MonzoAIChatMessage,
+  MonzoAIThinkingProps,
+} from "./MonzoAIChat";
 
 export {
   Table,

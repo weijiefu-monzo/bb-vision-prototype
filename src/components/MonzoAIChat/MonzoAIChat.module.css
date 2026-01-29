@@ -64,6 +64,14 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-small, 12px);
+}
+
+.actionGroup {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: var(--spacing-2x-small, 4px);
   padding: var(--spacing-3x-small, 2px);
   background: var(--semantic-background-secondary);

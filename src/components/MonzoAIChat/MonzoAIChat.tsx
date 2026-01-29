@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useCallback } from "react";
-import { TextArea, IconButton } from "@/components";
+import { TextArea, IconButton, MonzoAIThinking } from "@/components";
 import styles from "./MonzoAIChat.module.css";
 
 export interface MonzoAIChatMessage {
@@ -10,12 +10,13 @@ export interface MonzoAIChatMessage {
   content: string;
 }
 
-const DEFAULT_ACTION_ICONS = [
+const LEFT_ACTION_ICONS = [
   { icon: "action_plus" as const, ariaLabel: "Add" },
   { icon: "object_document" as const, ariaLabel: "Attachment" },
   { icon: "general_mic_on" as const, ariaLabel: "Voice Input" },
-  { icon: "action_send" as const, ariaLabel: "Send" },
 ];
+
+const SEND_ICON = { icon: "action_send" as const, ariaLabel: "Send" };
 
 export interface MonzoAIChatProps {
   /** Initial or controlled messages */
@@ -74,8 +75,7 @@ export default function MonzoAIChat({
       <div className={styles.messages}>
         {messages.length === 0 ? (
           <div className={styles.emptyState}>
-            Start a conversation with Monzo AI. Ask about your data or request a
-            chart.
+            <MonzoAIThinking />
           </div>
         ) : (
           messages.map((msg) => (
@@ -103,16 +103,28 @@ export default function MonzoAIChat({
           />
         </div>
         <div className={styles.actionRow}>
-          {DEFAULT_ACTION_ICONS.map(({ icon, ariaLabel }, index) => (
+          <div className={styles.actionGroup}>
+            {LEFT_ACTION_ICONS.map(({ icon, ariaLabel }, index) => (
+              <IconButton
+                key={`${icon}-${index}`}
+                variant="tertiary"
+                size="medium"
+                icon={icon}
+                iconSize="medium"
+                aria-label={ariaLabel}
+              />
+            ))}
+          </div>
+          <div className={styles.actionGroup}>
             <IconButton
-              key={`${icon}-${index}`}
-              variant="tertiary"
+              variant="primary"
               size="medium"
-              icon={icon}
+              icon={SEND_ICON.icon}
               iconSize="medium"
-              aria-label={ariaLabel}
+              aria-label={SEND_ICON.ariaLabel}
+              onClick={handleSubmit}
             />
-          ))}
+          </div>
         </div>
       </div>
     </div>

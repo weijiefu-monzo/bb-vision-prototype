@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import type { Edge } from "@xyflow/react";
-import { IconButton, FocusView, FocusViewHeader } from "@/components";
+import { IconButton, FullscreenDialog, FullscreenDialogHeader } from "@/components";
 import { WorkflowCanvas, type WorkflowNode } from "./WorkflowCanvas";
 import { WorkflowSidePanel } from "./WorkflowSidePanel";
 import styles from "./WorkflowBuilder.module.css";
@@ -122,12 +122,12 @@ export default function WorkflowBuilder({
   );
 
   return (
-    <FocusView
+    <FullscreenDialog
       open={open}
       onClose={onClose}
       className={className}
       header={
-        <FocusViewHeader
+        <FullscreenDialogHeader
           title={workflow.title}
           itemLabel={workflow.itemLabel}
           itemCaption={workflow.itemCaption}
@@ -144,6 +144,6 @@ export default function WorkflowBuilder({
         />
         <WorkflowSidePanel open={sidePanelOpen} />
       </div>
-    </FocusView>
+    </FullscreenDialog>
   );
 }
