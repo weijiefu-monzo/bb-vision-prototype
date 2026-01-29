@@ -4,8 +4,11 @@ import React, { HTMLAttributes } from "react";
 import { Icon } from "@/components";
 import styles from "./Chip.module.css";
 
-export interface ChipProps extends Omit<HTMLAttributes<HTMLButtonElement>, "onClick"> {
-  icon: string;
+export interface ChipProps extends Omit<
+  HTMLAttributes<HTMLButtonElement>,
+  "onClick"
+> {
+  icon?: string;
   label: string;
   selected?: boolean;
   onClick?: () => void;
@@ -28,11 +31,13 @@ export default function Chip({
       aria-pressed={selected}
       {...props}
     >
-      <Icon
-        name={icon}
-        size={iconSize}
-        color="semantic-action-fill-primary-default"
-      />
+      {icon && (
+        <Icon
+          name={icon}
+          size={iconSize}
+          color="semantic-action-fill-primary-default"
+        />
+      )}
       <span className={styles.label}>{label}</span>
     </button>
   );

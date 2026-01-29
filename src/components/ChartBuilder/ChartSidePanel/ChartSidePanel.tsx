@@ -1,7 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { Tabs, FocusViewSidePanel, Button } from "@/components";
+import {
+  Tabs,
+  FocusViewSidePanel,
+  Button,
+  SearchField,
+  Chip,
+} from "@/components";
 import type { TabItem } from "@/components";
 import type { ChartBuilderStep } from "../ChartBuilder";
 import styles from "./ChartSidePanel.module.css";
@@ -12,6 +18,41 @@ const STEP_EDIT = 2;
 const STEP1_TABS: TabItem[] = [
   { id: "templates", label: "Templates" },
   { id: "monzo-ai", label: "Monzo AI" },
+];
+
+const TYPE_CHIPS = [
+  { id: "all", label: "All" },
+  { id: "3d", label: "3D" },
+  { id: "animated", label: "Animated" },
+  { id: "areas", label: "Areas" },
+  { id: "bars", label: "Bars" },
+  { id: "circles", label: "Circles" },
+  { id: "icons", label: "Icons" },
+  { id: "images", label: "Images" },
+  { id: "interactive", label: "Interactive content" },
+  { id: "lines", label: "Lines" },
+  { id: "maps", label: "Maps" },
+  { id: "pies", label: "Pies" },
+  { id: "radial", label: "Radial" },
+  { id: "small-multiples", label: "Small multiples" },
+  { id: "text", label: "Text" },
+];
+
+const PURPOSE_CHIPS = [
+  { id: "all", label: "All" },
+  { id: "annotation", label: "Annotation" },
+  { id: "change-over-time", label: "Change over time" },
+  { id: "comparison", label: "Comparison" },
+  { id: "correlation", label: "Correlation" },
+  { id: "counter", label: "Counter" },
+  { id: "distribution", label: "Distribution" },
+  { id: "engagement", label: "Engagement" },
+  { id: "exploration", label: "Exploration" },
+  { id: "flow", label: "Flow" },
+  { id: "hierarchy", label: "Hierarchy" },
+  { id: "magnitude", label: "Magnitude" },
+  { id: "part-to-whole", label: "Part to whole" },
+  { id: "ranking", label: "Ranking" },
 ];
 
 const STEP2_TABS: TabItem[] = [
@@ -52,6 +93,9 @@ export default function ChartSidePanel({
 }: ChartSidePanelProps) {
   const [step1Tab, setStep1Tab] = useState(STEP1_TABS[0].id);
   const [step2Tab, setStep2Tab] = useState(STEP2_TABS[0].id);
+  const [templateSearch, setTemplateSearch] = useState("");
+  const [selectedTypeId, setSelectedTypeId] = useState("all");
+  const [selectedPurposeId, setSelectedPurposeId] = useState("all");
 
   const isStep1 = step === STEP_TEMPLATE;
   const isStep2 = step === STEP_EDIT;
@@ -83,17 +127,53 @@ export default function ChartSidePanel({
           >
             {step1Tab === "templates" && (
               <div className={styles.templatesTab}>
-                <Button
-                  variant="primary"
-                  size="large"
-                  onClick={onNext}
-                  disabled={!selectedTemplateId}
-                >
-                  Next
-                </Button>
-                <p className={styles.helperText}>
-                  Select a template from the left, then click Next to continue.
-                </p>
+                <div className={styles.templatesTabScroll}>
+                  <SearchField
+                    placeholder="Search templates..."
+                    value={templateSearch}
+                    onChange={(e) => setTemplateSearch(e.target.value)}
+                    className={styles.templateSearch}
+                  />
+                  <div className={styles.chipGroup}>
+                    <h3 className={styles.chipGroupLabel}>Type</h3>
+                    <div className={styles.chipList}>
+                      {TYPE_CHIPS.map(({ id, label }) => (
+                        <Chip
+                          key={id}
+                          label={label}
+                          selected={selectedTypeId === id}
+                          onClick={() => setSelectedTypeId(id)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles.chipGroup}>
+                    <h3 className={styles.chipGroupLabel}>Purpose</h3>
+                    <div className={styles.chipList}>
+                      {PURPOSE_CHIPS.map(({ id, label }) => (
+                        <Chip
+                          key={id}
+                          label={label}
+                          selected={selectedPurposeId === id}
+                          onClick={() => setSelectedPurposeId(id)}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className={styles.templatesTabFooter}>
+                  <p className={styles.helperText}>
+                    Select a template, then click Next to continue.
+                  </p>
+                  <Button
+                    variant="primary"
+                    size="large"
+                    onClick={onNext}
+                    disabled={!selectedTemplateId}
+                  >
+                    Next
+                  </Button>
+                </div>
               </div>
             )}
             {step1Tab === "monzo-ai" && (

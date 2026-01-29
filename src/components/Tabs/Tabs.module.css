@@ -36,7 +36,7 @@
 }
 
 .tab:hover {
-  color: var(--color-navy-700, #2c3a43);
+  color: var(--semantic-content-secondary, #75817e);
 }
 
 .tab:focus-visible {
@@ -46,7 +46,7 @@
 
 .tabActive {
   background-color: var(--semantic-background-primary, #ffffff);
-  color: var(--color-navy-900, #091723);
+  color: var(--semantic-content-primary, #091723);
   font-weight: 600;
   box-shadow: var(--elevation-level1-box-shadow, 0 1px 3px rgba(0, 0, 0, 0.08));
 }

@@ -75,6 +75,13 @@
   outline: none;
 }
 
+/* Hide native search clear button (Chrome, Safari, Edge) so only our custom clear shows */
+.input::-webkit-search-cancel-button,
+.input::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 .input::placeholder {
   color: var(--semantic-content-secondary);
 }
@@ -82,34 +89,6 @@
 .input:disabled {
   color: var(--semantic-content-disabled);
   cursor: not-allowed;
-}
-
-.clearBtn {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: var(--size-large, 24px);
-  height: var(--size-large, 24px);
-  padding: 0;
-  border: none;
-  border-radius: var(--corner-radius-x-small, 8px);
-  background: transparent;
-  color: var(--semantic-content-secondary);
-  cursor: pointer;
-  transition:
-    color var(--motion-duration-short) var(--motion-easing-flow),
-    background-color var(--motion-duration-short) var(--motion-easing-flow);
-}
-
-.clearBtn:hover {
-  color: var(--semantic-content-primary);
-  background-color: var(--semantic-action-fill-secondary-default);
-}
-
-.clearBtn:focus-visible {
-  outline: none;
-  box-shadow: 0 0 0 2px var(--semantic-field-outline-focus);
 }
 
 .description {

@@ -5,7 +5,7 @@
   padding: var(--spacing-x-small, 8px) var(--spacing-small, 12px);
   background-color: var(--semantic-background-primary, #ffffff);
   color: var(--semantic-content-primary, #091723);
-  border: 2px solid transparent;
+  border: 2px solid var(--semantic-separator);
   border-radius: var(--corner-radius-medium, 16px);
   font-family: var(--font-family-text);
   font-size: var(--type-font-size-small, 12px);
