@@ -19,6 +19,9 @@ import {
   TableCell,
   TableTitleCell,
   Icon,
+  InputField,
+  SearchField,
+  Select,
 } from "@/components";
 import styles from "./page.module.css";
 
@@ -1336,6 +1339,124 @@ export default function DesignSystemPage() {
                 name="general_home"
                 size="medium"
                 color="content-negative"
+              />
+            </div>
+          </div>
+        </div>
+      </PageSection>
+
+      {/* Form Fields Section */}
+      <PageSection
+        title="Form Fields"
+        description="InputField and Select include label and description; SearchField is a compact search input without label or description. All support interactive states (hover, focus, error, disabled)."
+      >
+        <div className={styles.subsection}>
+          <h3>InputField</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>Default</p>
+              <InputField
+                label="Email"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>With description</p>
+              <InputField
+                label="Full name"
+                description="As it appears on your account."
+                placeholder="Jane Smith"
+              />
+            </div>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>Error state</p>
+              <InputField
+                label="Username"
+                error="This username is already taken."
+                placeholder="jane"
+                defaultValue="jane"
+              />
+            </div>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>Disabled</p>
+              <InputField
+                label="Account ID"
+                description="Cannot be changed."
+                placeholder="acc_123"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>SearchField</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>Default</p>
+              <SearchField placeholder="Search by name or ID..." />
+            </div>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>With value (clearable)</p>
+              <SearchField placeholder="Search..." defaultValue="acme" />
+            </div>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>Disabled</p>
+              <SearchField placeholder="Search..." disabled />
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.subsection}>
+          <h3>Select</h3>
+          <div className={styles.componentGrid}>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>Default</p>
+              <Select
+                label="Country"
+                options={[
+                  { value: "", label: "Select a country..." },
+                  { value: "uk", label: "United Kingdom" },
+                  { value: "us", label: "United States" },
+                  { value: "de", label: "Germany" },
+                ]}
+              />
+            </div>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>With description</p>
+              <Select
+                label="Currency"
+                description="Used for all transactions in this account."
+                options={[
+                  { value: "", label: "Select currency..." },
+                  { value: "gbp", label: "British Pound (GBP)" },
+                  { value: "eur", label: "Euro (EUR)" },
+                  { value: "usd", label: "US Dollar (USD)" },
+                ]}
+              />
+            </div>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>Error state</p>
+              <Select
+                label="Category"
+                error="Please select a category."
+                options={[
+                  { value: "", label: "Select..." },
+                  { value: "a", label: "Option A" },
+                  { value: "b", label: "Option B" },
+                ]}
+              />
+            </div>
+            <div className={styles.componentExample} style={{ minWidth: 280 }}>
+              <p className={styles.label}>Disabled</p>
+              <Select
+                label="Region"
+                description="Locked for this account."
+                disabled
+                defaultValue="uk"
+                options={[
+                  { value: "uk", label: "United Kingdom" },
+                ]}
               />
             </div>
           </div>

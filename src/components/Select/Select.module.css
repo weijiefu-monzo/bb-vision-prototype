@@ -1,0 +1,98 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-small, 8px);
+  width: 100%;
+}
+
+.label {
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 600;
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-secondary);
+}
+
+.selectWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--size-2x-large, 48px);
+  padding: var(--spacing-small, 12px);
+  background-color: var(--semantic-field-fill-default);
+  border: 2px solid var(--semantic-field-border-default);
+  border-radius: var(--corner-radius-small, 12px);
+  transition:
+    border-color var(--motion-duration-short) var(--motion-easing-flow),
+    background-color var(--motion-duration-short) var(--motion-easing-flow),
+    box-shadow var(--motion-duration-short) var(--motion-easing-flow);
+}
+
+.selectWrap:hover {
+  background-color: var(--semantic-field-fill-hover);
+  border-color: var(--semantic-field-border-hover);
+}
+
+.selectWrap:focus-within {
+  background-color: var(--semantic-field-fill-active);
+  border-color: var(--semantic-field-border-active);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--semantic-field-outline-focus);
+}
+
+.root[data-error="true"] .selectWrap {
+  background-color: var(--semantic-field-fill-error);
+  border-color: var(--semantic-field-border-error);
+}
+
+.root[data-error="true"] .selectWrap:focus-within {
+  box-shadow: 0 0 0 2px var(--semantic-field-outline-focus);
+}
+
+.root[data-disabled="true"] .selectWrap {
+  background-color: var(--semantic-field-fill-disabled);
+  border-color: var(--semantic-field-border-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.select {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-medium, 14px);
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-primary);
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%2375817e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--spacing-small, 12px) center;
+  background-size: var(--size-medium, 16px);
+}
+
+.select:disabled {
+  color: var(--semantic-content-disabled);
+  cursor: not-allowed;
+}
+
+.select option {
+  background: var(--semantic-field-fill-active);
+  color: var(--semantic-content-primary);
+}
+
+.description {
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-small, 12px);
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-secondary);
+}
+
+.root[data-error="true"] .description {
+  color: var(--semantic-content-negative);
+}

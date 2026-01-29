@@ -1,0 +1,91 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-x-small, 8px);
+  width: 100%;
+}
+
+.label {
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 600;
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-secondary);
+}
+
+.inputWrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--size-2x-large, 48px);
+  padding: var(--spacing-small, 12px);
+  background-color: var(--semantic-field-fill-default);
+  border: 2px solid var(--semantic-field-border-default);
+  border-radius: var(--corner-radius-small, 12px);
+  transition:
+    border-color var(--motion-duration-short) var(--motion-easing-flow),
+    background-color var(--motion-duration-short) var(--motion-easing-flow),
+    box-shadow var(--motion-duration-short) var(--motion-easing-flow);
+}
+
+.inputWrap:hover {
+  background-color: var(--semantic-field-fill-hover);
+  border-color: var(--semantic-field-border-hover);
+}
+
+.inputWrap:focus-within {
+  background-color: var(--semantic-field-fill-active);
+  border-color: var(--semantic-field-border-active);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--semantic-field-outline-focus);
+}
+
+.root[data-error="true"] .inputWrap {
+  background-color: var(--semantic-field-fill-error);
+  border-color: var(--semantic-field-border-error);
+}
+
+.root[data-error="true"] .inputWrap:focus-within {
+  box-shadow: 0 0 0 2px var(--semantic-field-outline-focus);
+}
+
+.root[data-disabled="true"] .inputWrap {
+  background-color: var(--semantic-field-fill-disabled);
+  border-color: var(--semantic-field-border-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: none;
+  background: transparent;
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-medium, 14px);
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-primary);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--semantic-content-secondary);
+}
+
+.input:disabled {
+  color: var(--semantic-content-disabled);
+  cursor: not-allowed;
+}
+
+.description {
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-small, 12px);
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-secondary);
+}
+
+.root[data-error="true"] .description {
+  color: var(--semantic-content-negative);
+}

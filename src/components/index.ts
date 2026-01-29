@@ -80,6 +80,15 @@ export type { PillProps, PillSeverity } from "./Pill";
 export { Tabs } from "./Tabs";
 export type { TabsProps, TabItem } from "./Tabs";
 
+export { InputField } from "./InputField";
+export type { InputFieldProps } from "./InputField";
+
+export { SearchField } from "./SearchField";
+export type { SearchFieldProps } from "./SearchField";
+
+export { Select } from "./Select";
+export type { SelectProps, SelectOption } from "./Select";
+
 export {
   Table,
   TableHeader,
