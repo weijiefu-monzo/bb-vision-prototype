@@ -37,6 +37,8 @@ export interface LineChartProps {
   yMax?: number;
   /** Use smooth curves (Catmull–Rom) instead of straight segments */
   smooth?: boolean;
+  /** When true, hide axes and grid (e.g. for compact previews) */
+  hideAxis?: boolean;
   className?: string;
 }
 
@@ -77,6 +79,7 @@ export default function LineChart({
   title,
   yMax: yMaxProp,
   smooth = false,
+  hideAxis = false,
   className,
 }: LineChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -98,7 +101,9 @@ export default function LineChart({
   }, []);
 
   const width = widthProp ?? containerWidth;
-  const padding = { top: 16, right: 36, bottom: 24, left: 8 };
+  const padding = hideAxis
+    ? { top: 4, right: 4, bottom: 4, left: 4 }
+    : { top: 16, right: 36, bottom: 24, left: 8 };
   const chartWidth = width - padding.left - padding.right;
   const chartHeight = height - padding.top - padding.bottom;
 
@@ -158,90 +163,94 @@ export default function LineChart({
               </linearGradient>
             )}
           </defs>
-          {/* Grid */}
-          <g
-            className={styles.grid}
-            transform={`translate(${padding.left}, ${padding.top})`}
-          >
-            {Array.from({ length: yTicks }, (_, i) => (
-              <line
-                key={`h-${i}`}
-                x1={0}
-                y1={i * stepY}
-                x2={chartWidth}
-                y2={i * stepY}
-                stroke={stroke}
-                strokeWidth={1}
-              />
-            ))}
-            {n > 0 &&
-              Array.from({ length: n }, (_, i) => (
+          {!hideAxis && (
+            <>
+              {/* Grid */}
+              <g
+                className={styles.grid}
+                transform={`translate(${padding.left}, ${padding.top})`}
+              >
+                {Array.from({ length: yTicks }, (_, i) => (
+                  <line
+                    key={`h-${i}`}
+                    x1={0}
+                    y1={i * stepY}
+                    x2={chartWidth}
+                    y2={i * stepY}
+                    stroke={stroke}
+                    strokeWidth={1}
+                  />
+                ))}
+                {n > 0 &&
+                  Array.from({ length: n }, (_, i) => (
+                    <line
+                      key={`v-${i}`}
+                      x1={i * xStep}
+                      y1={0}
+                      x2={i * xStep}
+                      y2={chartHeight}
+                      stroke={stroke}
+                      strokeWidth={1}
+                    />
+                  ))}
                 <line
-                  key={`v-${i}`}
-                  x1={i * xStep}
+                  x1={chartWidth}
                   y1={0}
-                  x2={i * xStep}
+                  x2={chartWidth}
                   y2={chartHeight}
-                  stroke={stroke}
+                  stroke={axisStroke}
                   strokeWidth={1}
                 />
-              ))}
-            <line
-              x1={chartWidth}
-              y1={0}
-              x2={chartWidth}
-              y2={chartHeight}
-              stroke={axisStroke}
-              strokeWidth={1}
-            />
-            <line
-              x1={0}
-              y1={chartHeight}
-              x2={chartWidth}
-              y2={chartHeight}
-              stroke={axisStroke}
-              strokeWidth={1}
-            />
-          </g>
-          {/* Y-axis labels (right) */}
-          <g
-            transform={`translate(${padding.left + chartWidth}, ${padding.top})`}
-          >
-            {Array.from({ length: yTicks }, (_, i) => {
-              const value = Math.round(yMax - (i / (yTicks - 1)) * yMax);
-              return (
-                <text
-                  key={i}
-                  x={8}
-                  y={i * stepY}
-                  textAnchor="start"
-                  dominantBaseline="middle"
-                  fill="var(--semantic-content-secondary, rgba(9, 23, 35, 0.6))"
-                  fontSize="10"
+                <line
+                  x1={0}
+                  y1={chartHeight}
+                  x2={chartWidth}
+                  y2={chartHeight}
+                  stroke={axisStroke}
+                  strokeWidth={1}
+                />
+              </g>
+              {/* Y-axis labels (right) */}
+              <g
+                transform={`translate(${padding.left + chartWidth}, ${padding.top})`}
+              >
+                {Array.from({ length: yTicks }, (_, i) => {
+                  const value = Math.round(yMax - (i / (yTicks - 1)) * yMax);
+                  return (
+                    <text
+                      key={i}
+                      x={8}
+                      y={i * stepY}
+                      textAnchor="start"
+                      dominantBaseline="middle"
+                      fill="var(--semantic-content-secondary, rgba(9, 23, 35, 0.6))"
+                      fontSize="10"
+                    >
+                      {value}
+                    </text>
+                  );
+                })}
+              </g>
+              {/* X-axis labels */}
+              {xLabels && xLabels.length > 0 && (
+                <g
+                  transform={`translate(${padding.left}, ${padding.top + chartHeight})`}
                 >
-                  {value}
-                </text>
-              );
-            })}
-          </g>
-          {/* X-axis labels */}
-          {xLabels && xLabels.length > 0 && (
-            <g
-              transform={`translate(${padding.left}, ${padding.top + chartHeight})`}
-            >
-              {xLabels.map((label, i) => (
-                <text
-                  key={i}
-                  x={i * xStep}
-                  y={16}
-                  textAnchor="middle"
-                  fill="var(--semantic-content-secondary, rgba(9, 23, 35, 0.6))"
-                  fontSize="10"
-                >
-                  {label}
-                </text>
-              ))}
-            </g>
+                  {xLabels.map((label, i) => (
+                    <text
+                      key={i}
+                      x={i * xStep}
+                      y={16}
+                      textAnchor="middle"
+                      fill="var(--semantic-content-secondary, rgba(9, 23, 35, 0.6))"
+                      fontSize="10"
+                    >
+                      {label}
+                    </text>
+                  ))}
+                </g>
+              )}
+            </>
           )}
           {/* Lines and area (single line: area first, then line) */}
           {data.map((series, seriesIndex) => {

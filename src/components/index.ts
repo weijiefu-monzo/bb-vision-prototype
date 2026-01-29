@@ -16,6 +16,9 @@ export type { ButtonProps, ButtonVariant } from "./Button";
 export { Box } from "./Box";
 export type { BoxProps } from "./Box";
 
+export { Card } from "./Card";
+export type { CardProps } from "./Card";
+
 export { ChartLegend, BarChart, HorizontalBarChart, LineChart, RadialChart, DonutChart } from "./Charts";
 export type {
   ChartLegendProps,
@@ -55,11 +58,18 @@ export type { PageHeaderProps } from "./PageHeader";
 export { DetailHeader } from "./DetailHeader";
 export type { DetailHeaderProps } from "./DetailHeader";
 
-export { FocusView, FocusViewHeader } from "./FocusView";
-export type { FocusViewProps, FocusViewHeaderProps } from "./FocusView";
+export { FocusView, FocusViewHeader, FocusViewSidePanel } from "./FocusView";
+export type {
+  FocusViewProps,
+  FocusViewHeaderProps,
+  FocusViewSidePanelProps,
+} from "./FocusView";
 
 export { WorkflowBuilder } from "./WorkflowBuilder";
 export type { WorkflowBuilderProps, Workflow } from "./WorkflowBuilder";
+
+export { ChartBuilder } from "./ChartBuilder";
+export type { ChartBuilderProps, Chart } from "./ChartBuilder";
 
 export { PageSection } from "./PageSection";
 export type { PageSectionProps } from "./PageSection";

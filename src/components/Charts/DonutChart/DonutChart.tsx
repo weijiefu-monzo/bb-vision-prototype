@@ -44,6 +44,12 @@ const START_ANGLE = -Math.PI / 2;
 /** Gap between segments: constant linear width in px (same arc length at inner and outer) */
 const GAP_WIDTH_PX = 2;
 
+/** Round to fixed precision so server and client produce identical path strings (avoids hydration mismatch). */
+function roundForPath(n: number, decimals = 6): number {
+  const factor = 10 ** decimals;
+  return Math.round(n * factor) / factor;
+}
+
 function getDonutSegmentPath(
   cx: number,
   cy: number,
@@ -54,17 +60,19 @@ function getDonutSegmentPath(
   startInner: number,
   endInner: number
 ): string {
-  const x1 = cx + outerR * Math.cos(startOuter);
-  const y1 = cy + outerR * Math.sin(startOuter);
-  const x2 = cx + outerR * Math.cos(endOuter);
-  const y2 = cy + outerR * Math.sin(endOuter);
-  const x3 = cx + innerR * Math.cos(endInner);
-  const y3 = cy + innerR * Math.sin(endInner);
-  const x4 = cx + innerR * Math.cos(startInner);
-  const y4 = cy + innerR * Math.sin(startInner);
+  const x1 = roundForPath(cx + outerR * Math.cos(startOuter));
+  const y1 = roundForPath(cy + outerR * Math.sin(startOuter));
+  const x2 = roundForPath(cx + outerR * Math.cos(endOuter));
+  const y2 = roundForPath(cy + outerR * Math.sin(endOuter));
+  const x3 = roundForPath(cx + innerR * Math.cos(endInner));
+  const y3 = roundForPath(cy + innerR * Math.sin(endInner));
+  const x4 = roundForPath(cx + innerR * Math.cos(startInner));
+  const y4 = roundForPath(cy + innerR * Math.sin(startInner));
   const largeOuter = endOuter - startOuter > Math.PI ? 1 : 0;
   const largeInner = endInner - startInner > Math.PI ? 1 : 0;
-  return `M ${x1} ${y1} A ${outerR} ${outerR} 0 ${largeOuter} 1 ${x2} ${y2} L ${x3} ${y3} A ${innerR} ${innerR} 0 ${largeInner} 0 ${x4} ${y4} Z`;
+  const or = roundForPath(outerR);
+  const ir = roundForPath(innerR);
+  return `M ${x1} ${y1} A ${or} ${or} 0 ${largeOuter} 1 ${x2} ${y2} L ${x3} ${y3} A ${ir} ${ir} 0 ${largeInner} 0 ${x4} ${y4} Z`;
 }
 
 export default function DonutChart({

@@ -1,0 +1,29 @@
+.templateCard {
+  max-width: 200px;
+}
+
+.chartWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-small, 12px);
+  min-height: 96px;
+  background-color: var(--semantic-background-secondary, #f2f8f3);
+  border-radius: var(--corner-radius-small, 12px);
+}
+
+.title {
+  margin: 0 0 var(--spacing-x-small, 8px);
+  font-family: var(--font-family-display);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--semantic-content-primary, #091723);
+}
+
+.description {
+  margin: 0;
+  font-size: var(--type-font-size-small, 12px);
+  line-height: 1.35;
+  color: var(--semantic-content-secondary, #75817e);
+}

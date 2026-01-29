@@ -8,6 +8,7 @@ import {
   PageHeader,
   Button,
   Box,
+  ChartBuilder,
   BarChart,
   HorizontalBarChart,
   LineChart,
@@ -26,6 +27,7 @@ import {
   radialChartDummyDataSingle,
   radialChartDummyDataMultiple,
   donutChartDummyData,
+  chartDummyData,
 } from "@/data";
 import { useNavState } from "@/contexts/NavContext";
 import layoutStyles from "../page.module.css";
@@ -34,6 +36,7 @@ import styles from "./page.module.css";
 export default function InsightsPage() {
   const { navState, setNavState } = useNavState();
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [isChartBuilderOpen, setIsChartBuilderOpen] = useState(false);
   const layoutRef = useRef<PageLayoutRef>(null);
 
   return (
@@ -63,8 +66,13 @@ export default function InsightsPage() {
           title="Insights"
           description="Analyze your spending and income patterns"
           trailing={
-            <Button variant="secondary" size="medium" leadingIcon="action_plus">
-              Add new chart
+            <Button
+              variant="secondary"
+              size="medium"
+              leadingIcon="action_plus"
+              onClick={() => setIsChartBuilderOpen(true)}
+            >
+              Create chart
             </Button>
           }
         />
@@ -152,6 +160,12 @@ export default function InsightsPage() {
           </Box>
         </div>
       </PageLayout>
+
+      <ChartBuilder
+        open={isChartBuilderOpen}
+        onClose={() => setIsChartBuilderOpen(false)}
+        chart={chartDummyData}
+      />
     </div>
   );
 }

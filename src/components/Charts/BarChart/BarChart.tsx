@@ -40,6 +40,8 @@ export interface BarChartProps {
   title?: ReactNode;
   /** Y-axis max (default: derived from data) */
   yMax?: number;
+  /** When true, hide axes and grid (e.g. for compact previews) */
+  hideAxis?: boolean;
   className?: string;
 }
 
@@ -52,6 +54,7 @@ function BarChartRoot({
   showLegend = true,
   title,
   yMax: yMaxProp,
+  hideAxis = false,
   className,
 }: BarChartProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,7 +86,9 @@ function BarChartRoot({
       )
     : Math.max(...data.map((d) => d.value ?? 0), 1);
   const yMax = yMaxProp ?? yMaxComputed;
-  const padding = { top: 12, right: 36, bottom: 24, left: 8 };
+  const padding = hideAxis
+    ? { top: 4, right: 4, bottom: 4, left: 4 }
+    : { top: 12, right: 36, bottom: 24, left: 8 };
   const chartWidth = width - padding.left - padding.right;
   const chartHeight = height - padding.top - padding.bottom;
   const n = data.length;
@@ -117,31 +122,35 @@ function BarChartRoot({
           role="img"
           aria-label={isStacked ? "Stacked bar chart" : "Bar chart"}
         >
-          <BarChart.Grid
-            x={padding.left}
-            y={padding.top}
-            chartWidth={chartWidth}
-            chartHeight={chartHeight}
-            yTicks={5}
-            xSteps={n}
-            stepX={step}
-          />
-          <BarChart.YAxis
-            height={chartHeight}
-            width={padding.right}
-            yMax={yMax}
-            x={padding.left + chartWidth}
-            y={padding.top}
-          />
-          <BarChart.XAxis
-            labels={data.map((d) => d.label)}
-            x={padding.left}
-            y={padding.top + chartHeight}
-            width={chartWidth}
-            height={padding.bottom}
-            step={step}
-            barWidth={barWidth}
-          />
+          {!hideAxis && (
+            <>
+              <BarChart.Grid
+                x={padding.left}
+                y={padding.top}
+                chartWidth={chartWidth}
+                chartHeight={chartHeight}
+                yTicks={5}
+                xSteps={n}
+                stepX={step}
+              />
+              <BarChart.YAxis
+                height={chartHeight}
+                width={padding.right}
+                yMax={yMax}
+                x={padding.left + chartWidth}
+                y={padding.top}
+              />
+              <BarChart.XAxis
+                labels={data.map((d) => d.label)}
+                x={padding.left}
+                y={padding.top + chartHeight}
+                width={chartWidth}
+                height={padding.bottom}
+                step={step}
+                barWidth={barWidth}
+              />
+            </>
+          )}
           <BarChart.Bars
             data={data}
             isStacked={isStacked}

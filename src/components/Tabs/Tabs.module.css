@@ -3,7 +3,7 @@
   align-items: stretch;
   padding: var(--spacing-2x-small, 2px);
   background-color: var(--semantic-background-secondary, #f2f8f3);
-  border-radius: var(--corner-radius-medium, 12px);
+  border-radius: var(--corner-radius-large, 24px);
   font-family: var(--font-family-text);
   gap: 0;
 }
@@ -21,7 +21,7 @@
   padding: var(--spacing-x-small, 8px) var(--spacing-small, 12px);
   background: transparent;
   border: none;
-  border-radius: var(--corner-radius-small, 8px);
+  border-radius: var(--corner-radius-medium, 12px);
   font-size: var(--type-font-size-medium, 12px);
   font-weight: 600;
   line-height: 1.25;
@@ -46,7 +46,7 @@
 
 .tabActive {
   background-color: var(--semantic-background-primary, #ffffff);
-  color: var(--semantic-content-primary, #091723);
+  color: var(--color-navy-900, #091723);
   font-weight: 600;
   box-shadow: var(--elevation-level1-box-shadow, 0 1px 3px rgba(0, 0, 0, 0.08));
 }
