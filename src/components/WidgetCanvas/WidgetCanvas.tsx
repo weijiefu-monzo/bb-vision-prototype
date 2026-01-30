@@ -27,7 +27,6 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Widget } from "./Widget";
-import { IconButton } from "../IconButton";
 import styles from "./WidgetCanvas.module.css";
 
 export interface WidgetItem {
@@ -97,25 +96,6 @@ function SortableWidgetItem({
     transition,
   };
 
-  const stopDrag = (e: React.MouseEvent | React.PointerEvent) => {
-    e.stopPropagation();
-    e.preventDefault();
-  };
-
-  const handleSpanClick = (e: React.MouseEvent) => {
-    stopDrag(e);
-    if (span === 2) onSpanChange?.(id, 1);
-    else onSpanChange?.(id, 2);
-  };
-
-  const handleRemoveClick = (e: React.MouseEvent) => {
-    stopDrag(e);
-    onRemove?.(id);
-  };
-
-  const showActions =
-    customizable && (onSpanChange != null || onRemove != null);
-
   return (
     <div
       ref={setNodeRef}
@@ -124,45 +104,16 @@ function SortableWidgetItem({
       {...(customizable ? attributes : {})}
       {...(customizable ? listeners : {})}
     >
-      <div className={styles.widgetWithToggle}>
-        <Widget span={span}>{children}</Widget>
-        {showActions && (
-          <div className={styles.widgetActions}>
-            {onSpanChange != null && (
-              <IconButton
-                type="button"
-                variant="secondary"
-                size="small"
-                icon={
-                  span === 2
-                    ? "navigation_chevron_left"
-                    : "navigation_chevron_right"
-                }
-                iconSize="small"
-                aria-label={
-                  span === 2 ? "Narrow to 1 column" : "Widen to 2 columns"
-                }
-                className={styles.spanToggle}
-                onClick={handleSpanClick}
-                onPointerDown={stopDrag}
-              />
-            )}
-            {onRemove != null && (
-              <IconButton
-                type="button"
-                variant="secondary"
-                size="small"
-                icon="action_delete"
-                iconSize="small"
-                aria-label="Remove widget"
-                className={styles.removeButton}
-                onClick={handleRemoveClick}
-                onPointerDown={stopDrag}
-              />
-            )}
-          </div>
-        )}
-      </div>
+      <Widget
+        id={id}
+        span={span}
+        customizable={customizable}
+        onSpanChange={onSpanChange}
+        onRemove={onRemove}
+        isAffected={isAffected}
+      >
+        {children}
+      </Widget>
     </div>
   );
 }

@@ -9,10 +9,11 @@ import {
   ActionCard,
   PageSection,
   WorkflowBuilder,
+  type Workflow as BuilderWorkflow,
   DetailHeader,
   Button,
 } from "@/components";
-import { workflowDummyData } from "@/data";
+import { workflowEmptyData, workflowDefinitionsById } from "@/data";
 import { useNavState } from "@/contexts/NavContext";
 import TeamMembersTable, {
   type TeamMember,
@@ -24,11 +25,17 @@ export default function TeamPage() {
   const { navState, setNavState } = useNavState();
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isWorkflowBuilderOpen, setIsWorkflowBuilderOpen] = useState(false);
+  const [workflowToEdit, setWorkflowToEdit] = useState<Workflow | null>(null);
   const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
   const [selectedWorkflow, setSelectedWorkflow] = useState<Workflow | null>(
     null,
   );
   const layoutRef = useRef<PageLayoutRef>(null);
+
+  const workflowBuilderWorkflow =
+    workflowToEdit != null
+      ? (workflowDefinitionsById[workflowToEdit.id] ?? workflowEmptyData)
+      : workflowEmptyData;
 
   return (
     <div className={styles.pageContainer}>
@@ -117,7 +124,10 @@ export default function TeamPage() {
               icon="general_flex"
               title="Add new workflow"
               description="Create a new workflow for your team"
-              onClick={() => setIsWorkflowBuilderOpen(true)}
+              onClick={() => {
+                setWorkflowToEdit(null);
+                setIsWorkflowBuilderOpen(true);
+              }}
             />
           </div>
         </PageSection>
@@ -145,7 +155,7 @@ export default function TeamPage() {
           icon="object_puzzle"
           trailing={
             <Button variant="secondary" size="medium">
-              Activity Log
+              Add new itegration
             </Button>
           }
         >
@@ -155,14 +165,21 @@ export default function TeamPage() {
               setSelectedWorkflow(workflow);
               setIsDetailOpen(true);
             }}
+            onEditClick={(workflow) => {
+              setWorkflowToEdit(workflow);
+              setIsWorkflowBuilderOpen(true);
+            }}
           />
         </PageSection>
       </PageLayout>
 
       <WorkflowBuilder
         open={isWorkflowBuilderOpen}
-        onClose={() => setIsWorkflowBuilderOpen(false)}
-        workflow={workflowDummyData}
+        onClose={() => {
+          setIsWorkflowBuilderOpen(false);
+          setWorkflowToEdit(null);
+        }}
+        workflow={workflowBuilderWorkflow as BuilderWorkflow}
       />
     </div>
   );

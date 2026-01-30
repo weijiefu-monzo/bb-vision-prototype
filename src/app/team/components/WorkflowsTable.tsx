@@ -15,6 +15,7 @@ import {
 
 const WORKFLOWS = [
   {
+    id: "expense-approval",
     name: "Expense approval",
     createdBy: "Alex Chen",
     lastUpdatedAt: "28 Jan 2025",
@@ -22,6 +23,7 @@ const WORKFLOWS = [
     status: "Running" as const,
   },
   {
+    id: "invoice-processing",
     name: "Invoice processing",
     createdBy: "Sam Williams",
     lastUpdatedAt: "27 Jan 2025",
@@ -29,6 +31,7 @@ const WORKFLOWS = [
     status: "Paused" as const,
   },
   {
+    id: "new-joiner-onboarding",
     name: "New joiner onboarding",
     createdBy: "Alex Chen",
     lastUpdatedAt: "26 Jan 2025",
@@ -41,9 +44,10 @@ export type Workflow = (typeof WORKFLOWS)[number];
 
 export interface WorkflowsTableProps {
   onRowClick?: (workflow: Workflow) => void;
+  onEditClick?: (workflow: Workflow) => void;
 }
 
-export default function WorkflowsTable({ onRowClick }: WorkflowsTableProps) {
+export default function WorkflowsTable({ onRowClick, onEditClick }: WorkflowsTableProps) {
   return (
     <Table fullWidth>
       <TableHeader>
@@ -58,10 +62,7 @@ export default function WorkflowsTable({ onRowClick }: WorkflowsTableProps) {
       </TableHeader>
       <TableBody>
         {WORKFLOWS.map((workflow, index) => (
-          <TableRow
-            key={index}
-            onClick={() => onRowClick?.(workflow)}
-          >
+          <TableRow key={index} onClick={() => onRowClick?.(workflow)}>
             <TableTitleCell
               title={workflow.name}
               avatar={<Icon name="general_flex" size="medium" />}
@@ -108,6 +109,13 @@ export default function WorkflowsTable({ onRowClick }: WorkflowsTableProps) {
                   icon="general_nosign"
                   aria-label="Stop"
                   onClick={() => {}}
+                />
+                <IconButton
+                  variant="secondary"
+                  size="medium"
+                  icon="action_edit_pencil"
+                  aria-label="Edit"
+                  onClick={() => onEditClick?.(workflow)}
                 />
               </div>
             </TableCell>

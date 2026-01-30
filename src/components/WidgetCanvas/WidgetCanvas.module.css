@@ -31,34 +31,6 @@
   min-height: 0;
 }
 
-.widgetWithToggle {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
-}
-
-.widgetWithToggle > *:first-child {
-  flex: 1;
-  min-height: 0;
-}
-
-.widgetActions {
-  position: absolute;
-  top: var(--spacing-x-small, 8px);
-  right: var(--spacing-x-small, 8px);
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-2x-small, 4px);
-  flex-shrink: 0;
-}
-
-.spanToggle,
-.removeButton {
-  flex-shrink: 0;
-}
-
 .sortableWidget.span2 {
   grid-column: span 2;
 }
@@ -76,11 +48,6 @@
 .sortableWidget.isDragging > * {
   opacity: 0;
   /* transition: opacity 0.2s ease-in-out; */
-}
-/* Hide only the widget content (children of the Box), keep the Box and chevron visible */
-.sortableWidget.affected .widgetWithToggle > *:first-child > * {
-  opacity: 0;
-  transition: opacity 0.2s ease-in-out;
 }
 
 .dropTargetPlaceholder {

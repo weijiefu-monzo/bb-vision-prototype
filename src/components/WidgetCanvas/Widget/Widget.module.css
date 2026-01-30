@@ -1,4 +1,34 @@
 .widget {
+  position: relative;
   min-height: 120px;
   width: 100%;
+}
+
+.widgetContent {
+  min-height: 100%;
+}
+
+.widgetContent.affected {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.widgetActions {
+  position: absolute;
+  top: var(--spacing-x-small, 8px);
+  right: var(--spacing-x-small, 8px);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2x-small, 4px);
+  flex-shrink: 0;
+}
+
+.widgetActions.affected {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.spanToggle,
+.removeButton {
+  flex-shrink: 0;
 }

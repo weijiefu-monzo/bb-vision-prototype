@@ -69,6 +69,8 @@ function sameTargetHandle(
   return eh === ch;
 }
 
+const fitViewOptions = { maxZoom: 1, padding: 0.2, duration: 200 };
+
 function WorkflowCanvasInner({
   initialNodes,
   initialEdges,
@@ -78,6 +80,16 @@ function WorkflowCanvasInner({
 }) {
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const shouldFitView = initialNodes.length > 0;
+
+  const onInit = useCallback(
+    (instance: { fitView: (opts?: typeof fitViewOptions) => void }) => {
+      if (initialNodes.length > 0) {
+        instance.fitView(fitViewOptions);
+      }
+    },
+    [initialNodes.length]
+  );
 
   const onConnect = useCallback(
     (connection: Connection) => {
@@ -124,7 +136,9 @@ function WorkflowCanvasInner({
         edgeTypes={edgeTypes}
         defaultEdgeOptions={defaultEdgeOptions}
         defaultViewport={{ x: 0, y: 0, zoom: 1 }}
-        fitView={false}
+        fitView={shouldFitView}
+        fitViewOptions={fitViewOptions}
+        onInit={onInit}
         maxZoom={1}
         className={styles.flow}
         proOptions={{ hideAttribution: true }}
