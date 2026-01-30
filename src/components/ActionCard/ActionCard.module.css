@@ -3,7 +3,6 @@
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-medium, 16px);
-  padding: var(--spacing-medium, 16px);
 }
 
 .iconAvatar {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { Suspense, useState, useRef } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   PageLayout,
@@ -26,7 +26,7 @@ type TaskType = (typeof VALID_TASK_TYPES)[number] | null;
 
 export type { PaymentRow } from "@/data";
 
-export default function TasksPage() {
+function TasksPageContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { navState, setNavState } = useNavState();
@@ -45,8 +45,7 @@ export default function TasksPage() {
     )
       ? (taskTypeFromUrl as TaskType)
       : null;
-  const effectiveTaskType =
-    selectedTaskType ?? "scheduled-payment";
+  const effectiveTaskType = selectedTaskType ?? "scheduled-payment";
 
   // Update URL when task type changes
   const handleTaskTypeChange = (taskType: TaskType) => {
@@ -153,5 +152,21 @@ export default function TasksPage() {
         )}
       </PageLayout>
     </div>
+  );
+}
+
+function TasksPageFallback() {
+  return (
+    <div className={styles.pageContainer}>
+      <div style={{ padding: "var(--spacing-large, 24px)" }}>Loading…</div>
+    </div>
+  );
+}
+
+export default function TasksPage() {
+  return (
+    <Suspense fallback={<TasksPageFallback />}>
+      <TasksPageContent />
+    </Suspense>
   );
 }

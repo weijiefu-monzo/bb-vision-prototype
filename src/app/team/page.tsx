@@ -7,6 +7,7 @@ import {
   type PageLayoutRef,
   PageHeader,
   ActionCard,
+  PageSection,
 } from "@/components";
 import { useNavState } from "@/contexts/NavContext";
 import styles from "../page.module.css";
@@ -40,7 +41,8 @@ export default function TeamPage() {
         }
       >
         <PageHeader title="Team" description="Manage your team and workflows" />
-        <div className={styles.mainPlaceholder}>
+
+        <PageSection>
           <div className={styles.actionCardsRow}>
             <ActionCard
               icon="human_person_circles"
@@ -67,7 +69,7 @@ export default function TeamPage() {
               onClick={() => {}}
             />
           </div>
-        </div>
+        </PageSection>
       </PageLayout>
     </div>
   );
