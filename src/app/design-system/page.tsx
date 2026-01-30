@@ -636,7 +636,7 @@ export default function DesignSystemPage() {
               <PageSection
                 title="Full Width"
                 description="This section spans the full width"
-                hasMaxWidth={false}
+                fullWidth
               >
                 <p>Content spans the full available width.</p>
               </PageSection>

@@ -122,3 +122,6 @@ export type {
   TableCellProps,
   TableTitleCellProps,
 } from "./Table";
+
+export { WidgetCanvas, Widget } from "./WidgetCanvas";
+export type { WidgetCanvasProps, WidgetItem, WidgetProps } from "./WidgetCanvas";

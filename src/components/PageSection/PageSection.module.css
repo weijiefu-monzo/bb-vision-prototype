@@ -3,10 +3,11 @@
   flex-direction: column;
   gap: var(--spacing-medium, 16px);
   width: 100%;
+  max-width: var(--semantic-max-content-width, 960px);
 }
 
-.pageSection.hasMaxWidth {
-  max-width: var(--semantic-max-content-width, 960px);
+.pageSection.fullWidth {
+  max-width: none;
 }
 
 .sectionHeader {

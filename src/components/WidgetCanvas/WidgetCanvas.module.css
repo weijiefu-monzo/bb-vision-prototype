@@ -1,0 +1,111 @@
+.root {
+  position: relative;
+  width: 100%;
+  max-width: var(--semantic-max-content-width, 960px);
+}
+
+.root.fullWidth {
+  max-width: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-medium, 16px);
+  align-items: stretch;
+}
+
+.sortableWidget {
+  min-height: 0;
+  cursor: grab;
+  display: flex;
+  flex-direction: column;
+}
+
+.sortableWidget.notCustomizable {
+  cursor: default;
+}
+
+.sortableWidget > * {
+  flex: 1;
+  min-height: 0;
+}
+
+.widgetWithToggle {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.widgetWithToggle > *:first-child {
+  flex: 1;
+  min-height: 0;
+}
+
+.widgetActions {
+  position: absolute;
+  top: var(--spacing-x-small, 8px);
+  right: var(--spacing-x-small, 8px);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2x-small, 4px);
+  flex-shrink: 0;
+}
+
+.spanToggle,
+.removeButton {
+  flex-shrink: 0;
+}
+
+.sortableWidget.span2 {
+  grid-column: span 2;
+}
+
+.sortableWidget:active {
+  cursor: grabbing;
+}
+
+.sortableWidget.isDragging {
+  opacity: 0.5;
+  background: var(--semantic-content-accent);
+  /* border-radius: var(--corner-radius-medium, 16px); */
+}
+
+.sortableWidget.isDragging > * {
+  opacity: 0;
+  /* transition: opacity 0.2s ease-in-out; */
+}
+/* Hide only the widget content (children of the Box), keep the Box and chevron visible */
+.sortableWidget.affected .widgetWithToggle > *:first-child > * {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.dropTargetPlaceholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed var(--semantic-content-accent, #ff4f40);
+  border-radius: var(--corner-radius-medium, 16px);
+  font-size: var(--type-font-size-small, 12px);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.dropTargetPlaceholderOverlay {
+  position: absolute;
+  box-sizing: border-box;
+  min-height: 120px;
+}
+
+.dropTargetPlaceholder.dropTargetPlaceholderSpan2 {
+  /* Span is reflected by overlay width from JS; no extra grid rules needed */
+  min-width: 0;
+}
+
+.dropTargetPlaceholder.dropTargetPlaceholderCompact {
+  min-height: 8px;
+  font-size: 0;
+}

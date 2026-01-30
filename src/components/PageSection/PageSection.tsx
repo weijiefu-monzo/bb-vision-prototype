@@ -10,7 +10,7 @@ export interface PageSectionProps {
   icon?: string;
   trailing?: ReactNode;
   children: ReactNode;
-  hasMaxWidth?: boolean;
+  fullWidth?: boolean;
   className?: string;
 }
 
@@ -20,12 +20,12 @@ export default function PageSection({
   icon,
   trailing,
   children,
-  hasMaxWidth = true,
+  fullWidth = false,
   className,
 }: PageSectionProps) {
   return (
     <section
-      className={`${styles.pageSection} ${hasMaxWidth ? styles.hasMaxWidth : ""} ${className || ""}`}
+      className={`${styles.pageSection} ${fullWidth ? styles.fullWidth : ""} ${className || ""}`}
     >
       <div className={styles.sectionHeader}>
         <div className={styles.headerContent}>
