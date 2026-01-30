@@ -41,6 +41,8 @@ export type RadialChartVariant = "single" | "multiple";
 export interface RadialChartBaseProps {
   /** Chart diameter in px */
   size?: number;
+  /** Custom colours (single: first colour used for arc; multiple: one per ring); uses default if not specified */
+  colors?: string[];
   /** Optional title */
   title?: ReactNode;
   /** Show legend (multiple variant only) */
@@ -68,6 +70,7 @@ export default function RadialChart(props: RadialChartProps) {
   const {
     variant,
     size: sizeProp,
+    colors: colorsProp,
     title,
     showLegend = true,
     className,
@@ -98,6 +101,7 @@ export default function RadialChart(props: RadialChartProps) {
   if (variant === "single") {
     const { data } = props;
     const { value, total, centerLabel, unit } = data;
+    const singleColor = colorsProp?.[0] ?? SINGLE_COLOR;
     const fraction = total > 0 ? Math.min(1, Math.max(0, value / total)) : 0;
     const half = size / 2;
     const maxR = half * 0.9;
@@ -132,7 +136,7 @@ export default function RadialChart(props: RadialChartProps) {
                 cy={cy}
                 r={trackR}
                 strokeWidth={strokeWidth}
-                stroke={SINGLE_COLOR}
+                stroke={singleColor}
                 strokeDasharray={`${dashLength} ${circumference}`}
                 strokeDashoffset={0}
               />
@@ -162,13 +166,13 @@ export default function RadialChart(props: RadialChartProps) {
   }
 
   const { data: entries } = props;
+  const colors = colorsProp ?? SEQUENTIAL_COLORS;
   const ringCount = entries.length;
   const maxR = (size / 2) * 0.9;
   const gap = 4;
   const totalGap = (ringCount - 1) * gap;
   /* Rings go from outer edge inward; only maxR is available, so fit n strokes + (n-1) gaps in maxR */
   const ringStroke = (maxR - totalGap) / (2 * ringCount);
-  const colors = SEQUENTIAL_COLORS;
 
   return (
     <div ref={containerRef} className={`${styles.root} ${className ?? ""}`}>

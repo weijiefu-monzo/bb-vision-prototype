@@ -17,9 +17,3 @@
       3
   );
 }
-.iconContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-medium, 16px);
-}

@@ -14,7 +14,7 @@
 }
 
 .tableHeader .tableRow {
-  height: var(--spacing-2x-large, 48px);
+  height: auto;
   border-bottom: none;
 }
 .tableHeader .tableRow:hover {
@@ -22,7 +22,8 @@
   cursor: default;
 }
 .tableHeaderCell {
-  padding: var(--spacing-small, 12px) var(--spacing-medium, 16px);
+  padding: 0 var(--spacing-medium, 16px) var(--spacing-small, 12px)
+    var(--spacing-medium, 16px);
   text-align: left;
   font-family: var(--font-family-text);
   font-size: var(--type-font-size-small, 12px);

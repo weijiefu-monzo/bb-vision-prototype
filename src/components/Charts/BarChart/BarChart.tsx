@@ -28,6 +28,8 @@ export interface BarChartProps {
   data: BarChartDataItem[];
   /** Series labels for stacked chart legend (order matches values[] indices) */
   seriesLabels?: string[];
+  /** Custom colours for bars/segments; uses default palette if not specified */
+  colors?: string[];
   /** Chart width; when undefined, fills container (responsive) */
   width?: number;
   /** Chart height (default: 240) */
@@ -48,6 +50,7 @@ export interface BarChartProps {
 function BarChartRoot({
   data = barChartDummyData,
   seriesLabels,
+  colors: colorsProp,
   width: widthProp,
   height = DEFAULT_HEIGHT,
   barGap = 0.5,
@@ -94,7 +97,8 @@ function BarChartRoot({
   const n = data.length;
   const step = chartWidth / n;
   const barWidth = step * (1 - barGap);
-  const colors = isStacked ? CATEGORICAL_COLORS : SEQUENTIAL_COLORS;
+  const defaultColors = isStacked ? CATEGORICAL_COLORS : SEQUENTIAL_COLORS;
+  const colors = colorsProp ?? defaultColors;
   const legendLabels =
     isStacked && seriesLabels && seriesLabels.length > 0
       ? seriesLabels

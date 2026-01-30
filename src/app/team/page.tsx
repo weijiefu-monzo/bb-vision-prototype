@@ -9,15 +9,25 @@ import {
   ActionCard,
   PageSection,
   WorkflowBuilder,
+  DetailHeader,
+  Button,
 } from "@/components";
 import { workflowDummyData } from "@/data";
 import { useNavState } from "@/contexts/NavContext";
+import TeamMembersTable, {
+  type TeamMember,
+} from "./components/TeamMembersTable";
+import WorkflowsTable, { type Workflow } from "./components/WorkflowsTable";
 import styles from "./page.module.css";
 
 export default function TeamPage() {
   const { navState, setNavState } = useNavState();
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const [isWorkflowBuilderOpen, setIsWorkflowBuilderOpen] = useState(false);
+  const [selectedMember, setSelectedMember] = useState<TeamMember | null>(null);
+  const [selectedWorkflow, setSelectedWorkflow] = useState<Workflow | null>(
+    null,
+  );
   const layoutRef = useRef<PageLayoutRef>(null);
 
   return (
@@ -37,10 +47,48 @@ export default function TeamPage() {
           />
         }
         detailContent={
-          <div className={styles.detailPlaceholder}>
-            <h2>Projects Details</h2>
-            <p>Projects detail content goes here</p>
-          </div>
+          selectedMember ? (
+            <DetailHeader
+              title={selectedMember.name}
+              description={
+                <>
+                  <p>
+                    {selectedMember.role} · {selectedMember.status}
+                  </p>
+                  <p style={{ marginTop: 8 }}>
+                    Monthly spend: {selectedMember.monthlySpend} · Spend limit:
+                    £{selectedMember.limit.toLocaleString()}
+                  </p>
+                </>
+              }
+              onBack={() => {
+                setIsDetailOpen(false);
+                setSelectedMember(null);
+              }}
+            />
+          ) : selectedWorkflow ? (
+            <DetailHeader
+              title={selectedWorkflow.name}
+              description={
+                <>
+                  <p>Created by {selectedWorkflow.createdBy}</p>
+                  <p style={{ marginTop: 8 }}>
+                    Last updated: {selectedWorkflow.lastUpdatedAt} · Last run:{" "}
+                    {selectedWorkflow.lastRunAt}
+                  </p>
+                  <p style={{ marginTop: 8 }}>
+                    Status: {selectedWorkflow.status}
+                  </p>
+                </>
+              }
+              onBack={() => {
+                setIsDetailOpen(false);
+                setSelectedWorkflow(null);
+              }}
+            />
+          ) : (
+            <></>
+          )
         }
       >
         <PageHeader title="Team" description="Manage your team and workflows" />
@@ -56,7 +104,7 @@ export default function TeamPage() {
             <ActionCard
               icon="general_settings"
               title="Manage teams"
-              description="Configure teams, permissions and defaults"
+              description="Configure roles, permissions and defaults"
               onClick={() => {}}
             />
             <ActionCard
@@ -72,6 +120,42 @@ export default function TeamPage() {
               onClick={() => setIsWorkflowBuilderOpen(true)}
             />
           </div>
+        </PageSection>
+
+        <PageSection
+          title="Team members"
+          icon="human_person"
+          trailing={
+            <Button variant="secondary" size="medium">
+              View all members
+            </Button>
+          }
+        >
+          <TeamMembersTable
+            onRowClick={(member) => {
+              setSelectedWorkflow(null);
+              setSelectedMember(member);
+              setIsDetailOpen(true);
+            }}
+          />
+        </PageSection>
+
+        <PageSection
+          title="Workflows"
+          icon="object_puzzle"
+          trailing={
+            <Button variant="secondary" size="medium">
+              Activity Log
+            </Button>
+          }
+        >
+          <WorkflowsTable
+            onRowClick={(workflow) => {
+              setSelectedMember(null);
+              setSelectedWorkflow(workflow);
+              setIsDetailOpen(true);
+            }}
+          />
         </PageSection>
       </PageLayout>
 

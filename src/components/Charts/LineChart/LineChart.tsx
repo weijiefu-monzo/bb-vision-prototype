@@ -25,6 +25,8 @@ export interface LineChartProps {
   data: LineChartSeries[];
   /** Optional x-axis labels (length should match values length) */
   xLabels?: string[];
+  /** Custom colours for series (order matches data); uses default palette if not specified */
+  colors?: string[];
   /** Chart width; when undefined, fills container (responsive) */
   width?: number;
   /** Chart height (default: 240) */
@@ -73,6 +75,7 @@ function smoothLinePath(
 export default function LineChart({
   data,
   xLabels,
+  colors: colorsProp,
   width: widthProp,
   height = DEFAULT_HEIGHT,
   showLegend = true,
@@ -82,6 +85,7 @@ export default function LineChart({
   hideAxis = false,
   className,
 }: LineChartProps) {
+  const colors = colorsProp ?? DIVERGING_COLORS;
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(DEFAULT_WIDTH);
 
@@ -152,12 +156,12 @@ export default function LineChart({
               >
                 <stop
                   offset="0%"
-                  stopColor={DIVERGING_COLORS[0]}
+                  stopColor={colors[0]}
                   stopOpacity={0.35}
                 />
                 <stop
                   offset="100%"
-                  stopColor={DIVERGING_COLORS[0]}
+                  stopColor={colors[0]}
                   stopOpacity={0}
                 />
               </linearGradient>
@@ -255,8 +259,7 @@ export default function LineChart({
           {/* Lines and area (single line: area first, then line) */}
           {data.map((series, seriesIndex) => {
             const values = series.values;
-            const color =
-              DIVERGING_COLORS[seriesIndex % DIVERGING_COLORS.length];
+            const color = colors[seriesIndex % colors.length];
             const points = values.map((y, i) => ({
               x: scaleX(i),
               y: scaleY(y),
@@ -302,7 +305,7 @@ export default function LineChart({
         <ChartLegend
           items={data.map((series, i) => ({
             label: series.label,
-            color: DIVERGING_COLORS[i % DIVERGING_COLORS.length],
+            color: colors[i % colors.length],
           }))}
         />
       )}

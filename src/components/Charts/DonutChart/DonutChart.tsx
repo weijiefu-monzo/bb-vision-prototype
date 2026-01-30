@@ -24,6 +24,8 @@ export interface DonutChartEntry {
 export interface DonutChartProps {
   /** Segment data: label and value (values normalized to proportions) */
   data: DonutChartEntry[];
+  /** Custom colours for segments (order matches data); uses default palette if not specified */
+  colors?: string[];
   /** Optional large value text in center (e.g. "1,260") */
   centerValue?: string;
   /** Optional label text in center below value (e.g. "Total") */
@@ -77,6 +79,7 @@ function getDonutSegmentPath(
 
 export default function DonutChart({
   data,
+  colors: colorsProp,
   centerValue,
   centerLabel,
   size: sizeProp,
@@ -84,6 +87,7 @@ export default function DonutChart({
   showLegend = true,
   className,
 }: DonutChartProps) {
+  const colors = colorsProp ?? CATEGORICAL_COLORS;
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(DEFAULT_SIZE);
 
@@ -158,7 +162,7 @@ export default function DonutChart({
                 segments[i].startInner,
                 segments[i].endInner
               )}
-              fill={CATEGORICAL_COLORS[i % CATEGORICAL_COLORS.length]}
+              fill={colors[i % colors.length]}
             />
           ))}
           {hasCenterContent && (
@@ -191,7 +195,7 @@ export default function DonutChart({
         <ChartLegend
           items={data.map((entry, i) => ({
             label: entry.label,
-            color: CATEGORICAL_COLORS[i % CATEGORICAL_COLORS.length],
+            color: colors[i % colors.length],
           }))}
         />
       )}

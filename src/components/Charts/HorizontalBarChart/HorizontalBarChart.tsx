@@ -31,6 +31,8 @@ export interface HorizontalBarChartProps {
   data: BarChartDataItem[];
   /** Series labels for legend (order matches values[] indices) */
   seriesLabels: string[];
+  /** Custom colours for segments (order matches values[]); uses default palette if not specified */
+  colors?: string[];
   /** Chart width; when undefined, fills container (responsive) */
   width?: number;
   /** Chart height (default: bar height + padding) */
@@ -47,6 +49,7 @@ export interface HorizontalBarChartProps {
 export default function HorizontalBarChart({
   data,
   seriesLabels,
+  colors: colorsProp,
   width: widthProp,
   height: heightProp,
   showLegend = true,
@@ -54,6 +57,7 @@ export default function HorizontalBarChart({
   xMax: xMaxProp,
   className,
 }: HorizontalBarChartProps) {
+  const colors = colorsProp ?? CATEGORICAL_COLORS;
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(DEFAULT_WIDTH);
 
@@ -86,8 +90,8 @@ export default function HorizontalBarChart({
   const totalBarWidth = (sumValues / xMax) * chartWidth;
   const numGaps = values.length - 1;
   const availableForSegments = totalBarWidth - numGaps * SEGMENT_GAP;
-  const segmentWidths = values.map(
-    (v) => (sumValues > 0 ? (v / sumValues) * availableForSegments : 0)
+  const segmentWidths = values.map((v) =>
+    sumValues > 0 ? (v / sumValues) * availableForSegments : 0,
   );
   const segmentX: number[] = [];
   let x = 0;
@@ -95,6 +99,11 @@ export default function HorizontalBarChart({
     segmentX.push(x);
     x += segmentWidths[i] + (i < segmentWidths.length - 1 ? SEGMENT_GAP : 0);
   }
+
+  const nonZeroIndices = segmentWidths
+    .map((w, i) => (w > 0.5 ? i : -1))
+    .filter((i) => i >= 0);
+  const isOnlySegment = nonZeroIndices.length === 1;
 
   return (
     <div className={`${styles.root} ${className ?? ""}`}>
@@ -117,15 +126,16 @@ export default function HorizontalBarChart({
             {values.map((segmentValue, j) => {
               const segmentWidth = segmentWidths[j] ?? 0;
               const segX = segmentX[j] ?? 0;
-              const fill = CATEGORICAL_COLORS[j % CATEGORICAL_COLORS.length];
+              const fill = colors[j % colors.length];
               const isFirst = j === 0;
               const isLast = j === values.length - 1;
+              const isOnlyVisibleSegment = isOnlySegment && segmentWidth > 0.5;
               const r = Math.min(
                 CORNER_RADIUS,
                 segmentWidth / 2,
-                chartHeight / 2
+                chartHeight / 2,
               );
-              if (isFirst && isLast) {
+              if ((isFirst && isLast) || isOnlyVisibleSegment) {
                 const path = [
                   `M ${segX + r} ${barY}`,
                   `L ${segX + segmentWidth - r} ${barY}`,
@@ -183,7 +193,7 @@ export default function HorizontalBarChart({
         <ChartLegend
           items={seriesLabels.map((label, i) => ({
             label,
-            color: CATEGORICAL_COLORS[i % CATEGORICAL_COLORS.length],
+            color: colors[i % colors.length],
           }))}
         />
       )}
