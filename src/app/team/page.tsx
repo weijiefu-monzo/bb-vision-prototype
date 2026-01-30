@@ -8,13 +8,16 @@ import {
   PageHeader,
   ActionCard,
   PageSection,
+  WorkflowBuilder,
 } from "@/components";
+import { workflowDummyData } from "@/data";
 import { useNavState } from "@/contexts/NavContext";
-import styles from "../page.module.css";
+import styles from "./page.module.css";
 
 export default function TeamPage() {
   const { navState, setNavState } = useNavState();
   const [isDetailOpen, setIsDetailOpen] = useState(false);
+  const [isWorkflowBuilderOpen, setIsWorkflowBuilderOpen] = useState(false);
   const layoutRef = useRef<PageLayoutRef>(null);
 
   return (
@@ -52,25 +55,31 @@ export default function TeamPage() {
             />
             <ActionCard
               icon="general_settings"
-              title="Team settings"
-              description="Configure permissions and defaults"
+              title="Manage teams"
+              description="Configure teams, permissions and defaults"
               onClick={() => {}}
             />
             <ActionCard
-              icon="general_folder"
-              title="Shared spaces"
-              description="View and manage shared workspaces"
+              icon="money_card"
+              title="Issue expense card"
+              description="Create and assign expense cards to your team"
               onClick={() => {}}
             />
             <ActionCard
-              icon="object_clock"
-              title="Activity"
-              description="See recent team activity and history"
-              onClick={() => {}}
+              icon="general_flex"
+              title="Add new workflow"
+              description="Create a new workflow for your team"
+              onClick={() => setIsWorkflowBuilderOpen(true)}
             />
           </div>
         </PageSection>
       </PageLayout>
+
+      <WorkflowBuilder
+        open={isWorkflowBuilderOpen}
+        onClose={() => setIsWorkflowBuilderOpen(false)}
+        workflow={workflowDummyData}
+      />
     </div>
   );
 }

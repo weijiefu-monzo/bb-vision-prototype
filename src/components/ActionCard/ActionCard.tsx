@@ -28,16 +28,19 @@ export default function ActionCard({
   return (
     <Card onClick={onClick} className={className}>
       <div className={styles.actionCard}>
-        <div className={styles.iconAvatar} aria-hidden>
-          <Icon name={icon} size={20} />
+        <div className={styles.iconContainer}>
+          <div className={styles.iconAvatar} aria-hidden>
+            <Icon name={icon} size={20} />
+          </div>
+          <span className={styles.chevron} aria-hidden>
+            <Icon name="navigation_chevron_right" size="large" />
+          </span>
         </div>
+
         <div className={styles.content}>
           <span className={styles.title}>{title}</span>
           <span className={styles.description}>{description}</span>
         </div>
-        <span className={styles.chevron} aria-hidden>
-          <Icon name="navigation_chevron_right" size="small" />
-        </span>
       </div>
     </Card>
   );

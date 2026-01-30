@@ -1,7 +1,7 @@
 .actionCard {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: var(--spacing-medium, 16px);
 }
 
@@ -49,4 +49,12 @@
 .chevron {
   flex-shrink: 0;
   color: var(--semantic-content-secondary, #6b6b6b);
+}
+.iconContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-medium, 16px);
+  width: 100%;
 }
