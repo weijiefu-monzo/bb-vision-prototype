@@ -40,6 +40,7 @@ export default function WorkflowBuilder({
   className,
 }: WorkflowBuilderProps) {
   const [sidePanelOpen, setSidePanelOpen] = useState(true);
+  const [isDraggingNodeFromPanel, setIsDraggingNodeFromPanel] = useState(false);
 
   const headerTrailing = (
     <div className={styles.headerTrailing}>
@@ -141,8 +142,13 @@ export default function WorkflowBuilder({
         <WorkflowCanvas
           initialNodes={workflow.nodes}
           initialEdges={workflow.edges}
+          isDraggingNodeFromPanel={isDraggingNodeFromPanel}
         />
-        <WorkflowSidePanel open={sidePanelOpen} />
+        <WorkflowSidePanel
+          open={sidePanelOpen}
+          onNodeDragStart={() => setIsDraggingNodeFromPanel(true)}
+          onNodeDragEnd={() => setIsDraggingNodeFromPanel(false)}
+        />
       </div>
     </FullscreenDialog>
   );

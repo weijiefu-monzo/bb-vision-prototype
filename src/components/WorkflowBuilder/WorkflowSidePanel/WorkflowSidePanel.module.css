@@ -9,9 +9,55 @@
   min-height: 0;
   overflow: auto;
   padding: var(--spacing-small, 12px);
+  display: flex;
+  flex-direction: column;
 }
 
 .placeholder {
   color: var(--semantic-content-secondary, #75817e);
   font-size: var(--type-font-size-small, 12px);
+}
+
+.nodePalette {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-medium, 16px);
+}
+
+.nodePaletteHint {
+  margin: 0;
+  color: var(--semantic-content-secondary, #75817e);
+  font-size: var(--type-font-size-small, 12px);
+  line-height: 1.35;
+}
+
+.nodePaletteSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small, 12px);
+}
+
+.nodePaletteSectionTitle {
+  margin: 0;
+  font-family: var(--type-font-family-content);
+  font-size: var(--type-font-size-medium, 14px);
+  font-weight: 600;
+  line-height: var(--type-line-height-default);
+  color: var(--semantic-content-primary);
+}
+
+.nodePaletteList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-x-small, 8px);
+}
+
+.monzoAiTab {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
 }

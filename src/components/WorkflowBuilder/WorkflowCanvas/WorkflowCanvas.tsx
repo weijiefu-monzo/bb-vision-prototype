@@ -7,6 +7,7 @@ import {
   useNodesState,
   useEdgesState,
   addEdge,
+  useReactFlow,
   type Node,
   type Connection,
 } from "@xyflow/react";
@@ -24,6 +25,11 @@ import type { ConnectableNodeData } from "./nodes";
 import { EdgeWithPlusButton } from "./edges";
 import { ZoomControls } from "./ZoomControls";
 import type { Edge } from "@xyflow/react";
+import {
+  WORKFLOW_NODE_PALETTE,
+  WORKFLOW_NODE_DATA_TRANSFER,
+  type WorkflowNodeTypeId,
+} from "../workflowNodePalette";
 import styles from "./WorkflowCanvas.module.css";
 
 export type WorkflowNode = Node<ConnectableNodeData | BaseNodeType["data"], string>;
@@ -71,16 +77,99 @@ function sameTargetHandle(
 
 const fitViewOptions = { maxZoom: 1, padding: 0.2, duration: 200 };
 
+/** Estimated node size in pixels (for centering on drop). Matches BaseNode / ConnectableNode. */
+const NODE_DROP_WIDTH_PX = 180;
+const NODE_DROP_HEIGHT_PX = 56;
+
 function WorkflowCanvasInner({
   initialNodes,
   initialEdges,
+  isDraggingNodeFromPanel = false,
 }: {
   initialNodes: WorkflowNode[];
   initialEdges: Edge[];
+  isDraggingNodeFromPanel?: boolean;
 }) {
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const { screenToFlowPosition, getZoom } = useReactFlow();
   const shouldFitView = initialNodes.length > 0;
+
+  const handleDrop = useCallback(
+    (e: React.DragEvent) => {
+      e.preventDefault();
+      const raw =
+        e.dataTransfer.getData(WORKFLOW_NODE_DATA_TRANSFER) ||
+        e.dataTransfer.getData("application/x-workflow-node-type");
+      let type: WorkflowNodeTypeId | "" = "";
+      let label = "";
+      let icon = "";
+      if (raw.startsWith("{")) {
+        try {
+          const payload = JSON.parse(raw) as {
+            type?: string;
+            label?: string;
+            icon?: string;
+          };
+          type = (payload.type as WorkflowNodeTypeId) ?? "";
+          label = payload.label ?? "";
+          icon = payload.icon ?? "";
+        } catch {
+          return;
+        }
+      } else {
+        type = raw as WorkflowNodeTypeId;
+        const paletteItem = WORKFLOW_NODE_PALETTE.find((item) => item.type === type);
+        if (paletteItem) {
+          label = paletteItem.label;
+          icon = paletteItem.icon;
+        }
+      }
+      const validTypes: WorkflowNodeTypeId[] = [
+        "initialNode",
+        "transformNode",
+        "joinNode",
+        "branchNode",
+        "outputNode",
+      ];
+      if (!type || !validTypes.includes(type)) return;
+      if (!label && !icon) {
+        const fallback = WORKFLOW_NODE_PALETTE.find((item) => item.type === type);
+        if (fallback) {
+          label = fallback.label;
+          icon = fallback.icon;
+        }
+      }
+      const cursorFlow = screenToFlowPosition({
+        x: e.clientX,
+        y: e.clientY,
+      });
+      const zoom = getZoom();
+      const offsetX = (NODE_DROP_WIDTH_PX / zoom) / 2;
+      const offsetY = (NODE_DROP_HEIGHT_PX / zoom) / 2;
+      const position = {
+        x: cursorFlow.x - offsetX,
+        y: cursorFlow.y - offsetY,
+      };
+      const id = `node-${Date.now()}`;
+      const newNode: WorkflowNode = {
+        id,
+        type,
+        position,
+        data: {
+          label: label || type,
+          icon: icon || undefined,
+        },
+      };
+      setNodes((prev) => [...prev, newNode]);
+    },
+    [screenToFlowPosition, getZoom, setNodes]
+  );
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  }, []);
 
   const onInit = useCallback(
     (instance: { fitView: (opts?: typeof fitViewOptions) => void }) => {
@@ -126,6 +215,14 @@ function WorkflowCanvasInner({
 
   return (
     <div className={styles.canvas} data-workflow-canvas>
+      {isDraggingNodeFromPanel && (
+        <div
+          className={styles.dropOverlay}
+          onDragOver={handleDragOver}
+          onDrop={handleDrop}
+          aria-hidden
+        />
+      )}
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -154,6 +251,8 @@ export interface WorkflowCanvasProps {
   initialNodes?: WorkflowNode[];
   /** Edges when editing an existing workflow */
   initialEdges?: Edge[];
+  /** When true, show overlay to accept node drops from the side panel */
+  isDraggingNodeFromPanel?: boolean;
   className?: string;
 }
 
@@ -163,6 +262,7 @@ const emptyEdges: Edge[] = [];
 export default function WorkflowCanvas({
   initialNodes = emptyNodes,
   initialEdges = emptyEdges,
+  isDraggingNodeFromPanel = false,
   className,
 }: WorkflowCanvasProps) {
   return (
@@ -174,6 +274,7 @@ export default function WorkflowCanvas({
         <WorkflowCanvasInner
           initialNodes={initialNodes}
           initialEdges={initialEdges}
+          isDraggingNodeFromPanel={isDraggingNodeFromPanel}
         />
       </div>
     </ReactFlowProvider>

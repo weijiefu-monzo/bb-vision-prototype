@@ -1,8 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { Tabs, FullscreenDialogSidePanel } from "@/components";
+import { Tabs, FullscreenDialogSidePanel, MonzoAIChat } from "@/components";
 import type { TabItem } from "@/components";
+import { WORKFLOW_NODE_PALETTE_SECTIONS } from "../workflowNodePalette";
+import { NodePaletteItem } from "./NodePaletteItem";
 import styles from "./WorkflowSidePanel.module.css";
 
 const SIDE_PANEL_TABS: TabItem[] = [
@@ -20,6 +22,10 @@ export interface WorkflowSidePanelProps {
   maxWidth?: number;
   /** Minimum width in pixels */
   minWidth?: number;
+  /** Called when user starts dragging a node from the palette */
+  onNodeDragStart?: () => void;
+  /** Called when user ends dragging a node (drop or cancel) */
+  onNodeDragEnd?: () => void;
   className?: string;
 }
 
@@ -28,6 +34,8 @@ export default function WorkflowSidePanel({
   defaultWidth,
   maxWidth,
   minWidth,
+  onNodeDragStart,
+  onNodeDragEnd,
   className,
 }: WorkflowSidePanelProps) {
   const [activeTab, setActiveTab] = useState(SIDE_PANEL_TABS[0].id);
@@ -56,13 +64,40 @@ export default function WorkflowSidePanel({
         aria-labelledby={`tab-${activeTab}`}
       >
         {activeTab === "nodes" && (
-          <div className={styles.placeholder}>Nodes content</div>
+          <div className={styles.nodePalette}>
+            {WORKFLOW_NODE_PALETTE_SECTIONS.map((section) => (
+              <section
+                key={section.id}
+                className={styles.nodePaletteSection}
+                aria-labelledby={`palette-section-${section.id}`}
+              >
+                <h3
+                  id={`palette-section-${section.id}`}
+                  className={styles.nodePaletteSectionTitle}
+                >
+                  {section.label}
+                </h3>
+                <ul className={styles.nodePaletteList} role="list">
+                  {section.items.map((item) => (
+                    <NodePaletteItem
+                      key={item.id ?? `${item.type}-${item.label}`}
+                      item={item}
+                      onDragStart={onNodeDragStart}
+                      onDragEnd={onNodeDragEnd}
+                    />
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
         )}
         {activeTab === "detail" && (
           <div className={styles.placeholder}>Detail content</div>
         )}
         {activeTab === "monzo-ai" && (
-          <div className={styles.placeholder}>Monzo AI content</div>
+          <div className={styles.monzoAiTab}>
+            <MonzoAIChat placeholder="Message Monzo AI..." />
+          </div>
         )}
       </div>
     </FullscreenDialogSidePanel>

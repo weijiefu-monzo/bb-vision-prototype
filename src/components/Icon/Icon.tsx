@@ -105,15 +105,18 @@ export default function Icon({
     return sizeMap[size] || sizeMap['medium'];
   };
 
-  // Get color value - map to semantic token or use directly
+  // When the icon name (SVG file) starts with brand-, do not override; keep SVG's original colors
+  const isBrandIcon = Boolean(name?.startsWith('brand-'));
+
+  // Get color value - map to semantic token or use directly (not used when brand- icon)
   const getColorValue = (): string | undefined => {
-    if (!color) return undefined;
-    
+    if (!color || isBrandIcon) return undefined;
+
     // If it starts with semantic-, use it directly
     if (color.startsWith('semantic-')) {
       return `var(--${color})`;
     }
-    
+
     // Map common color names to semantic tokens
     const colorMap: Record<string, string> = {
       'content-primary': 'var(--semantic-content-primary)',
@@ -126,7 +129,7 @@ export default function Icon({
       'content-negative': 'var(--semantic-content-negative)',
       'inverse-content-primary': 'var(--semantic-inverse-content-primary)',
     };
-    
+
     return colorMap[color] || color;
   };
 
@@ -173,9 +176,12 @@ export default function Icon({
     );
   }
 
-  // Modify SVG to use the color if specified, or currentColor for inheritance
+  // Modify SVG to use the color if specified, or currentColor for inheritance. Do not override when icon name starts with brand-.
   let modifiedSvg = svgContent;
-  if (colorValue) {
+  if (isBrandIcon) {
+    // Leave SVG unchanged so brand colors from the file are preserved
+    modifiedSvg = svgContent;
+  } else if (colorValue) {
     // Replace fill attributes and styles with specified color
     modifiedSvg = modifiedSvg
       .replace(/fill="[^"]*"/g, `fill="${colorValue}"`)
@@ -202,10 +208,10 @@ export default function Icon({
   return (
     <span
       className={`${styles.icon} ${className || ''}`}
-      style={{ 
-        width: sizeValue, 
+      style={{
+        width: sizeValue,
         height: sizeValue,
-        color: colorValue,
+        ...(colorValue != null ? { color: colorValue } : {}),
       }}
       dangerouslySetInnerHTML={{ __html: modifiedSvg }}
       aria-label={name}

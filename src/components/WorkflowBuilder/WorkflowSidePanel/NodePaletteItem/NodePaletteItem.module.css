@@ -1,0 +1,31 @@
+.item {
+  margin: 0;
+}
+
+.dragWrapper {
+  cursor: grab;
+  padding: var(--spacing-small, 12px);
+  border-radius: var(--corner-radius-medium, 16px);
+  background-color: var(--semantic-background-primary);
+  border: 1px solid var(--semantic-separator);
+  overflow: hidden;
+}
+
+.dragWrapper:active {
+  cursor: grabbing;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-small, 12px);
+  font-size: var(--type-font-size-small, 14px);
+  font-weight: 600;
+  color: var(--semantic-content-primary);
+}
+
+.label {
+  flex: 1;
+  min-width: 0;
+}

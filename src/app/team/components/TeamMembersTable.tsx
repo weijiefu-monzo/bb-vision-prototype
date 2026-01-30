@@ -61,7 +61,7 @@ export type TeamMember = (typeof TEAM_MEMBERS)[number];
 
 const SPEND_LIMIT_COLORS_ACTIVE = [
   "var(--chart-sequential-on-light-order1)",
-  "var(--chart-sequential-on-light-order5)",
+  "var(--chart-sequential-on-dark-order6)",
 ];
 const SPEND_LIMIT_COLORS_DISABLED = [
   "var(--semantic-content-disabled)",
@@ -85,8 +85,7 @@ function SpendLimitBar({
       values: [spentVal, remainingVal],
     },
   ];
-  const useDisabledColor =
-    status === "Pending" || status === "Inactive";
+  const useDisabledColor = status === "Pending" || status === "Inactive";
   const colors = useDisabledColor
     ? SPEND_LIMIT_COLORS_DISABLED
     : SPEND_LIMIT_COLORS_ACTIVE;
@@ -108,7 +107,9 @@ export interface TeamMembersTableProps {
   onRowClick?: (member: TeamMember) => void;
 }
 
-export default function TeamMembersTable({ onRowClick }: TeamMembersTableProps) {
+export default function TeamMembersTable({
+  onRowClick,
+}: TeamMembersTableProps) {
   return (
     <Table fullWidth>
       <TableHeader>
@@ -122,10 +123,7 @@ export default function TeamMembersTable({ onRowClick }: TeamMembersTableProps) 
       </TableHeader>
       <TableBody>
         {TEAM_MEMBERS.map((member, index) => (
-          <TableRow
-            key={index}
-            onClick={() => onRowClick?.(member)}
-          >
+          <TableRow key={index} onClick={() => onRowClick?.(member)}>
             <TableTitleCell
               title={member.name}
               avatar={<Avatar name={member.name} />}
