@@ -16,14 +16,14 @@
 .tableHeader .tableRow {
   height: auto;
   border-bottom: none;
+  height: var(--spacing-2x-large, 48px);
 }
 .tableHeader .tableRow:hover {
   background-color: transparent;
   cursor: default;
 }
 .tableHeaderCell {
-  padding: 0 var(--spacing-medium, 16px) var(--spacing-small, 12px)
-    var(--spacing-medium, 16px);
+  padding: 0 var(--spacing-medium, 16px);
   text-align: left;
   font-family: var(--font-family-text);
   font-size: var(--type-font-size-small, 12px);
