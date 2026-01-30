@@ -39,12 +39,9 @@ export default function ProjectsPage() {
           </div>
         }
       >
-        <PageHeader
-          title="Projects"
-          description="Manage your projects and tasks"
-        />
+        <PageHeader title="Team" description="Manage your team and workflows" />
         <div className={styles.mainPlaceholder}>
-          <p>This is the projects page</p>
+          <p>This is the team page</p>
         </div>
       </PageLayout>
     </div>

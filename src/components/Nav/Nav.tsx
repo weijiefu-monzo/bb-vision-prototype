@@ -71,7 +71,7 @@ export default function Nav({
     payments: "/payments",
     pots: "/pots",
     insights: "/insights",
-    projects: "/projects",
+    team: "/team",
   };
 
   // Determine active item from current pathname if not controlled
@@ -183,13 +183,13 @@ export default function Nav({
           onClick={() => handleItemClick("insights")}
         />
         <NavItem
-          label="Projects"
+          label="Team"
           leadingIcon={
-            <Icon name="general_layout" size="medium" color="content-primary" />
+            <Icon name="human_person_circles" size="medium" color="content-primary" />
           }
           expanded={shouldExpand}
-          active={activeItemId === "projects"}
-          onClick={() => handleItemClick("projects")}
+          active={activeItemId === "team"}
+          onClick={() => handleItemClick("team")}
         />
       </div>
 
