@@ -19,6 +19,9 @@ export type { BoxProps } from "./Box";
 export { Card } from "./Card";
 export type { CardProps } from "./Card";
 
+export { ActionCard } from "./ActionCard";
+export type { ActionCardProps } from "./ActionCard";
+
 export { ChartLegend, BarChart, HorizontalBarChart, LineChart, RadialChart, DonutChart } from "./Charts";
 export type {
   ChartLegendProps,

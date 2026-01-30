@@ -10,3 +10,19 @@
   height: 100%;
   overflow-y: auto;
 }
+
+.mainPlaceholder {
+  padding: var(--spacing-large, 24px);
+}
+
+.actionCardsRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-medium, 16px);
+}
+
+.actionCardsRow > * {
+  flex: 1;
+  min-width: 240px;
+}

@@ -4,14 +4,14 @@ import { useState, useRef } from "react";
 import {
   PageLayout,
   Nav,
-  Button,
   type PageLayoutRef,
   PageHeader,
+  ActionCard,
 } from "@/components";
 import { useNavState } from "@/contexts/NavContext";
 import styles from "../page.module.css";
 
-export default function ProjectsPage() {
+export default function TeamPage() {
   const { navState, setNavState } = useNavState();
   const [isDetailOpen, setIsDetailOpen] = useState(false);
   const layoutRef = useRef<PageLayoutRef>(null);
@@ -41,7 +41,32 @@ export default function ProjectsPage() {
       >
         <PageHeader title="Team" description="Manage your team and workflows" />
         <div className={styles.mainPlaceholder}>
-          <p>This is the team page</p>
+          <div className={styles.actionCardsRow}>
+            <ActionCard
+              icon="human_person_circles"
+              title="Invite members"
+              description="Add people to your team and manage roles"
+              onClick={() => {}}
+            />
+            <ActionCard
+              icon="general_settings"
+              title="Team settings"
+              description="Configure permissions and defaults"
+              onClick={() => {}}
+            />
+            <ActionCard
+              icon="general_folder"
+              title="Shared spaces"
+              description="View and manage shared workspaces"
+              onClick={() => {}}
+            />
+            <ActionCard
+              icon="object_clock"
+              title="Activity"
+              description="See recent team activity and history"
+              onClick={() => {}}
+            />
+          </div>
         </div>
       </PageLayout>
     </div>

@@ -36,7 +36,7 @@ export default function TasksPage() {
   );
   const layoutRef = useRef<PageLayoutRef>(null);
 
-  // Derive selected task type from URL query parameter
+  // Derive selected task type from URL query parameter (default: scheduled-payment)
   const taskTypeFromUrl = searchParams.get("type");
   const selectedTaskType: TaskType =
     taskTypeFromUrl &&
@@ -45,6 +45,8 @@ export default function TasksPage() {
     )
       ? (taskTypeFromUrl as TaskType)
       : null;
+  const effectiveTaskType =
+    selectedTaskType ?? "scheduled-payment";
 
   // Update URL when task type changes
   const handleTaskTypeChange = (taskType: TaskType) => {
@@ -98,10 +100,10 @@ export default function TasksPage() {
             <Chip
               icon="money_invoice_envelope"
               label="Invoice Overdue"
-              selected={selectedTaskType === "invoice-overdue"}
+              selected={effectiveTaskType === "invoice-overdue"}
               onClick={() =>
                 handleTaskTypeChange(
-                  selectedTaskType === "invoice-overdue"
+                  effectiveTaskType === "invoice-overdue"
                     ? null
                     : "invoice-overdue",
                 )
@@ -110,10 +112,10 @@ export default function TasksPage() {
             <Chip
               icon="money_cheque"
               label="Scheduled Payment"
-              selected={selectedTaskType === "scheduled-payment"}
+              selected={effectiveTaskType === "scheduled-payment"}
               onClick={() =>
                 handleTaskTypeChange(
-                  selectedTaskType === "scheduled-payment"
+                  effectiveTaskType === "scheduled-payment"
                     ? null
                     : "scheduled-payment",
                 )
@@ -122,26 +124,26 @@ export default function TasksPage() {
             <Chip
               icon="general_task"
               label="Expense Claim"
-              selected={selectedTaskType === "expense-claim"}
+              selected={effectiveTaskType === "expense-claim"}
               onClick={() =>
                 handleTaskTypeChange(
-                  selectedTaskType === "expense-claim" ? null : "expense-claim",
+                  effectiveTaskType === "expense-claim" ? null : "expense-claim",
                 )
               }
             />
             <Chip
               icon="general_home"
               label="New Joiner"
-              selected={selectedTaskType === "new-joiner"}
+              selected={effectiveTaskType === "new-joiner"}
               onClick={() =>
                 handleTaskTypeChange(
-                  selectedTaskType === "new-joiner" ? null : "new-joiner",
+                  effectiveTaskType === "new-joiner" ? null : "new-joiner",
                 )
               }
             />
           </div>
         </div>
-        {selectedTaskType === "scheduled-payment" && (
+        {effectiveTaskType === "scheduled-payment" && (
           <ScheduledPaymentTable
             onRowClick={(payment) => {
               setSelectedPayment(payment);
