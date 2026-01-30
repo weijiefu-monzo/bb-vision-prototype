@@ -66,14 +66,17 @@
 .iconSmall {
   position: relative;
   z-index: 1;
-  animation: spin 4s linear infinite reverse;
+  animation: spin 1s ease-in-out infinite reverse;
 }
 
 @keyframes spin {
   from {
-    transform: rotate(0deg);
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(0.5);
   }
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg) scale(1);
   }
 }
